@@ -1,0 +1,77 @@
+﻿Exportfile for AOT version 1.0 or later
+Formatversion: 1
+
+***Element: CLS
+
+; Microsoft Dynamics AX Class: DimensionLinkProviders unloaded
+; --------------------------------------------------------------------------------
+  CLSVERSION 1
+  
+  CLASS #DimensionLinkProviders
+    PROPERTIES
+      Name                #DimensionLinkProviders
+      Origin              #{0A3F9375-C3DC-4D22-8B4C-50BC6C61388B}
+    ENDPROPERTIES
+    
+    METHODS
+      SOURCE #new
+        #/// <summary>
+        #/// Constructs a new instance of a <c>DimensionLinkProviders</c> class.
+        #/// </summary>
+        #/// <param name="_controller">
+        #/// The controler instance that holds a reference to the provider collection.
+        #/// </param>
+        #/// <param name="_dataSource">
+        #/// The <c>FormDataSource</c> that contains linked fields that are of interest to the link providers.
+        #/// </param>
+        #public void new(DimensionControllerObject _controller, FormDataSource _dataSource)
+        #{
+        #    #ISOCountryRegionCodes
+        #
+        #    DimensionLinkProvider linkProvider;
+        #    DimensionLinkProvider advancedLedgerEntryLinkProvider;
+        #    linkProviders = new List(Types::Class);
+        #
+        #    linkProvider = new InventSiteDimensionLinkProvider(_controller, _dataSource);
+        #    linkProviders.addEnd(linkProvider);
+        #
+        #    //AAX start
+        #    linkProvider = new AAX_InventLocationDimensionLinkProvider(_controller, _dataSource);
+        #    if(linkProvider.subscribed())
+        #    {
+        #        linkProviders.addEnd(linkProvider);
+        #    }
+        #    //AAX End
+        #
+        #    if (isConfigurationkeyEnabled(configurationKeyNum(PublicSector)))
+        #    {
+        #        advancedLedgerEntryLinkProvider = new AdvancedLedgerEntryDimensionLinkProvider(_controller, _dataSource);
+        #    }
+        #
+        #    if (linkProvider.subscribed())
+        #    {
+        #        // Only add the provider if it actually needed to subscribe to any events based on the datasource supplied
+        #        linkProviders.addEnd(linkProvider);
+        #    }
+        #
+        #    if (isConfigurationkeyEnabled(configurationKeyNum(PublicSector)))
+        #    {
+        #        if (advancedLedgerEntryLinkProvider.subscribed())
+        #        {
+        #            // Add the provider for Advanced Ledger Entry.
+        #            linkProviders.addEnd(advancedLedgerEntryLinkProvider);
+        #        }
+        #    }
+        #
+        #    // <GEERU>
+        #    if (SysCountryRegionCode::isLegalEntityInCountryRegion([#isoRU]))
+        #    {
+        #        this.postNew_RU(_controller, _dataSource);
+        #    }
+        #    // </GEERU>
+        #}
+      ENDSOURCE
+    ENDMETHODS
+  ENDCLASS
+
+***Element: END

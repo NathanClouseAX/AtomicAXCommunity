@@ -1,0 +1,84 @@
+﻿Exportfile for AOT version 1.0 or later
+Formatversion: 1
+
+***Element: CLS
+
+; Microsoft Dynamics AX Class: AAX_InventLocationDimensionLink_Null unloaded
+; --------------------------------------------------------------------------------
+  CLSVERSION 1
+  
+  CLASS #AAX_InventLocationDimensionLink_Null
+    PROPERTIES
+      Name                #AAX_InventLocationDimensionLink_Null
+      Extends             #AAX_InventLocationDimensionLink
+      Origin              #{354AD440-EF7B-4277-916F-C5CA6FB58860}
+    ENDPROPERTIES
+    
+    METHODS
+      SOURCE #axParmDefaultDimensionSet
+        #/// <summary>
+        #/// gets DefaultDimensionSet
+        #/// </summary>
+        #/// <param name="_axInventSiteDimensionable">
+        #/// AxInventSiteDimensionable
+        #/// </param>
+        #/// <param name="_dimension">
+        #/// DimensionDefault
+        #/// </param>
+        #public void axParmDefaultDimensionSet(AxInventSiteDimensionable _axInventSiteDimensionable, DimensionDefault _dimension)
+        #{
+        #    _axInventSiteDimensionable.setDefaultDimensionValue(_dimension);
+        #}
+      ENDSOURCE
+      SOURCE #axSetDefaultDimension
+        #/// <summary>
+        #/// sets defaultDimension value
+        #/// </summary>
+        #/// <param name="_axInventSiteDimensionable">
+        #/// AxInventSiteDimensionable
+        #/// </param>
+        #public void axSetDefaultDimension(AxInventSiteDimensionable _axInventSiteDimensionable)
+        #{
+        #}
+      ENDSOURCE
+      SOURCE #classDeclaration
+        #/// <summary>
+        #/// InventLocationDimensionLink disabled
+        #/// </summary>
+        #class AAX_InventLocationDimensionLink_Null extends AAX_inventLocationDimensionLink
+        #{
+        #    SysDictField    sysDictField;
+        #}
+      ENDSOURCE
+      SOURCE #linkDimension
+        #/// <summary>
+        #/// links dimension
+        #/// </summary>
+        #public void linkDimension()
+        #{
+        #}
+      ENDSOURCE
+      SOURCE #construct
+        #protected static AAX_inventLocationDimensionLink_Null construct()
+        #{
+        #    return new AAX_inventLocationDimensionLink_Null();
+        #}
+        #
+      ENDSOURCE
+      SOURCE #newStandard
+        #/// <summary>
+        #/// standard constructor
+        #/// </summary>
+        #/// <returns>
+        #/// AAX_inventLocationDimensionLink_Null
+        #/// </returns>
+        #public static AAX_inventLocationDimensionLink_Null newStandard()
+        #{
+        #    return AAX_inventLocationDimensionLink_Null::construct();
+        #}
+        #
+      ENDSOURCE
+    ENDMETHODS
+  ENDCLASS
+
+***Element: END

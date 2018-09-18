@@ -1,0 +1,26 @@
+﻿Exportfile for AOT version 1.0 or later
+Formatversion: 1
+
+***Element: FTM
+
+; Microsoft Dynamics AX MENUITEM : AAX_AifDataCleanup unloaded
+; --------------------------------------------------------------------------------
+  VERSION 1
+  
+  MENUITEM #AAX_AifDataCleanup
+    Type: 3
+    PROPERTIES
+      Name                #AAX_AifDataCleanup
+      Label               #@AAX11
+      HelpText            #@AAX12
+      ObjectType          #Class
+      Object              #AAX_AifDataCleanup
+      RunOn               #Server
+      ConfigurationKey    #SysAdmin
+      Origin              #{7164AA32-BDC8-4875-B444-1B3CAE938AF9}
+    ENDPROPERTIES
+    
+  ENDMENUITEM
+  
+
+***Element: END

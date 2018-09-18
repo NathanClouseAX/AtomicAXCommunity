@@ -1,0 +1,54 @@
+﻿Exportfile for AOT version 1.0 or later
+Formatversion: 1
+
+***Element: CLS
+
+; Microsoft Dynamics AX Class: AAX_InventParametersEH unloaded
+; --------------------------------------------------------------------------------
+  CLSVERSION 1
+  
+  CLASS #AAX_InventParametersEH
+    PROPERTIES
+      Name                #AAX_InventParametersEH
+      Origin              #{2D5F0BCD-0CCA-4C89-A753-AF0335E32C6F}
+    ENDPROPERTIES
+    
+    METHODS
+      SOURCE #classDeclaration
+        #/// <summary>
+        #/// eventParameters event handler
+        #/// </summary>
+        #class AAX_InventParametersEH
+        #{
+        #}
+      ENDSOURCE
+      SOURCE #validateFieldPost
+        #/// <summary>
+        #/// checks site and warehouse financial dimensions for overlap
+        #/// </summary>
+        #/// <param name="_args">
+        #/// XppPrePostArgs
+        #/// </param>
+        #public static void validateFieldPost(XppPrePostArgs _args)
+        #{
+        #    FieldId             FieldId             =   _args.getArg(identifierStr(_fieldIdToCheck));
+        #    InventParameters    InventParameters    =   _args.getThis();
+        #
+        #    boolean ret;
+        #
+        #    switch(FieldId)
+        #    {
+        #        case fieldNum(InventParameters, SiteDimensionAttribute):
+        #            if(InventParameters.SiteDimensionAttribute == AAX_InventParameters::find().LocationDimensionAttribute)
+        #            {
+        #                ret = checkFailed(strFmt("@AAX1"));
+        #                _args.setReturnValue(ret);
+        #            }
+        #            break;
+        #    }
+        #}
+      ENDSOURCE
+    ENDMETHODS
+  ENDCLASS
+
+***Element: END

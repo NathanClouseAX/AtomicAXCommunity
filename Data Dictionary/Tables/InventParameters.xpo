@@ -1,0 +1,44 @@
+﻿Exportfile for AOT version 1.0 or later
+Formatversion: 1
+
+***Element: DBT
+
+; Microsoft Dynamics AX Table : InventParameters unloaded
+; --------------------------------------------------------------------------------
+  TABLEVERSION 1
+  
+  TABLE #InventParameters
+    EnforceFKRelation 0
+    FIELDS
+    ENDFIELDS
+    GROUPS
+    ENDGROUPS
+    
+    INDICES
+    ENDINDICES
+    FULLTEXTINDICES
+    ENDFULLTEXTINDICES
+    REFERENCES
+    ENDREFERENCES
+    
+    METHODS
+    ENDMETHODS
+    EVENTS
+      METHOD #validateField
+        EVENTHANDLERS
+          EVENTHANDLER #AAX_ValidateFieldPost
+            PROPERTIES
+              CalledWhen          #Post
+              Class               #AAX_InventParametersEH
+              Method              #validateFieldPost
+              AOTlink             #\Classes\AAX_InventParametersEH\validateFieldPost
+            ENDPROPERTIES
+            
+          ENDEVENTHANDLER
+        ENDEVENTHANDLERS
+      ENDMETHOD
+    ENDEVENTS
+  ENDTABLE
+  
+
+***Element: END

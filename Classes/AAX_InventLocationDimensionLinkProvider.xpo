@@ -1,0 +1,327 @@
+﻿Exportfile for AOT version 1.0 or later
+Formatversion: 1
+
+***Element: CLS
+
+; Microsoft Dynamics AX Class: AAX_InventLocationDimensionLinkProvider unloaded
+; --------------------------------------------------------------------------------
+  CLSVERSION 1
+  
+  CLASS #AAX_InventLocationDimensionLinkProvider
+    PROPERTIES
+      Name                #AAX_InventLocationDimensionLinkProvider
+      Extends             #DimensionLinkProvider
+      Origin              #{2295221C-97C4-451D-88B0-A8336607D2EB}
+      LegacyId            #371
+    ENDPROPERTIES
+    
+    METHODS
+      SOURCE #allowFieldEdit
+        #/// <summary>
+        #///    Responds to a dimension controller when a field is allowed to be edited for a specified dimension
+        #///    attribute.
+        #/// </summary>
+        #/// <param name="_e">
+        #///    The <c>DimensionLinkSetValueEventArgs</c> object that is supplied to the event subscription.
+        #/// </param>
+        #/// <remarks>
+        #///    This method is an event subscription method.
+        #/// </remarks>
+        #public void allowFieldEdit(DimensionLinkCancelEventArgs _e)
+        #{
+        #    Common c = dataSource.cursor();
+        #
+        #    if (preventEditBasedOnSMATransactionType && this.preventEditForSMATransactionType(c))
+        #    {
+        #        _e.parmCancel(true);
+        #    }
+        #
+        #    if ((preventEditLinked || (preventEditLinkedForExistingRecords && (c.RecId != 0))) && (_e.parmDimensionAttributeId() == linkedDimAttributeId))
+        #    {
+        #        _e.parmCancel(true);
+        #    }
+        #    //Disable the site related dimension field
+        #    //if(_e.parmDimensionAttributeId() == InventParameters::find().SiteDimensionAttribute)
+        #    //{
+        #    //    _e.parmCancel(true);
+        #    //}
+        #
+        #}
+      ENDSOURCE
+      SOURCE #classDeclaration
+        #/// <summary>
+        #///    The <c>InventLocationDimensionLinkProvider</c> class provides defaulting and locking logic that relates
+        #///    to the user-linked inventory Location financial dimension.
+        #/// </summary>
+        #// This is a framework class. Customizing this class may cause problems with future upgrades to the software.
+        #public class AAX_InventLocationDimensionLinkProvider extends DimensionLinkProvider
+        #{
+        #    DimensionControllerObject controller;
+        #    FormDataSource dataSource;
+        #    InventMultiSiteDimensionLink multiSiteDimensionLink;
+        #
+        #    RefRecId linkedDimAttributeId;
+        #    FieldId linkedFieldId;
+        #
+        #    boolean preventShowingNonLinked;
+        #    boolean preventOptionalLinked;
+        #    boolean preventEditLinked;
+        #    boolean preventEditBasedOnSMATransactionType;
+        #    boolean preventEditLinkedForExistingRecords;
+        #
+        #    boolean isSubscribed;
+        #}
+      ENDSOURCE
+      SOURCE #linkLocationActive
+        #/// <summary>
+        #///    Configures the provider to respond appropriately when default dimensions are displayed when the
+        #///    linked Location dimension is locked.
+        #/// </summary>
+        #private void linkLocationActive()
+        #{
+        #    preventEditLinked = true;
+        #
+        #    controller.DimensionLinkAllowFieldEdit += eventhandler (this.allowFieldEdit);
+        #    isSubscribed = true;
+        #}
+      ENDSOURCE
+      SOURCE #linkLocationActiveBySMATransactionType
+        #/// <summary>
+        #///    Configures the provider to respond appropriately when default dimensions are displayed when the
+        #///    linked Location dimension may need to be locked based on the <c>SMATransactionType</c> enumeration
+        #///    value.
+        #/// </summary>
+        #private void linkLocationActiveBySMATransactionType()
+        #{
+        #    preventEditBasedOnSMATransactionType = true;
+        #    controller.DimensionLinkSetFieldValue += eventhandler (this.setFieldValue);
+        #    controller.DimensionLinkAllowFieldEdit += eventhandler (this.allowFieldEdit);
+        #    isSubscribed = true;
+        #}
+      ENDSOURCE
+      SOURCE #linkMain
+        #/// <summary>
+        #///    Configures the provider to respond appropriately when default dimensions are displayed when all but
+        #///    the linked Location dimension are hidden.
+        #/// </summary>
+        #private void linkMain()
+        #{
+        #    preventShowingNonLinked = true;
+        #    if (InventMultiSiteDimensionLink::Inactive != multiSiteDimensionLink)
+        #    {
+        #        preventOptionalLinked = true;
+        #    }
+        #
+        #    if (InventMultiSiteDimensionLink::Locked == multiSiteDimensionLink)
+        #    {
+        #        preventEditLinkedForExistingRecords = true;
+        #    }
+        #
+        #    controller.DimensionLinkAllowFieldEdit += eventhandler (this.allowFieldEdit);
+        #    controller.DimensionLinkMarkFieldOptional += eventhandler (this.markFieldOptional);
+        #    controller.DimensionLinkShowField += eventhandler (this.showField);
+        #    isSubscribed = true;
+        #}
+      ENDSOURCE
+      SOURCE #markFieldOptional
+        #/// <summary>
+        #///    Responds to a dimension controller when a field is optional for a specified dimension attribute.
+        #/// </summary>
+        #/// <param name="_e">
+        #///    The <c>DimensionLinkCancelEventArgs</c> object that is supplied to the event subscription.
+        #/// </param>
+        #/// <remarks>
+        #///    This method is an event subscription method.
+        #/// </remarks>
+        #public void markFieldOptional(DimensionLinkCancelEventArgs _e)
+        #{
+        #    if (preventOptionalLinked && (_e.parmDimensionAttributeId() == linkedDimAttributeId))
+        #    {
+        #        _e.parmCancel(true);
+        #    }
+        #}
+      ENDSOURCE
+      SOURCE #new
+        #/// <summary>
+        #/// Constructs a new instance of the <c>InventLocationDimensionLinkProvider</c> class.
+        #/// </summary>
+        #/// <param name="_controller">
+        #/// The controler instance that holds a reference to the provider.
+        #/// </param>
+        #/// <param name="_dataSource">
+        #/// The <c>FormDataSource</c> that may contain linked fields related to InventLocation.
+        #/// </param>
+        #public void new(DimensionControllerObject _controller, FormDataSource _dataSource)
+        #{
+        #    super(_controller, _dataSource);
+        #
+        #    isSubscribed = true;
+        #
+        #    controller = _controller;
+        #    dataSource = _dataSource;
+        #
+        #    linkedDimAttributeId = AAX_InventParameters::find().LocationDimensionAttribute;
+        #    multiSiteDimensionLink = AAX_InventParameters::find().InventLocationDimensionLink;
+        #
+        #    switch (_dataSource.table())
+        #    {
+        #        case tableNum(InventLocation):
+        #            this.linkMain();
+        #            break;
+        #
+        #        case tableNum(SalesLine):
+        #        case tableNum(PurchLine):
+        #        case tableNum(ForecastPurch):
+        #        case tableNum(ForecastSales):
+        #        case tableNum(PurchRFQLine):
+        #        case tableNum(PurchRFQCaseLine):
+        #        case tableNum(ProdBOM):
+        #        case tableNum(ProdTable):
+        #        case tableNum(ProdRoute):
+        #        case tableNum(ProdJournalBOM):
+        #        case tableNum(ProdJournalRoute):
+        #        case tableNum(BOMParmReportFinish):
+        #        case tableNum(InventJournalTrans):
+        #        case tableNum(InventNonConformanceTable):
+        #        case tableNum(InventQualityOrderTable):
+        #        case tableNum(InventQuarantineOrder):
+        #        case tableNum(SalesQuotationLine):
+        #        case tableNum(TmpBOM):
+        #        case tableNum(TmpLedgerBase):
+        #            if (InventMultiSiteDimensionLink::Locked == multiSiteDimensionLink)
+        #            {
+        #                this.linkLocationActive();
+        #                linkedFieldId = fieldName2id(_dataSource.table(), 'DefaultDimension');
+        #            }
+        #            break;
+        #
+        #        case tableNum(SMAServiceOrderLine):
+        #            if (InventMultiSiteDimensionLink::Locked == multiSiteDimensionLink)
+        #            {
+        #                this.linkLocationActiveBySMATransactionType();
+        #                linkedFieldId = fieldNum(SMAServiceOrderLine, DefaultDimension);
+        #            }
+        #            break;
+        #
+        #        case tableNum(SMAAgreementLine):
+        #            if (InventMultiSiteDimensionLink::Locked == multiSiteDimensionLink)
+        #            {
+        #                this.linkLocationActiveBySMATransactionType();
+        #                linkedFieldId = fieldNum(SMAAgreementLine, DefaultDimension);
+        #            }
+        #            break;
+        #    }
+        #}
+      ENDSOURCE
+      SOURCE #preventEditForSMATransactionType
+        #/// <summary>
+        #///    Determines whether the linked Location dimension should be editable based on the
+        #///    <c>SMATransactionType</c> enumeration value.
+        #/// </summary>
+        #/// <param name="_common">
+        #///    The data buffer that holds a reference to the <c>SMMTransactionType</c> enumeration type.
+        #/// </param>
+        #/// <returns>
+        #///    true if the linked Location dimension should not be editable; otherwise, false.
+        #/// </returns>
+        #private boolean preventEditForSMATransactionType(Common _common)
+        #{
+        #    SMAAgreementLine    smaAgreementLine;
+        #    SMAServiceOrderLine smaServiceOrderLine;
+        #    boolean             preventEdit;
+        #
+        #    switch (_common.TableId)
+        #    {
+        #        case tableNum(SMAAgreementLine):
+        #            smaAgreementLine = _common;
+        #            preventEdit = (smaAgreementLine.TransactionType == SMATransactionType::Item);
+        #            break;
+        #
+        #        case tableNum(SMAServiceOrderLine):
+        #            smaServiceOrderLine = _common;
+        #            preventEdit = (smaServiceOrderLine.TransactionType == SMATransactionType::Item);
+        #            break;
+        #
+        #        default:
+        #            throw error(Error::wrongUseOfFunction(funcName()));
+        #    }
+        #
+        #    return preventEdit;
+        #}
+      ENDSOURCE
+      SOURCE #setFieldValue
+        #/// <summary>
+        #///    Responds to a dimension controller when a field value is set for the specified dimension attribute.
+        #/// </summary>
+        #/// <param name="_e">
+        #///    The <c>DimensionLinkSetValueEventArgs</c> object that is supplied to the event subscription.
+        #/// </param>
+        #/// <remarks>
+        #///    This method is an event subscription method.
+        #/// </remarks>
+        #public void setFieldValue(DimensionLinkSetFieldValueEventArgs _e)
+        #{
+        #    DimensionDefault    dimDefault;
+        #    RecId               dimAttributeValue;
+        #
+        #    if ((linkedFieldId != 0) && (_e.parmDimensionAttributeId() == linkedDimAttributeId))
+        #    {
+        #        dimDefault = dataSource.cursor().(linkedFieldId);
+        #        dimAttributeValue = DimensionAttributeValueSetStorage::find(dimDefault).getValueByDimensionAttribute(linkedDimAttributeId);
+        #        _e.parmDimensionValue(DimensionAttributeValueSetStorage::getDisplayStringForAttributeValue(dimAttributeValue));
+        #        _e.parmCancel(true);
+        #    }
+        #}
+      ENDSOURCE
+      SOURCE #showField
+        #/// <summary>
+        #///    Responds to a dimension controller when a field is shown for the specified dimension attribute.
+        #/// </summary>
+        #/// <param name="_e">
+        #///    The <c>DimensionLinkCancelEventArgs</c> object that is supplied to the event subscription.
+        #/// </param>
+        #/// <remarks>
+        #///    This method is an event subscription method.
+        #/// </remarks>
+        #public void showField(DimensionLinkCancelEventArgs _e)
+        #{
+        #    if (preventShowingNonLinked && (_e.parmDimensionAttributeId() != linkedDimAttributeId)
+        #        && _e.parmDimensionAttributeId() != InventParameters::find().SiteDimensionAttribute )//Show site related dimension
+        #    {
+        #        _e.parmCancel(true);
+        #    }
+        #}
+      ENDSOURCE
+      SOURCE #subscribed
+        #/// <summary>
+        #///    Indicates whether the link provider is subscribed to any events.
+        #/// </summary>
+        #/// <returns>
+        #///    true if the link provider is subscribed to any events; otherwise, false.
+        #/// </returns>
+        #public boolean subscribed()
+        #{
+        #    return isSubscribed;
+        #}
+      ENDSOURCE
+      SOURCE #unsubscribeAllEventHandlers
+        #/// <summary>
+        #///    Unsubscribes all event handlers that have been added by an instance of the
+        #///    <c>InventLocationDimensionLinkProvider</c> class.
+        #/// </summary>
+        #public void unsubscribeAllEventHandlers()
+        #{
+        #    if (this.subscribed())
+        #    {
+        #        controller.DimensionLinkAllowFieldEdit -= eventhandler (this.allowFieldEdit);
+        #        controller.DimensionLinkMarkFieldOptional -= eventhandler (this.markFieldOptional);
+        #        controller.DimensionLinkSetFieldValue -= eventhandler (this.setFieldValue);
+        #        controller.DimensionLinkShowField -= eventhandler (this.showField);
+        #        isSubscribed = false;
+        #    }
+        #}
+      ENDSOURCE
+    ENDMETHODS
+  ENDCLASS
+
+***Element: END

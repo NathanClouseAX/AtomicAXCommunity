@@ -1,0 +1,65 @@
+﻿Exportfile for AOT version 1.0 or later
+Formatversion: 1
+
+***Element: DBT
+
+; Microsoft Dynamics AX Table : ProdJournalRoute unloaded
+; --------------------------------------------------------------------------------
+  TABLEVERSION 1
+  
+  TABLE #ProdJournalRoute
+    EnforceFKRelation 0
+    FIELDS
+    ENDFIELDS
+    GROUPS
+    ENDGROUPS
+    
+    INDICES
+    ENDINDICES
+    FULLTEXTINDICES
+    ENDFULLTEXTINDICES
+    REFERENCES
+    ENDREFERENCES
+    
+    METHODS
+      SOURCE #checkInventSiteDimension
+        #/// <summary>
+        #///    Checks whether the financial dimensions for the current production journal line is consistent with
+        #///    the site for the production order.
+        #/// </summary>
+        #/// <returns>
+        #///    true if financial dimensions are valid; otherwise, false.
+        #/// </returns>
+        #/// <remarks>
+        #///    A financial dimension can be linked and locked to the inventory dimension site.
+        #///    If this setup is
+        #///    used, the selected financial dimension must match the value that is associated with the site
+        #///    dimension.
+        #/// </remarks>
+        #public boolean checkInventSiteDimension()
+        #{
+        #    InventSiteDimensionCheck    siteDimensionCheck = InventSiteDimensionCheck::newStandard();
+        #
+        #    return siteDimensionCheck.checkDimensions(this.prodTable().inventDim(),this.DefaultDimension);
+        #}
+      ENDSOURCE
+    ENDMETHODS
+    EVENTS
+      METHOD #checkInventSiteDimension
+        EVENTHANDLERS
+          EVENTHANDLER #postCheckInventSiteDimEH
+            PROPERTIES
+              CalledWhen          #Post
+              Class               #AAX_TableProdJournalRouteEH
+              Method              #postCheckInventSiteDimension
+              AOTlink             #\Classes\AAX_TableProdJournalRouteEH\postCheckInventSiteDimension
+            ENDPROPERTIES
+            
+          ENDEVENTHANDLER
+        ENDEVENTHANDLERS
+      ENDMETHOD
+    ENDEVENTS
+  ENDTABLE
+  
+
+***Element: END

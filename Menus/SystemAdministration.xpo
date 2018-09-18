@@ -1,0 +1,1065 @@
+﻿Exportfile for AOT version 1.0 or later
+Formatversion: 1
+
+***Element: MNU
+
+; Microsoft Dynamics AX Menu : SystemAdministration unloaded
+; --------------------------------------------------------------------------------
+  MNUVERSION 5
+  
+  MENU #SystemAdministration
+    PROPERTIES
+      Name                #SystemAdministration
+      Label               #@SYS334405
+      SetCompany          #Yes
+      NormalImage         #3467
+      ImageLocation       #EmbeddedResource
+      Origin              #{FACC2DF0-3622-42E9-B6B1-0EE0606E9541}
+    ENDPROPERTIES
+    
+    MENU #@SYS333846
+      PROPERTIES
+        Name                #Common
+        Label               #@SYS333846
+        NormalImage         #3495
+        ImageLocation       #EmbeddedResource
+      ENDPROPERTIES
+      
+      MENU #@SYS334407
+        PROPERTIES
+          Name                #Users
+          Label               #@SYS334407
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Users
+            MenuItemName        #SysUserInfoPage
+            IsDisplayedInContentArea    #Yes
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Online users
+            MenuItemName        #SysUsersOnline
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #External web users
+            MenuItemName        #SysEPParameters
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #User relations
+            MenuItemName        #DirPersonUser
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #User groups
+            MenuItemName        #SysUserGroupInfo
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #User profiles
+            MenuItemName        #Profiles
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #User requests
+            MenuItemName        #UserRequestListPage
+            IsDisplayedInContentArea    #Yes
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@SYS334408
+        PROPERTIES
+          Name                #DataExport/import
+          Label               #@SYS334408
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Definition groups
+            MenuItemName        #SysExpImpGroup
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Export to
+            MenuItemType        #Action
+            MenuItemName        #SysDataExport
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Import
+            MenuItemType        #Action
+            MenuItemName        #SysDataImport
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENUITEM
+        PROPERTIES
+          Name                #File archive
+          MenuItemName        #BankFileArchTable
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+    ENDMENU
+    MENU #@SYS333856
+      PROPERTIES
+        Name                #Inquiries
+        Label               #@SYS333856
+        NormalImage         #3474
+        ImageLocation       #EmbeddedResource
+      ENDPROPERTIES
+      
+      MENU #@SYS334411
+        PROPERTIES
+          Name                #BatchJobs
+          Label               #@SYS334411
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Batch job history
+            MenuItemName        #BatchJobHistory
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Batch jobs
+            MenuItemName        #BatchJob
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@SYS334412
+        PROPERTIES
+          Name                #Database
+          Label               #@SYS334412
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Database information
+            MenuItemName        #SysSqlStatus
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Database log
+            MenuItemName        #SysDatabaseLog
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #SQL statement trace log
+            MenuItemName        #SysTraceSQL
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@SYS334413
+        PROPERTIES
+          Name                #SynchronizationService
+          Label               #@SYS334413
+          ConfigurationKey    #ProjServerIntegration
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Integration log
+            MenuItemName        #SyncCompoundTrans
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@SYS334414
+        PROPERTIES
+          Name                #System
+          Label               #@SYS334414
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Element usage log
+            MenuItemName        #SysUtilElementsLog
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@SYS334415
+        PROPERTIES
+          Name                #Users
+          Label               #@SYS334415
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #User log
+            MenuItemName        #SysUserLog
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+    ENDMENU
+    MENU #@SYS333860
+      PROPERTIES
+        Name                #Reports
+        Label               #@SYS333860
+        NormalImage         #3477
+        ImageLocation       #EmbeddedResource
+      ENDPROPERTIES
+      
+      MENU #@SYS334426
+        PROPERTIES
+          Name                #Licensing
+          Label               #@SYS334426
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Named User License Counts
+            MenuItemType        #Output
+            MenuItemName        #SysUserLicenseCountReport
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@SYS334416
+        PROPERTIES
+          Name                #Database
+          Label               #@SYS334416
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Database log
+            MenuItemType        #Output
+            MenuItemName        #SysDatabaseLog
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Tables
+            MenuItemType        #Output
+            MenuItemName        #SysDataAreaPrintCollections
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Size of company accounts
+            MenuItemType        #Output
+            MenuItemName        #SysCompanySize
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@SYS334417
+        PROPERTIES
+          Name                #Security
+          Label               #@SYS334417
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Online time
+            MenuItemType        #Output
+            MenuItemName        #SysUsersOnlineReport
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Record level security
+            MenuItemType        #Output
+            MenuItemName        #SysRecordLevelSecurity
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+    ENDMENU
+    MENU #@SYS333865
+      PROPERTIES
+        Name                #Periodic
+        Label               #@SYS333865
+        NormalImage         #3476
+        ImageLocation       #EmbeddedResource
+      ENDPROPERTIES
+      
+      MENUITEM
+        PROPERTIES
+          Name                #Notification clean up
+          MenuItemType        #Action
+          MenuItemName        #EventAlertCleanup
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Compile application
+          MenuItemType        #Action
+          MenuItemName        #SysCompileAll
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Compile into .NET Framework CIL
+          MenuItemType        #Action
+          MenuItemName        #syscheckListitem_ciLGenerations
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Populate Enum Dictionary
+          MenuItemType        #Action
+          MenuItemName        #AAX_EnumDictionaryDump
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENU #@SYS334418
+        PROPERTIES
+          Name                #Database
+          Label               #@SYS334418
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Consistency check
+            MenuItemType        #Action
+            MenuItemName        #SysConsistencyCheckBase
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #SQL administration
+            MenuItemName        #SysSqlAdmin
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@SYS334419
+        PROPERTIES
+          Name                #MenuAIF
+          Label               #@SYS334419
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Queue manager
+            MenuItemName        #AifQueueManager
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #History
+            MenuItemName        #AifDocumentHistory
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Exceptions
+            MenuItemName        #Exceptions
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@SYS333867
+        PROPERTIES
+          Name                #Alerts
+          Label               #@SYS333867
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Change based alerts
+            MenuItemType        #Action
+            MenuItemName        #EventCUD
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Due date alerts
+            MenuItemType        #Action
+            MenuItemName        #EventDueDate
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@SYS334420
+        PROPERTIES
+          Name                #E-mailProcessing
+          Label               #@SYS334420
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #E-mail broadcast
+            MenuItemType        #Action
+            MenuItemName        #SysEmailBroadcast
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #E-mail sending status
+            MenuItemName        #SysOutgoingEmailTable
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Batch
+            MenuItemType        #Action
+            MenuItemName        #SysEmailDistributor
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Retry schedule
+            MenuItemName        #SysEmailRetrySchedule
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+    ENDMENU
+    MENU #@SYS333869
+      PROPERTIES
+        Name                #Setup
+        Label               #@SYS333869
+        NormalImage         #3478
+        ImageLocation       #EmbeddedResource
+      ENDPROPERTIES
+      
+      MENUITEM
+        PROPERTIES
+          Name                #System parameters
+          MenuItemName        #SystemParameters
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Batch group
+          MenuItemName        #BatchGroup
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Virtual company accounts
+          MenuItemName        #SysDataAreaVirtual
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENUITEM
+        PROPERTIES
+          Name                #Partitions
+          MenuItemName        #PartitionAdministration
+        ENDPROPERTIES
+        
+      ENDMENUITEM
+      MENU #@SYS334421
+        PROPERTIES
+          Name                #CopyOfSecurity
+          Label               #@SYS334421
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Assign users to roles
+            MenuItemName        #SysSecRolesEditUsers
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Security roles
+            MenuItemName        #SysSecRolesEditTasks
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Security privileges
+            MenuItemName        #SysSecTasksEditPS
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Record level security
+            MenuItemName        #SysRecordLevelSecurity
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #External roles
+            MenuItemName        #DirExternalRoles
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENU #@SYS334422
+          PROPERTIES
+            Name                #SegregationOfDuties
+            Label               #@SYS334422
+          ENDPROPERTIES
+          
+          MENUITEM
+            PROPERTIES
+              Name                #Segregation of duties rules
+              MenuItemName        #SysSecSegregationOfDutiesRule
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Segregation of duties conflicts
+              MenuItemName        #SysSecSegregationOfDutiesConflictsAll
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Segregation of duties unresolved conflicts
+              MenuItemName        #SysSecSegregationOfDutiesConflictsNew
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Verify compliance of user-role assignments
+              MenuItemType        #Action
+              MenuItemName        #SECuritysegregationOfDuties
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+        ENDMENU
+      ENDMENU
+      MENU #@SYS334423
+        PROPERTIES
+          Name                #CopyOfSystem
+          Label               #@SYS334423
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Client performance options
+            MenuItemName        #SysClientPerf
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #System service accounts
+            MenuItemName        #SysBusinessConnectorProxy
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Server configuration
+            MenuItemName        #SysServerConfig
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Cluster configuration
+            MenuItemName        #SysClusterConfig
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Customer feedback options
+            MenuItemName        #SysSQMSettings
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #E-mail parameters
+            MenuItemName        #SysEmailParameters
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #E-mail client constraints
+            MenuItemName        #SysEmailPopClientConstraints
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Help system parameters
+            MenuItemName        #SysHelpSystemParameters
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Modify data types
+            MenuItemName        #SysEDTSetup
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Modify invalid conditions
+            MenuItemName        #ExpressionUpgradeInvalidExpressions
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@SYS334424
+        PROPERTIES
+          Name                #CopyOfWorkflow
+          Label               #@SYS334424
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Workflow parameters
+            MenuItemName        #WorkflowParametersAdmin
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Workflow infrastructure configuration
+            MenuItemName        #WorkflowSetupWizard
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #User workflows
+            MenuItemName        #UserWorkFlowConfigurationUser
+            IsDisplayedInContentArea    #Yes
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@SYS334425
+        PROPERTIES
+          Name                #CopyOfDatabase
+          Label               #@SYS334425
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Database log setup
+            MenuItemName        #SysDatabaseLogSetup
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Select concurrency mode
+            MenuItemName        #SysOccConfiguration
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Modify data types
+            MenuItemName        #SYSEDTSETUP
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@SYS334426
+        PROPERTIES
+          Name                #CopyOfLicensing
+          Label               #@SYS334426
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #License configuration
+            MenuItemName        #SysConfiguration
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #License information
+            MenuItemName        #SysLicenseCode
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@SYS334427
+        PROPERTIES
+          Name                #BusinessIntelligence
+          Label               #@SYS334427
+        ENDPROPERTIES
+        
+        MENU #@SYS334428
+          PROPERTIES
+            Name                #AnalysisServices
+            Label               #@SYS334428
+          ENDPROPERTIES
+          
+          MENUITEM
+            PROPERTIES
+              Name                #Analysis servers
+              MenuItemName        #BIOlapAdministration
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #System currency and exchange rate type
+              MenuItemName        #BISetupExchangeRates
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Time periods
+              MenuItemName        #BITimePeriodsMDX
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Date dimensions
+              MenuItemName        #BICalendarBuilder
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+        ENDMENU
+        MENU #@SYS334429
+          PROPERTIES
+            Name                #ReportingServices
+            Label               #@SYS334429
+          ENDPROPERTIES
+          
+          MENUITEM
+            PROPERTIES
+              Name                #Report servers
+              MenuItemName        #SRSReportingServicesServersMenuItem
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Report deployment settings
+              MenuItemName        #SRSReportDeploymentSettingsMenuItem
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+        ENDMENU
+      ENDMENU
+      MENU #@SYS334430
+        PROPERTIES
+          Name                #CopyOfChecklists
+          Label               #@SYS334430
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Initialization checklist
+            MenuItemName        #SysCheckList_Setup
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Prevent startup of checklists
+            MenuItemType        #Action
+            MenuItemName        #SysCheckList_InitNoUpdate
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Code upgrade checklist
+            MenuItemName        #SysCheckList_UpgradeCode
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Data upgrade checklist
+            MenuItemName        #SysCheckList_Upgrade
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Partition initialization checklist
+            MenuItemName        #SysCheckList_SetupPartition
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Software update checklist
+            MenuItemName        #SysCheckList_Servicing
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Code upgrade checklist for in-place upgrade
+            MenuItemName        #syscheckList_sysupdateCode
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Data upgrade checklist for in-place upgrade
+            MenuItemName        #SysCheckList_Update
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@SYS334431
+        PROPERTIES
+          Name                #ServicesAndAIF
+          Label               #@SYS334431
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Inbound ports
+            MenuItemName        #AifInboundPort
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Outbound ports
+            MenuItemName        #AifOutboundPort
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Value substitution maps
+            MenuItemName        #AifLookupTable
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Web sites
+            MenuItemName        #AifWebsites
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENU #@SYS4004478
+          PROPERTIES
+            Name                #PositivePayServices
+            Label               #@SYS4004478
+          ENDPROPERTIES
+          
+          MENUITEM
+            PROPERTIES
+              Name                #Outbound ports for positive pay
+              MenuItemName        #BankPositivePayFormat
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+          MENUITEM
+            PROPERTIES
+              Name                #Outbound ports for payroll positive pay
+              MenuItemName        #PayrollPositivePayFormat
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+        ENDMENU
+        MENUITEM
+          PROPERTIES
+            Name                #Windows Azure Service Bus configuration
+            MenuItemName        #AifAzureServiceBus
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENU #@SYS335927
+          PROPERTIES
+            Name                #ElectronicPaymentServices
+            Label               #@SYS335927
+          ENDPROPERTIES
+          
+          MENUITEM
+            PROPERTIES
+              Name                #Outbound ports for electronic payments
+              MenuItemName        #CustVendAifPaymTable
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+        ENDMENU
+      ENDMENU
+      MENU #@SYS334432
+        PROPERTIES
+          Name                #EnterprisePortal
+          Label               #@SYS334432
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Enterprise Portal parameters
+            MenuItemName        #EPParameters
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Deployments
+            MenuItemName        #EPWizard
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Publish images
+            MenuItemName        #EPPublishImages
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Web sites
+            MenuItemName        #EPWebSiteParameters
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Collaboration workspace settings
+            MenuItemName        #CollabSiteSettings
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@SYS60181
+        PROPERTIES
+          Name                #SearchSetup
+          Label               #@SYS60181
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Search configuration
+            MenuItemName        #SysSearchSetup
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Update search crawler role
+            MenuItemName        #SysSearchSetupRole
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@SYS334434
+        PROPERTIES
+          Name                #FileArchiving
+          Label               #@SYS334434
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #File archiving parameters
+            MenuItemName        #BankFileArchParameters
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #File types
+            MenuItemName        #BankFileArchFileTypeTable
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@SYS334413
+        PROPERTIES
+          Name                #SynchronizationService
+          Label               #@SYS334413
+          ConfigurationKey    #ProjServerIntegration
+        ENDPROPERTIES
+        
+        MENU #@RET3014
+          PROPERTIES
+            Name                #Retail
+            Label               #@RET3014
+          ENDPROPERTIES
+          
+          MENUITEM
+            PROPERTIES
+              Name                #Retail POS redeployment
+              MenuItemName        #retailredeploySelectStores
+            ENDPROPERTIES
+            
+          ENDMENUITEM
+        ENDMENU
+        MENUITEM
+          PROPERTIES
+            Name                #Integration settings
+            MenuItemName        #ProjServerConfigure
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+        MENUITEM
+          PROPERTIES
+            Name                #Synchronization service parameters
+            MenuItemName        #SyncParameters
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+      MENU #@SYS4007920
+        PROPERTIES
+          Name                #WindowsAppStore
+          Label               #@SYS4007920
+        ENDPROPERTIES
+        
+        MENUITEM
+          PROPERTIES
+            Name                #Windows Application Store setup
+            MenuItemName        #SysWindowsAppSetup
+          ENDPROPERTIES
+          
+        ENDMENUITEM
+      ENDMENU
+    ENDMENU
+  ENDMENU
+  
+
+***Element: END

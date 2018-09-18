@@ -1,0 +1,388 @@
+﻿Exportfile for AOT version 1.0 or later
+Formatversion: 1
+
+***Element: CLS
+
+; Microsoft Dynamics AX Class: AAX_DatabaseLogCleanup unloaded
+; --------------------------------------------------------------------------------
+  CLSVERSION 1
+  
+  CLASS #AAX_DatabaseLogCleanup
+    PROPERTIES
+      Name                #AAX_DatabaseLogCleanup
+      Extends             #RunBaseBatch
+      Origin              #{7B0EBB00-5AC2-4F2D-A1BA-8150F6A04AAC}
+    ENDPROPERTIES
+    
+    METHODS
+      SOURCE #caption
+        #public ClassDescription caption()
+        #{
+        #    ClassDescription ret;
+        #
+        #    ret = "@SYS58410";
+        #
+        #    return ret;
+        #}
+      ENDSOURCE
+      SOURCE #classDeclaration
+        #/// <summary>
+        #///    cleans out SysDataBaseLog records based on rules like expiry
+        #/// </summary>
+        #public class AAX_DatabaseLogCleanup extends RunBaseBatch
+        #{
+        #    int numDaysFramework;
+        #    int numDaysGroup;
+        #    int numDaysMain;
+        #    int numDaysMisc;
+        #    int numDaysParameter;
+        #    int numDaysReference;
+        #    int numDaysTransaction;
+        #    int numDaysTransactionHeader;
+        #    int numDaysTransactionLine;
+        #    int numDaysWorksheet;
+        #    int numDaysWorksheetHeader;
+        #    int numDaysWorksheetLine;
+        #
+        #    DialogField dialognumDaysFramework;
+        #    DialogField dialognumDaysGroup;
+        #    DialogField dialognumDaysMain;
+        #    DialogField dialognumDaysMisc;
+        #    DialogField dialognumDaysParameter;
+        #    DialogField dialognumDaysReference;
+        #    DialogField dialognumDaysTransaction;
+        #    DialogField dialognumDaysTransactionHeader;
+        #    DialogField dialognumDaysTransactionLine;
+        #    DialogField dialognumDaysWorksheet;
+        #    DialogField dialognumDaysWorksheetHeader;
+        #    DialogField dialognumDaysWorksheetLine;
+        #
+        #    #define.CurrentVersion(1)
+        #    #localmacro.CurrentList
+        #        numDaysFramework,
+        #        numDaysGroup,
+        #        numDaysMain,
+        #        numDaysMisc,
+        #        numDaysParameter,
+        #        numDaysReference,
+        #        numDaysTransaction,
+        #        numDaysTransactionHeader,
+        #        numDaysTransactionLine,
+        #        numDaysWorksheet,
+        #        numDaysWorksheetHeader,
+        #        numDaysWorksheetLine
+        #    #endmacro
+        #}
+      ENDSOURCE
+      SOURCE #dialog
+        #protected Object dialog()
+        #{
+        #    DialogRunBase DialogRunBase;
+        #
+        #    DialogRunBase = super();
+        #
+        #    dialognumDaysFramework                  = dialogRunBase.addFieldValue(extendedTypeStr(Days), 0, "@AAX13","@AAX14");
+        #    dialognumDaysGroup                      = dialogRunBase.addFieldValue(extendedTypeStr(Days), 120, "@AAX15","@AAX26");
+        #    dialognumDaysMain                       = dialogRunBase.addFieldValue(extendedTypeStr(Days), 0, "@AAX16","@AAX27");
+        #    dialognumDaysMisc                       = dialogRunBase.addFieldValue(extendedTypeStr(Days), 0, "@AAX17","@AAX28");
+        #    dialognumDaysParameter                  = dialogRunBase.addFieldValue(extendedTypeStr(Days), 0, "@AAX18","@AAX29");
+        #    dialognumDaysReference                  = dialogRunBase.addFieldValue(extendedTypeStr(Days), 0, "@AAX19","@AAX30");
+        #    dialognumDaysTransaction                = dialogRunBase.addFieldValue(extendedTypeStr(Days), 90, "@AAX20","@AAX31");
+        #    dialognumDaysTransactionHeader          = dialogRunBase.addFieldValue(extendedTypeStr(Days), 90, "@AAX21","@AAX32");
+        #    dialognumDaysTransactionLine            = dialogRunBase.addFieldValue(extendedTypeStr(Days), 90, "@AAX22","@AAX33");
+        #    dialognumDaysWorksheet                  = dialogRunBase.addFieldValue(extendedTypeStr(Days), 90, "@AAX23","@AAX34");
+        #    dialognumDaysWorksheetHeader            = dialogRunBase.addFieldValue(extendedTypeStr(Days), 90, "@AAX24","@AAX35");
+        #    dialognumDaysWorksheetLine              = dialogRunBase.addFieldValue(extendedTypeStr(Days), 90, "@AAX25","@AAX36");
+        #
+        #    return DialogRunBase;
+        #}
+      ENDSOURCE
+      SOURCE #getFromDialog
+        #public boolean getFromDialog()
+        #{
+        #    boolean ret;
+        #
+        #    ret             = super();
+        #
+        #    numDaysFramework                = dialognumDaysFramework.value();
+        #    numDaysGroup                    = dialognumDaysGroup.value();
+        #    numDaysMain                     = dialognumDaysMain.value();
+        #    numDaysMisc                     = dialognumDaysMisc.value();
+        #    numDaysParameter                = dialognumDaysParameter.value();
+        #    numDaysReference                = dialognumDaysReference.value();
+        #    numDaysTransaction              = dialognumDaysTransaction.value();
+        #    numDaysTransactionHeader        = dialognumDaysTransactionHeader.value();
+        #    numDaysTransactionLine          = dialognumDaysTransactionLine.value();
+        #    numDaysWorksheet                = dialognumDaysWorksheet.value();
+        #    numDaysWorksheetHeader          = dialognumDaysWorksheetHeader.value();
+        #    numDaysWorksheetLine            = dialognumDaysWorksheetLine.value();
+        #
+        #    return ret;
+        #}
+      ENDSOURCE
+      SOURCE #name
+        #public IdentifierName name()
+        #{
+        #    IdentifierName ret;
+        #
+        #    ret = "@SYS58410";
+        #
+        #    return ret;
+        #}
+      ENDSOURCE
+      SOURCE #pack
+        #public container pack()
+        #{
+        #    return [#CurrentVersion,#CurrentList];
+        #}
+      ENDSOURCE
+      SOURCE #parmNumDaysFramework
+        #public int parmNumDaysFramework(int _numDaysFramework = numDaysFramework)
+        #{
+        #    if(!prmisdefault(_numDaysFramework))
+        #    {
+        #        numDaysFramework = _numDaysFramework;
+        #    }
+        #    return numDaysFramework;
+        #}
+      ENDSOURCE
+      SOURCE #parmNumDaysGroup
+        #public int parmNumDaysGroup(int _numDaysGroup = numDaysGroup)
+        #{
+        #    if(!prmisdefault(_numDaysGroup))
+        #    {
+        #        numDaysGroup = _numDaysGroup;
+        #    }
+        #    return numDaysGroup;
+        #}
+      ENDSOURCE
+      SOURCE #parmNumDaysMain
+        #public int parmNumDaysMain(int _numDaysMain = numDaysMain)
+        #{
+        #    if(!prmisdefault(_numDaysMain))
+        #    {
+        #        numDaysMain = _numDaysMain;
+        #    }
+        #    return numDaysMain;
+        #}
+      ENDSOURCE
+      SOURCE #parmNumDaysMisc
+        #public int parmNumDaysMisc(int _numDaysMisc = numDaysMisc)
+        #{
+        #    if(!prmisdefault(_numDaysMisc))
+        #    {
+        #        numDaysMisc = _numDaysMisc;
+        #    }
+        #    return numDaysMisc;
+        #}
+      ENDSOURCE
+      SOURCE #parmNumDaysParameter
+        #public int parmNumDaysParameter(int _numDaysParameter = numDaysParameter)
+        #{
+        #    if(!prmisdefault(_numDaysParameter))
+        #    {
+        #        numDaysParameter = _numDaysParameter;
+        #    }
+        #    return numDaysParameter;
+        #}
+      ENDSOURCE
+      SOURCE #parmNumDaysReference
+        #public int parmNumDaysReference(int _numDaysReference = numDaysReference)
+        #{
+        #    if(!prmisdefault(_numDaysReference))
+        #    {
+        #        numDaysReference = _numDaysReference;
+        #    }
+        #    return numDaysReference;
+        #}
+      ENDSOURCE
+      SOURCE #parmNumDaysTransaction
+        #public int parmNumDaysTransaction(int _numDaysTransaction = numDaysTransaction)
+        #{
+        #    if(!prmisdefault(_numDaysTransaction))
+        #    {
+        #        numDaysTransaction = _numDaysTransaction;
+        #    }
+        #    return numDaysTransaction;
+        #}
+      ENDSOURCE
+      SOURCE #parmNumDaysTransactionHeader
+        #public int parmNumDaysTransactionHeader(int _numDaysTransactionHeader = numDaysTransactionHeader)
+        #{
+        #    if(!prmisdefault(_numDaysTransactionHeader))
+        #    {
+        #        numDaysTransactionHeader = _numDaysTransactionHeader;
+        #    }
+        #    return numDaysTransactionHeader;
+        #}
+      ENDSOURCE
+      SOURCE #parmNumDaysTransactionLine
+        #public int parmNumDaysTransactionLine(int _numDaysTransactionLine = numDaysTransactionLine)
+        #{
+        #    if(!prmisdefault(_numDaysTransactionLine))
+        #    {
+        #        numDaysTransactionLine = _numDaysTransactionLine;
+        #    }
+        #    return numDaysTransactionLine;
+        #}
+      ENDSOURCE
+      SOURCE #parmNumDaysWorksheet
+        #public int parmNumDaysWorksheet(int _numDaysWorksheet = numDaysWorksheet)
+        #{
+        #    if(!prmisdefault(_numDaysWorksheet))
+        #    {
+        #        numDaysWorksheet = _numDaysWorksheet;
+        #    }
+        #    return numDaysWorksheet;
+        #}
+      ENDSOURCE
+      SOURCE #parmNumDaysWorksheetHeader
+        #public int parmNumDaysWorksheetHeader(int _numDaysWorksheetHeader = numDaysWorksheetHeader)
+        #{
+        #    if(!prmisdefault(_numDaysWorksheetHeader))
+        #    {
+        #        numDaysWorksheetHeader = _numDaysWorksheetHeader;
+        #    }
+        #    return numDaysWorksheetHeader;
+        #}
+      ENDSOURCE
+      SOURCE #parmNumDaysWorksheetLine
+        #public int parmNumDaysWorksheetLine(int _numDaysWorksheetLine = numDaysWorksheetLine)
+        #{
+        #    if(!prmisdefault(_numDaysWorksheetLine))
+        #    {
+        #        numDaysWorksheetLine = _numDaysWorksheetLine;
+        #    }
+        #    return numDaysWorksheetLine;
+        #}
+      ENDSOURCE
+      SOURCE #run
+        #public void run()
+        #{
+        #    DatabaseLog     databaseLog;
+        #    TreeNode        treeNode;
+        #    tableGroup      tableGroup;
+        #    SysDataBaseLog  SysDataBaseLog;
+        #    int             numDays;
+        #
+        #    while select logTable from databaseLog group by logtable
+        #    {
+        #        treeNode = treeNode::findNode('\\Data Dictionary\\Tables\\' + tableid2name(databaseLog.logTable));
+        #        if(!treeNode)
+        #        {
+        #            treeNode = treeNode::findNode('\\Data Dictionary\\Views\\' + tableid2name(databaseLog.logTable));
+        #        }
+        #        tableGroup = str2enum(tableGroup, treeNode.AOTgetProperty('TableGroup'));
+        #
+        #        switch(tableGroup)
+        #        {
+        #            case tableGroup::Framework:
+        #                numDays = this.parmNumDaysFramework();
+        #                break;
+        #            case tableGroup::Group:
+        #                numDays = this.parmNumDaysGroup();
+        #                break;
+        #            case tableGroup::Main:
+        #                numDays = this.parmNumDaysMain();
+        #                break;
+        #            case tableGroup::Miscellaneous:
+        #                numDays = this.parmNumDaysMisc();
+        #                break;
+        #            case tableGroup::Parameter:
+        #                numDays = this.parmNumDaysParameter();
+        #                break;
+        #            case tableGroup::Reference:
+        #                numDays = this.parmNumDaysReference();
+        #                break;
+        #            case tableGroup::Transaction:
+        #                numDays = this.parmNumDaysTransaction();
+        #                break;
+        #            case tableGroup::TransactionHeader:
+        #                numDays = this.parmNumDaysTransactionHeader();
+        #                break;
+        #            case tableGroup::TransactionLine:
+        #                numDays = this.parmNumDaysTransactionLine();
+        #                break;
+        #            case tableGroup::Worksheet:
+        #                numDays = this.parmNumDaysWorksheet();
+        #                break;
+        #            case tableGroup::WorksheetHeader:
+        #                numDays = this.parmNumDaysWorksheetHeader();
+        #                break;
+        #            case tableGroup::WorksheetLine:
+        #                numDays = this.parmNumDaysWorksheetLine();
+        #                break;
+        #
+        #            default:
+        #                continue;
+        #        }
+        #
+        #        //if numDays is zero, leave everything intact
+        #        if(numDays == 0)
+        #        {
+        #            continue;
+        #        }
+        #
+        #        delete_from SysDataBaseLog
+        #            where SysDataBaseLog.createdDateTime < DateTimeUtil::addDays(DateTimeUtil::utcNow(),-numDays)
+        #               && SysDataBaseLog.table == databaseLog.logTable;
+        #    }
+        #
+        #    //delete all logs for tables that are no longer logged ( by type )
+        #    //with a default 120 day timeout
+        #    delete_from SysDataBaseLog
+        #        notexists join databaseLog
+        #            where SysDataBaseLog.createdDateTime < DateTimeUtil::addDays(DateTimeUtil::utcNow(),-120)
+        #               && SysDataBaseLog.table == databaseLog.logTable
+        #               && SysDataBaseLog.LogType == databaseLog.LogType;
+        #
+        #}
+      ENDSOURCE
+      SOURCE #unpack
+        #public boolean unpack(container packedClass)
+        #{
+        #    Version version     = runbase::getVersion(packedClass);
+        #
+        #    switch (version)
+        #    {
+        #        case #CurrentVersion:
+        #            [version,#CurrentList] = packedClass;
+        #            break;
+        #        default:
+        #            return false;
+        #    }
+        #    return true;
+        #
+        #}
+      ENDSOURCE
+      SOURCE #description
+        #/// <summary>
+        #/// Description
+        #/// </summary>
+        #/// <returns>
+        #/// Description
+        #/// </returns>
+        #public static Description description()
+        #{
+        #    Description ret;
+        #
+        #    ret = "@SYS58410";
+        #
+        #    return ret;
+        #}
+      ENDSOURCE
+      SOURCE #main
+        #static void main(Args args)
+        #{
+        #    AAX_DatabaseLogCleanup this = new AAX_DatabaseLogCleanup();
+        #
+        #    if(this.prompt())
+        #    {
+        #        this.run();
+        #    }
+        #}
+      ENDSOURCE
+    ENDMETHODS
+  ENDCLASS
+
+***Element: END

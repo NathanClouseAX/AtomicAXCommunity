@@ -1,0 +1,48 @@
+﻿Exportfile for AOT version 1.0 or later
+Formatversion: 1
+
+***Element: SPV
+
+; Microsoft Dynamics AX PRIVILEGE : AAX_RetailUploadSessionCleaner unloaded
+; --------------------------------------------------------------------------------
+  VERSION 1
+  
+  PRIVILEGE #AAX_RetailUploadSessionCleaner
+    PROPERTIES
+      Name                #AAX_RetailUploadSessionCleaner
+      Label               #@AAX53
+      Origin              #{92C7B155-0130-4D99-8145-25116C4A9DEE}
+    ENDPROPERTIES
+    
+    ENTRYPOINTS #Entry Points
+      ENTRYPOINT #AAX_RetailDownloadSessionCleaner
+        PROPERTIES
+          Name                #AAX_RetailDownloadSessionCleaner
+          ObjectType          #MenuItemAction
+          ObjectName          #AAX_RetailDownloadSessionCleaner
+          AccessLevel         #Read
+        ENDPROPERTIES
+        
+      ENDENTRYPOINT
+      
+  ENDENTRYPOINTS
+  
+PERMISSIONSET #Permissions
+  PROPERTIES
+  ENDPROPERTIES
+  
+  TABLES #Tables
+  ENDTABLES
+  
+SERVERMETHODS #Server Methods
+ENDSERVERMETHODS
+
+FORMS #Forms
+ENDFORMS
+
+ENDPERMISSIONSET
+
+ENDPRIVILEGE
+
+
+***Element: END

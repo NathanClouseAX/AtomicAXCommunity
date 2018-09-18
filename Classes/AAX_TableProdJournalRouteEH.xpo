@@ -1,0 +1,68 @@
+﻿Exportfile for AOT version 1.0 or later
+Formatversion: 1
+
+***Element: CLS
+
+; Microsoft Dynamics AX Class: AAX_TableProdJournalRouteEH unloaded
+; --------------------------------------------------------------------------------
+  CLSVERSION 1
+  
+  CLASS #AAX_TableProdJournalRouteEH
+    PROPERTIES
+      Name                #AAX_TableProdJournalRouteEH
+      Origin              #{64E1BA2C-083F-424D-89FA-6E44F49C82B7}
+    ENDPROPERTIES
+    
+    METHODS
+      SOURCE #classDeclaration
+        #/// <summary>
+        #///     ProdJournalRoute changes event handler
+        #/// </summary>
+        #class AAX_TableProdJournalRouteEH
+        #{
+        #}
+      ENDSOURCE
+      SOURCE #postCheckInventSiteDimension
+        #/// <summary>
+        #///    Checks whether the financial dimensions for the current production journal line is consistent with
+        #///    the site for the production order.
+        #/// </summary>
+        #/// <param name="_args">
+        #/// XppPrePostArgs
+        #/// </param>
+        #/// <remarks>
+        #///    A financial dimension can be linked and locked to the inventory dimension site.
+        #///    If this setup is
+        #///    used, the selected financial dimension must match the value that is associated with the site
+        #///    dimension.
+        #/// </remarks>
+        #/// <exception cref="Exception::Error">
+        #/// error to prevent ttscommit
+        #/// </exception>
+        #///
+        #
+        #
+        #
+        #public static void postCheckInventSiteDimension(XppPrePostArgs _args)
+        #{
+        #    AAX_InventLocationDimensionCheck    AAX_InventLocationDimensionCheck = AAX_InventLocationDimensionCheck::newStandard();
+        #    ProdJournalRoute ProdJournalRoute;
+        #    boolean ret;
+        #
+        #    ProdJournalRoute = _args.getThis();
+        #
+        #    AAX_InventLocationDimensionCheck = AAX_InventLocationDimensionCheck::newStandard();
+        #
+        #    ret = AAX_InventLocationDimensionCheck.checkDimensions(ProdJournalRoute.prodTable().inventDim(),ProdJournalRoute.DefaultDimension);
+        #
+        #    if(ret)
+        #    {
+        #        throw error(strFmt("@SYS19378", funcName()));
+        #    }
+        #
+        #}
+      ENDSOURCE
+    ENDMETHODS
+  ENDCLASS
+
+***Element: END

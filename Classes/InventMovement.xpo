@@ -1,0 +1,71 @@
+﻿Exportfile for AOT version 1.0 or later
+Formatversion: 1
+
+***Element: CLS
+
+; Microsoft Dynamics AX Class: InventMovement unloaded
+; --------------------------------------------------------------------------------
+  CLSVERSION 1
+  
+  CLASS #InventMovement
+    PROPERTIES
+      Name                #InventMovement
+      Origin              #{2D0E00C7-0000-1000-BB1B-75C2868D1681}
+      LegacyId            #199
+    ENDPROPERTIES
+    
+    METHODS
+      SOURCE #AAX_adjustmentMovement
+        #/// <summary>
+        #///    proxy to get to adjustmentMovement method that is protecte
+        #/// </summary>
+        #/// <returns>
+        #///    true if the movement is an adjustment to a previous transaction; otherwise, false.
+        #/// </returns>
+        #public boolean AAX_adjustmentMovement()
+        #{
+        #    return(this.adjustmentMovement());
+        #}
+      ENDSOURCE
+    ENDMETHODS
+    EVENTS
+      METHOD #updateLedgerAdjust
+        EVENTHANDLERS
+          EVENTHANDLER #AAX_preUpdateLedgerAdjust
+            PROPERTIES
+              Class               #AAX_InventMovementEH
+              Method              #preUpdateLedgerAdjust
+              AOTlink             #\Classes\AAX_InventMovementEH\preUpdateLedgerAdjust
+            ENDPROPERTIES
+            
+          ENDEVENTHANDLER
+        ENDEVENTHANDLERS
+      ENDMETHOD
+      METHOD #updateLedgerFinancial
+        EVENTHANDLERS
+          EVENTHANDLER #AAX_UpdateLedgerFinancial
+            PROPERTIES
+              Class               #AAX_InventMovementEH
+              Method              #preUpdateLedgerFinancial
+              AOTlink             #\Classes\AAX_InventMovementEH\preUpdateLedgerFinancial
+            ENDPROPERTIES
+            
+          ENDEVENTHANDLER
+        ENDEVENTHANDLERS
+      ENDMETHOD
+      METHOD #updateLedgerPhysical
+        EVENTHANDLERS
+          EVENTHANDLER #AAX_UpdateLedgerPhysical
+            PROPERTIES
+              Class               #AAX_InventMovementEH
+              Method              #preUpdateLedgerPhysical
+              AOTlink             #\Classes\AAX_InventMovementEH\preUpdateLedgerPhysical
+            ENDPROPERTIES
+            
+          ENDEVENTHANDLER
+        ENDEVENTHANDLERS
+      ENDMETHOD
+    ENDEVENTS
+  ENDCLASS
+
+***Element: END

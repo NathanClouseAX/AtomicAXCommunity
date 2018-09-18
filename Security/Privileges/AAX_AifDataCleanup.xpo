@@ -1,0 +1,48 @@
+﻿Exportfile for AOT version 1.0 or later
+Formatversion: 1
+
+***Element: SPV
+
+; Microsoft Dynamics AX PRIVILEGE : AAX_AifDataCleanup unloaded
+; --------------------------------------------------------------------------------
+  VERSION 1
+  
+  PRIVILEGE #AAX_AifDataCleanup
+    PROPERTIES
+      Name                #AAX_AifDataCleanup
+      Label               #@AAX11
+      Description         #@AAX12
+      Origin              #{CDACE1C6-4DBD-4F84-93F4-714B27197ABD}
+    ENDPROPERTIES
+    
+    ENTRYPOINTS #Entry Points
+      ENTRYPOINT #AAX_AifDataCleanup
+        PROPERTIES
+          Name                #AAX_AifDataCleanup
+          ObjectType          #MenuItemAction
+          ObjectName          #AAX_AifDataCleanup
+        ENDPROPERTIES
+        
+      ENDENTRYPOINT
+      
+  ENDENTRYPOINTS
+  
+PERMISSIONSET #Permissions
+  PROPERTIES
+  ENDPROPERTIES
+  
+  TABLES #Tables
+  ENDTABLES
+  
+SERVERMETHODS #Server Methods
+ENDSERVERMETHODS
+
+FORMS #Forms
+ENDFORMS
+
+ENDPERMISSIONSET
+
+ENDPRIVILEGE
+
+
+***Element: END

@@ -1,0 +1,106 @@
+﻿Exportfile for AOT version 1.0 or later
+Formatversion: 1
+
+***Element: CLS
+
+; Microsoft Dynamics AX Class: AAX_InventLocationDimensionCheck unloaded
+; --------------------------------------------------------------------------------
+  CLSVERSION 1
+  
+  CLASS #AAX_InventLocationDimensionCheck
+    PROPERTIES
+      Name                #AAX_InventLocationDimensionCheck
+      Origin              #{D2F5D4A8-8A62-42E1-835A-8BE573A7653D}
+    ENDPROPERTIES
+    
+    METHODS
+      SOURCE #allowDimensionHierarchyLevelDeletion
+        #/// <summary>
+        #/// Indicates whether the dimension hierarchy level can be deleted.
+        #/// </summary>
+        #/// <param name="_dimensionHierarchyLevel">
+        #/// The dimension hierarchy level that is being deleted.
+        #/// </param>
+        #/// <returns>
+        #/// true if the dimension hierarchy level can be deleted; otherwise, false.
+        #/// </returns>
+        #/// <remarks>
+        #/// This method is overridden in derived classes.
+        #/// </remarks>
+        #public boolean allowDimensionHierarchyLevelDeletion(DimensionHierarchyLevel _dimensionHierarchyLevel)
+        #{
+        #    boolean             allowDeletion = true;
+        #    DimensionAttribute  dimensionAttribute;
+        #
+        #    if (AAX_inventParameters.LocationDimensionAttribute == _dimensionHierarchyLevel.DimensionAttribute)
+        #    {
+        #        dimensionAttribute = DimensionAttribute::find(_dimensionHierarchyLevel.DimensionAttribute);
+        #        allowDeletion = checkFailed(strFmt("@SYS344227", dimensionAttribute.localizedName()));
+        #    }
+        #
+        #    return allowDeletion;
+        #}
+      ENDSOURCE
+      SOURCE #checkDimensions
+        #/// <summary>
+        #/// checks inventDimLocationLink
+        #/// </summary>
+        #/// <param name="_inventDim">
+        #/// inventDim
+        #/// </param>
+        #/// <param name="_dimension">
+        #/// DimensionDefault
+        #/// </param>
+        #/// <returns>
+        #/// true if dimensions attributes are ok depending on state of inventDimLocationLink
+        #/// </returns>
+        #abstract public boolean checkDimensions(InventDim _inventDim, DimensionDefault _dimension)
+        #{
+        #}
+      ENDSOURCE
+      SOURCE #classDeclaration
+        #/// <summary>
+        #/// abstract class for inventDimLocationLink to check conditions
+        #/// </summary>
+        #abstract class AAX_InventLocationDimensionCheck
+        #{
+        #    AAX_InventParameters    AAX_inventParameters;
+        #}
+      ENDSOURCE
+      SOURCE #new
+        #protected void new()
+        #{
+        #}
+      ENDSOURCE
+      SOURCE #newStandard
+        #/// <summary>
+        #/// default standards checker for inventDimLocationLink
+        #/// </summary>
+        #/// <returns>
+        #/// AAX_InventLocationDimensionCheck objects depending on inventDimLocationLink status
+        #/// </returns>
+        #/// <exception cref="Exception::Error">
+        #/// error if inventDimLocationLink in unknown state
+        #/// </exception>
+        #static public AAX_InventLocationDimensionCheck newStandard()
+        #{
+        #    switch (AAX_InventParameters::find().InventLocationDimensionLink)
+        #    {
+        #        case InventMultiSiteDimensionLink::Inactive:
+        #            return AAX_InventLocationDimensionCheck_Null::construct();
+        #
+        #        case InventMultiSiteDimensionLink::Active:
+        #            return AAX_InventLocationDimensionCheck_Active::construct();
+        #
+        #        case InventMultiSiteDimensionLink::Locked:
+        #            return AAX_InventLocationDimensionCheck_Locked::construct();
+        #
+        #        default:
+        #            throw error(Error::wrongUseOfFunction(funcName()));
+        #    }
+        #}
+      ENDSOURCE
+    ENDMETHODS
+  ENDCLASS
+
+***Element: END

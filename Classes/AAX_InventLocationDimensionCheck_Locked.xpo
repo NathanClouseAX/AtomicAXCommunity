@@ -1,0 +1,90 @@
+﻿Exportfile for AOT version 1.0 or later
+Formatversion: 1
+
+***Element: CLS
+
+; Microsoft Dynamics AX Class: AAX_InventLocationDimensionCheck_Locked unloaded
+; --------------------------------------------------------------------------------
+  CLSVERSION 1
+  
+  CLASS #AAX_InventLocationDimensionCheck_Locked
+    PROPERTIES
+      Name                #AAX_InventLocationDimensionCheck_Locked
+      Extends             #AAX_InventLocationDimensionCheck
+      Origin              #{7BF5479C-5CD6-4B12-B37C-99483A26358B}
+    ENDPROPERTIES
+    
+    METHODS
+      SOURCE #checkDimensions
+        #public boolean checkDimensions(InventDim _inventDim, DimensionDefault _dimension)
+        #{
+        #    boolean ok = true;
+        #    RecId   dimensionValue;
+        #
+        #    if (InventLocation.InventLocationId != _inventDim.InventLocationId)
+        #    {
+        #        InventLocation = _inventDim.inventLocation();
+        #    }
+        #
+        #    dimensionValue = this.locationDimensionAttributeValue(_dimension);
+        #
+        #    if (dimensionValue != InventLocation.AAX_dimensionAttributeValue())
+        #    {
+        #        ok = checkFailed(strFmt("@SYS110623", DimensionAttributeValue::find(dimensionValue).getValue(), InventLocation.InventLocationId));
+        #    }
+        #
+        #    return ok;
+        #}
+      ENDSOURCE
+      SOURCE #classDeclaration
+        #/// <summary>
+        #/// class for inventDimLocationLink in locked status
+        #/// </summary>
+        #class AAX_InventLocationDimensionCheck_Locked extends AAX_InventLocationDimensionCheck
+        #{
+        #    InventLocation          InventLocation;
+        #}
+      ENDSOURCE
+      SOURCE #locationDimensionAttributeValue
+        #/// <summary>
+        #/// gets financial dimension for inventDimLocationLink
+        #/// </summary>
+        #/// <param name="_dimension">
+        #/// defaultDimension
+        #/// </param>
+        #/// <returns>
+        #/// recid of financial dimension from DimensionAttributeValueSetStorage
+        #/// </returns>
+        #private RecId locationDimensionAttributeValue(DimensionDefault _dimension)
+        #{
+        #    DimensionAttributeValueSetStorage   valueSetStorage;
+        #
+        #    valueSetStorage = DimensionAttributeValueSetStorage::find(_dimension);
+        #
+        #    return valueSetStorage.getValueByDimensionAttribute(AAX_inventParameters.LocationDimensionAttribute);
+        #}
+      ENDSOURCE
+      SOURCE #new
+        #protected void new()
+        #{
+        #    super();
+        #
+        #    AAX_inventParameters    = AAX_InventParameters::find();
+        #}
+      ENDSOURCE
+      SOURCE #construct
+        #/// <summary>
+        #/// default construct
+        #/// </summary>
+        #/// <returns>
+        #/// AAX_InventLocationDimensionCheck_Locked
+        #/// </returns>
+        #static public AAX_InventLocationDimensionCheck_Locked construct()
+        #{
+        #    return new AAX_InventLocationDimensionCheck_Locked();
+        #}
+      ENDSOURCE
+    ENDMETHODS
+  ENDCLASS
+
+***Element: END

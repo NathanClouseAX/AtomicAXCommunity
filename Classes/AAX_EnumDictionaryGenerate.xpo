@@ -1,0 +1,191 @@
+﻿Exportfile for AOT version 1.0 or later
+Formatversion: 1
+
+***Element: CLS
+
+; Microsoft Dynamics AX Class: AAX_EnumDictionaryGenerate unloaded
+; --------------------------------------------------------------------------------
+  CLSVERSION 1
+  
+  CLASS #AAX_EnumDictionaryGenerate
+    PROPERTIES
+      Name                #AAX_EnumDictionaryGenerate
+      Extends             #RunBaseBatch
+      Origin              #{89BEF0AA-CD2A-43DD-BE54-23D576889836}
+    ENDPROPERTIES
+    
+    METHODS
+      SOURCE #classDeclaration
+        #/// <summary>
+        #///     generates a list of enums, values and labels for use outside of AX
+        #/// </summary>
+        #public class AAX_EnumDictionaryGenerate extends RunBaseBatch
+        #{
+        #    NoYes additive;
+        #    NoYes allLanguages;
+        #
+        #    DialogField DialogAdditive;
+        #    DialogField dialogAllLanguages;
+        #
+        #    #define.CurrentVersion(1)
+        #    #localmacro.CurrentList
+        #        additive
+        #    #endmacro
+        #}
+      ENDSOURCE
+      SOURCE #dialog
+        #protected Object dialog()
+        #{
+        #    DialogRunBase DialogRunBase;
+        #
+        #    DialogRunBase = super();
+        #
+        #    DialogAdditive = DialogRunBase.addFieldValue(enumStr(NoYes), "@SYS41112", "@$AA45", "@$AA48");
+        #    DialogAllLanguages = DialogRunbase.addFieldValue(enumStr(NoYes),"@SYS58315", "@$AA46","@$AA47");
+        #
+        #    return DialogRunBase;
+        #}
+      ENDSOURCE
+      SOURCE #getFromDialog
+        #public boolean getFromDialog()
+        #{
+        #    boolean ret;
+        #
+        #    ret             = super();
+        #    Additive        = DialogAdditive.value();
+        #    allLanguages    = dialogAllLanguages.value();
+        #
+        #    return ret;
+        #}
+      ENDSOURCE
+      SOURCE #pack
+        #public container pack()
+        #{
+        #    return [#CurrentVersion,#CurrentList];
+        #}
+      ENDSOURCE
+      SOURCE #parmAdditive
+        #public NoYes parmAdditive(NoYes _additive = additive)
+        #{
+        #    additive = _additive;
+        #    return(additive);
+        #}
+      ENDSOURCE
+      SOURCE #parmallLanguages
+        #public NoYes parmallLanguages(NoYes _allLanguages = allLanguages)
+        #{
+        #    allLanguages = _allLanguages;
+        #    return(allLanguages);
+        #}
+      ENDSOURCE
+      SOURCE #run
+        #public void run()
+        #{
+        #    #AOT
+        #    #Properties
+        #    AAX_enumDictionary      AAX_enumDictionary;
+        #    UtilElements            utilElements;
+        #    int                     i, cnt;
+        #
+        #
+        #    void dumpEnum(str enumName, LanguageIdAll LanguageId = SystemParameters::find().SystemLanguageId)
+        #    {
+        #        int localEnumNum = Global::enumName2Id(enumName);
+        #        DictEnum dictEnum = new DictEnum(localEnumNum);
+        #        int      elements = dictEnum.values();
+        #        int      counter;
+        #        ;
+        #
+        #        for(counter=0; counter<elements; counter++)
+        #        {
+        #            select forupdate * from AAX_EnumDictionary where AAX_EnumDictionary.enum        == DictEnum.name()
+        #                                                          && AAX_enumDictionary.name        == DictEnum.index2Name(counter)
+        #                                                          && AAX_enumDictionary.label       == DictEnum.index2Label(counter)
+        #                                                          && AAX_enumDictionary.enumValue   == DictEnum.index2Value(counter)
+        #                                                          && AAX_EnumDictionary.LanguageId  == LanguageId;
+        #            ttsBegin;
+        #            if(AAX_EnumDictionary)
+        #            {
+        #                AAX_EnumDictionary.initFromdictEnum(DictEnum, counter, LanguageId);
+        #                AAX_EnumDictionary.update();
+        #            }
+        #            else
+        #            {
+        #                AAX_EnumDictionary.initValue();
+        #                AAX_EnumDictionary.initFromdictEnum(DictEnum, counter, LanguageId);
+        #                AAX_enumDictionary.insert();
+        #            }
+        #            ttscommit;
+        #        }
+        #    }
+        #
+        #    //clear the table, rebuild everything
+        #    if(!this.parmAdditive())
+        #    {
+        #        delete_from AAX_enumDictionary;
+        #    }
+        #
+        #    while select utilElements
+        #        where UtilElements.recordType == UtilElementType::Enum
+        #    {
+        #        if(allLanguages)
+        #        {
+        #            cnt = xlanguage::languageCount();
+        #            // 0 is unknown, 1 is user, 2 is system default
+        #            for (i = 3; i<=cnt; i++)
+        #            {
+        #                dumpEnum(UtilElements.name, xLanguage::index2languageID(i));
+        #
+        #            }
+        #        }
+        #        else
+        #        {
+        #            dumpEnum(UtilElements.name);
+        #        }
+        #    }
+        #}
+      ENDSOURCE
+      SOURCE #unpack
+        #public boolean unpack(container packedClass)
+        #{
+        #    Version version     = runbase::getVersion(packedClass);
+        #
+        #    switch (version)
+        #    {
+        #        case #CurrentVersion:
+        #            [version,#CurrentList] = packedClass;
+        #            break;
+        #        default:
+        #            return false;
+        #    }
+        #    return true;
+        #
+        #}
+      ENDSOURCE
+      SOURCE #description
+        #//todo
+        #public static Description description()
+        #{
+        #    Description ret;
+        #
+        #    ret = "";
+        #
+        #    return ret;
+        #}
+      ENDSOURCE
+      SOURCE #main
+        #public static void main(Args args)
+        #{
+        #    AAX_EnumDictionaryGenerate this = new AAX_EnumDictionaryGenerate();
+        #
+        #
+        #    if(this.prompt())
+        #    {
+        #        this.run();
+        #    }
+        #}
+      ENDSOURCE
+    ENDMETHODS
+  ENDCLASS
+
+***Element: END

@@ -1,0 +1,25 @@
+﻿Exportfile for AOT version 1.0 or later
+Formatversion: 1
+
+***Element: FTM
+
+; Microsoft Dynamics AX MENUITEM : AAX_InventLocationDimension_UnlockLink unloaded
+; --------------------------------------------------------------------------------
+  VERSION 1
+  
+  MENUITEM #AAX_InventLocationDimension_UnlockLink
+    Type: 3
+    PROPERTIES
+      Name                #AAX_InventLocationDimension_UnlockLink
+      Label               #@SYS109388
+      HelpText            #@SYS109389
+      ObjectType          #Class
+      Object              #AAX_InventLocationDimension_UnlockLink
+      ConfigurationKey    #LogisticsBasic
+      Origin              #{E32911DC-9E61-47E4-86C3-48FC3D94232E}
+    ENDPROPERTIES
+    
+  ENDMENUITEM
+  
+
+***Element: END

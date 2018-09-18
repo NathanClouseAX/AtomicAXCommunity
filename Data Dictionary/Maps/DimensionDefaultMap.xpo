@@ -1,0 +1,37 @@
+﻿Exportfile for AOT version 1.0 or later
+Formatversion: 1
+
+***Element: MAP
+
+; Microsoft Dynamics AX Map : DimensionDefaultMap unloaded
+; --------------------------------------------------------------------------------
+  TABLEVERSION 1
+  
+  MAP #DimensionDefaultMap
+    FIELDS
+    ENDFIELDS
+    GROUPS
+    ENDGROUPS
+    
+    MAPPINGS
+      MAPPING #InventLocation
+      PROPERTIES
+        MappingTable        #InventLocation
+      ENDPROPERTIES
+      
+      FIELDMAPPINGS
+        PROPERTIES
+          MapField            #DefaultDimension
+          MapFieldTo          #AAX_DefaultDimension
+        ENDPROPERTIES
+        
+      ENDFIELDMAPPINGS
+      ENDMAPPING
+    ENDMAPPINGS
+    
+    METHODS
+    ENDMETHODS
+  ENDMAP
+  
+
+***Element: END

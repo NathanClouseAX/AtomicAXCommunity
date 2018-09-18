@@ -1,0 +1,206 @@
+﻿Exportfile for AOT version 1.0 or later
+Formatversion: 1
+
+***Element: CLS
+
+; Microsoft Dynamics AX Class: AAX_RetailDownloadSessionCleaner unloaded
+; --------------------------------------------------------------------------------
+  CLSVERSION 1
+  
+  CLASS #AAX_RetailDownloadSessionCleaner
+    PROPERTIES
+      Name                #AAX_RetailDownloadSessionCleaner
+      Extends             #RunBaseBatch
+      Origin              #{077F27B4-EF39-40B0-B0B7-ADABE1FF6E9A}
+    ENDPROPERTIES
+    
+    METHODS
+      SOURCE #classDeclaration
+        #/// <summary>
+        #/// Delete Download Sessions No Longer Needed
+        #/// </summary>
+        #class AAX_RetailDownloadSessionCleaner  extends RunBaseBatch
+        #{
+        #    QueryRun query;
+        #
+        #    #DEFINE.CurrentVersion(1)
+        #
+        #}
+      ENDSOURCE
+      SOURCE #deleteDownloadSessions
+        #/// <summary>
+        #///  delete download sessions
+        #/// </summary>
+        #private void deleteDownloadSessions()
+        #{
+        #    RetailCDXDownloadSessionDataStore RetailCDXDownloadSessionDataStore;
+        #    //RetailCDXDownloadSession RetailCDXDownloadSession;
+        #
+        #    RetailCDXDownloadSessionDataStore.selectForUpdate(true);
+        #    query.reset();
+        #    query.setRecord(RetailCDXDownloadSessionDataStore);
+        #
+        #    while (query.next())
+        #    {
+        #        ttsbegin;
+        #
+        #        RetailCDXDownloadSessionDataStore.delete();
+        #
+        #        ttscommit;
+        #    }
+        #}
+      ENDSOURCE
+      SOURCE #getFromDialog
+        #public boolean getFromDialog()
+        #{
+        #
+        #    return super();
+        #}
+      ENDSOURCE
+      SOURCE #initParmDefault
+        #/// <summary>
+        #///    Initializes the internal variables.
+        #/// </summary>
+        #/// <remarks>
+        #///    This method is called when no <c>SysLastValue</c> record can be found when calling the
+        #///    <c>SysLastValue.GetLast</c> method. Remember to call the <c>super</c> method.
+        #/// </remarks>
+        #public void initParmDefault()
+        #{
+        #    ;
+        #
+        #}
+      ENDSOURCE
+      SOURCE #mustLoadSaveQuery
+        #/// <summary>
+        #///    Determines whether the last query must be loaded and saved when you leave the form. Called from the
+        #///    <c>SysQueryForm</c> class.
+        #/// </summary>
+        #/// <returns>
+        #///    Always returns false.
+        #/// </returns>
+        #public boolean mustLoadSaveQuery()
+        #{
+        #    return false;
+        #}
+      ENDSOURCE
+      SOURCE #new
+        #public void new()
+        #{
+        #    ;
+        #    super();
+        #    query = new QueryRun(querystr(AAX_RetailCDXDownloadSessionCleanup));
+        #}
+      ENDSOURCE
+      SOURCE #pack
+        #public container pack()
+        #{
+        #    return [#CurrentVersion,query.pack()];
+        #}
+      ENDSOURCE
+      SOURCE #queryRun
+        #/// <summary>
+        #///    Returns the <c>QueryRun</c> class, which is used by the <c>queryPrompt</c> method
+        #/// </summary>
+        #/// <returns>
+        #///    The <c>QueryRun</c> class, which is used by the <c>queryPrompt</c> method.
+        #/// </returns>
+        #/// <remarks>
+        #///    This method is used if a query prompt is in the dialog and if a select menu item is added to a
+        #///    dialog. Do not create the instance of the <c>QueryRun</c> class when this method is called. Do it
+        #///    in the <c>unpack</c> method and the <c>initParmDefault</c> method, or in the <c>init</c> method.
+        #/// </remarks>
+        #public QueryRun queryRun()
+        #{
+        #    return query;
+        #}
+      ENDSOURCE
+      SOURCE #run
+        #/// <summary>
+        #///    Contains the code that does the actual job of the class.
+        #/// </summary>
+        #public void run()
+        #{
+        #    super();
+        #
+        #    this.deleteDownloadSessions();
+        #
+        #}
+      ENDSOURCE
+      SOURCE #runsImpersonated
+        #/// <summary>
+        #///    Determines whether the batch task is run on the server or on a client.
+        #/// </summary>
+        #/// <returns>
+        #///    true if the task is run on the server; otherwise, false.
+        #/// </returns>
+        #/// <remarks>
+        #///    Your classes that extend <c>RunBaseBatch</c> must override the <c>runsImpersonated</c> method and
+        #///    return false, if you want those tasks to run on a client.
+        #/// </remarks>
+        #public boolean runsImpersonated()
+        #{
+        #    return true;
+        #}
+      ENDSOURCE
+      SOURCE #showQueryValues
+        #/// <summary>
+        #///    Determines whether a Select button is to be added to the dialog. If you change the return value to
+        #///    true, the button will be added.
+        #/// </summary>
+        #/// <returns>
+        #///    false by default.
+        #/// </returns>
+        #/// <remarks>
+        #///    If you click this button, it will show the query form. Therefore, the <c>queryRun</c> method has to
+        #///    return a valid <c>queryRun</c> value.
+        #/// </remarks>
+        #public boolean showQueryValues()
+        #{
+        #    return true;
+        #}
+      ENDSOURCE
+      SOURCE #unpack
+        #public boolean unpack(container _packedClass)
+        #{
+        #    Integer     version     = RunBase::getVersion(_packedClass);
+        #    container       packedQuery;
+        #;
+        #    switch (version)
+        #    {
+        #        case #CurrentVersion:
+        #            [version, packedQuery] = _packedClass;
+        #            if (packedQuery)
+        #                query = new QueryRun(packedQuery);
+        #            break;
+        #
+        #        default :
+        #            return false;
+        #    }
+        #
+        #    return true;
+        #}
+      ENDSOURCE
+      SOURCE #description
+        #public client server static ClassDescription description()
+        #{
+        #    return "@AAX57";
+        #}
+      ENDSOURCE
+      SOURCE #main
+        #public static void main(Args _args)
+        #{
+        #    AAX_RetailDownloadSessionCleaner AAX_RetailDownloadSessionCleaner;
+        #    ;
+        #
+        #    AAX_RetailDownloadSessionCleaner = new AAX_RetailDownloadSessionCleaner();
+        #
+        #    if (AAX_RetailDownloadSessionCleaner.prompt())
+        #        AAX_RetailDownloadSessionCleaner.run();
+        #
+        #}
+      ENDSOURCE
+    ENDMETHODS
+  ENDCLASS
+
+***Element: END

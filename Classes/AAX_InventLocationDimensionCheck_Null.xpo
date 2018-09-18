@@ -1,0 +1,65 @@
+﻿Exportfile for AOT version 1.0 or later
+Formatversion: 1
+
+***Element: CLS
+
+; Microsoft Dynamics AX Class: AAX_InventLocationDimensionCheck_Null unloaded
+; --------------------------------------------------------------------------------
+  CLSVERSION 1
+  
+  CLASS #AAX_InventLocationDimensionCheck_Null
+    PROPERTIES
+      Name                #AAX_InventLocationDimensionCheck_Null
+      Extends             #AAX_InventLocationDimensionCheck
+      Origin              #{B937476D-FFB2-4DEA-9AD5-B563BD04D27C}
+    ENDPROPERTIES
+    
+    METHODS
+      SOURCE #allowDimensionHierarchyLevelDeletion
+        #/// <summary>
+        #/// Indicates whether the dimension hierarchy level can be deleted.
+        #/// </summary>
+        #/// <param name="_dimensionHierarchyLevel">
+        #/// The dimension hierarchy level that is being deleted.
+        #/// </param>
+        #/// <returns>
+        #/// true if the dimension hierarchy level can be deleted; otherwise, false.
+        #/// </returns>
+        #/// <remarks>
+        #/// This method is overridden in derived classes.
+        #/// </remarks>
+        #public boolean allowDimensionHierarchyLevelDeletion(DimensionHierarchyLevel _dimensionHierarchyLevel)
+        #{
+        #    return true;
+        #}
+      ENDSOURCE
+      SOURCE #checkDimensions
+        #public boolean checkDimensions(InventDim _inventDim, DimensionDefault _dimension)
+        #{
+        #    return true;
+        #}
+      ENDSOURCE
+      SOURCE #classDeclaration
+        #/// <summary>
+        #/// check object for disabled inventDimLocationLink state
+        #/// </summary>
+        #class AAX_InventLocationDimensionCheck_Null extends AAX_InventLocationDimensionCheck
+        #{
+        #}
+      ENDSOURCE
+      SOURCE #construct
+        #/// <summary>
+        #/// default constructor
+        #/// </summary>
+        #/// <returns>
+        #/// AAX_InventLocationDimensionCheck_Null
+        #/// </returns>
+        #static public AAX_InventLocationDimensionCheck_Null construct()
+        #{
+        #    return new AAX_InventLocationDimensionCheck_Null();
+        #}
+      ENDSOURCE
+    ENDMETHODS
+  ENDCLASS
+
+***Element: END

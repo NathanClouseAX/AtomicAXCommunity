@@ -1,0 +1,63 @@
+﻿@AAX0 
+@AAX1 Inventory and Financial Dimensions do not match
+@AAX2 When the dimension link is active, the value of the selected dimension on all transactions will be determined based on the value of the Location storage dimension.
+@AAX3 When the dimension link is locked, transactions can only be posted if the value of the selected dimension matches the value associated with the Location storage dimension.
+@AAX4 Select the dimension to be linked to the storage dimension, Warehouse
+@AAX5 Number of Days of Success history to keep
+@AAX6 Number of Days of Exception history to keep
+@AAX7 Number of Days of Warning history to keep
+@AAX8 Number of Days of AIF Queue history to keep
+@AAX9 Number of Days of Successfully ended History to keep
+@AAX10 Batch Clean Up
+@AAX11 Batch Job Cleanup
+@AAX12 Clean Up Old Records from various automated sources
+@AAX13 Delete Framework Log Entries after days
+@AAX14 Number of Days of Framework history to keep (zero is forever)
+@AAX15 Delete Group Log Entries after days
+@AAX16 Delete Main Log Entries after days
+@AAX17 Delete Misc Log Entries after days
+@AAX18 Delete Parameter Log Entries after days
+@AAX19 Delete Reference Log Entries after days
+@AAX20 Delete Transaction Log Entries after days
+@AAX21 Delete Transaction Header Log Entries after days
+@AAX22 Delete Transaction Line Log Entries after days
+@AAX23 Delete Worksheet Log Entries after days
+@AAX24 Delete Worksheet Header Log Entries after days
+@AAX25 Delete Worksheet Line Log Entries after days
+@AAX26 Number of Days of Group history to keep (zero is forever)
+@AAX27 Number of Days of Main history to keep (zero is forever)
+@AAX28 Number of Days of Misc history to keep (zero is forever)
+@AAX29 Number of Days of Parameter history to keep (zero is forever)
+@AAX30 Number of Days of Reference history to keep (zero is forever)
+@AAX31 Number of Days of Transaction history to keep (zero is forever)
+@AAX32 Number of Days of Transaction Header history to keep (zero is forever)
+@AAX33 Number of Days of Transaction Line history to keep (zero is forever)
+@AAX34 Number of Days of Worksheet history to keep (zero is forever)
+@AAX35 Number of Days of Worksheet Header history to keep (zero is forever)
+@AAX36 Number of Days of Worksheet Line history to keep (zero is forever)
+@AAX37 Cleanup database log entries based on rules
+@AAX38 Populate Enum Dictionary
+@AAX39 Enum Dictionary
+@AAX40 Only Scan for changes
+@AAX41 Include all languages rather than just system default
+@AAX42 Check to include all languages licensed
+@AAX43 Uncheck this to delete all enums and rebuild from scratch
+@AAX44 Run Process To Create Database List of All Enumerations
+@AAX45 Delete Success Entries after days
+@AAX46 AOT Enum Name
+@AAX47 Enum Label
+@AAX48 Enum Dictionary Table that stores exploded enum labels and values for use in SQL
+@AAX49 Delete Exception Entries after days
+@AAX50 Delete Warning Entries after days
+@AAX51 Delete AIF Queue Entries after days
+@AAX52 Delete Successfully ended batch jobs after days
+@AAX53 Upload Sessions Cleaner
+@AAX54 Delete Upload Sessions No Longer Needed
+@AAX55 Download Sessions Cleaner
+@AAX56 Delete Download Sessions No Longer Needed
+@AAX57 Retail Download Session Cleanup
+@AAX58 Retail Upload Session Cleanup
+@AAX59 Warehouse '%1' is not associated to a %2.
+@AAX60 The DimAttributeAssetGroup view contains the fields that allow the InventLocation table to be used as a financial dimension.
+@AAX61 Warehouse Dimension Link
+@AAX62 Warehouse Dimension Link Form

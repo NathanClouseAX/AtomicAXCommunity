@@ -1,0 +1,64 @@
+﻿Exportfile for AOT version 1.0 or later
+Formatversion: 1
+
+***Element: CLS
+
+; Microsoft Dynamics AX Class: AAX_AxInventLocationDimensionable unloaded
+; --------------------------------------------------------------------------------
+  CLSVERSION 1
+  
+  INTERFACE #AAX_AxInventLocationDimensionable
+    PROPERTIES
+      Name                #AAX_AxInventLocationDimensionable
+      Origin              #{1388399D-1222-4F7A-ABB2-DB9D99BB3563}
+    ENDPROPERTIES
+    
+    METHODS
+      SOURCE #classDeclaration
+        #/// <summary>
+        #/// abstraction to make inventLocation dimensionable
+        #/// </summary>
+        #interface AAX_AxInventLocationDimensionable
+        #{
+        #}
+      ENDSOURCE
+      SOURCE #isStorageDimFieldSet
+        #/// <summary>
+        #/// checks if a storageDimension field is dimensionable
+        #/// </summary>
+        #/// <param name="_fieldId">
+        #/// FieldId
+        #/// </param>
+        #/// <returns>
+        #/// true if field is dimensionable
+        #/// </returns>
+        #public boolean isStorageDimFieldSet(FieldId _fieldId)
+        #{
+        #}
+      ENDSOURCE
+      SOURCE #setDefaultDimensionValue
+        #/// <summary>
+        #/// sets defultDImension value
+        #/// </summary>
+        #/// <param name="_dimension">
+        #/// DimensionDefault
+        #/// </param>
+        #public void setDefaultDimensionValue(DimensionDefault _dimension)
+        #{
+        #}
+      ENDSOURCE
+      SOURCE #setStorageDimField
+        #/// <summary>
+        #/// sets storage dimension field
+        #/// </summary>
+        #/// <param name="_fieldId">
+        #/// fieldid
+        #/// </param>
+        #public void setStorageDimField(FieldId _fieldId)
+        #{
+        #}
+      ENDSOURCE
+    ENDMETHODS
+  ENDCLASS
+
+***Element: END

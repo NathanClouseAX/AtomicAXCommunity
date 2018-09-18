@@ -1,0 +1,127 @@
+﻿Exportfile for AOT version 1.0 or later
+Formatversion: 1
+
+***Element: CLS
+
+; Microsoft Dynamics AX Class: AAX_InventLocationDimension_UnlockLink unloaded
+; --------------------------------------------------------------------------------
+  CLSVERSION 1
+  
+  CLASS #AAX_InventLocationDimension_UnlockLink
+    PROPERTIES
+      Name                #AAX_InventLocationDimension_UnlockLink
+      Origin              #{82288968-E7A4-451E-A55E-CB5088A005A9}
+    ENDPROPERTIES
+    
+    METHODS
+      SOURCE #classDeclaration
+        #/// <summary>
+        #/// unlocks inventDimLocationLink
+        #/// </summary>
+        #public class AAX_InventLocationDimension_UnlockLink
+        #{
+        #    AAX_InventParameters    AAX_inventParameters;
+        #}
+      ENDSOURCE
+      SOURCE #new
+        #protected void new()
+        #{
+        #    AAX_inventParameters    = AAX_InventParameters::find();
+        #}
+      ENDSOURCE
+      SOURCE #run
+        #/// <summary>
+        #///    Contains the code that does the actual job of the class.
+        #/// </summary>
+        #public void run()
+        #{
+        #    #OCCRetryCount
+        #
+        #    if (!this.validate())
+        #    {
+        #        return;
+        #    }
+        #
+        #    try
+        #    {
+        #        ttsbegin;
+        #
+        #        AAX_inventParameters = AAX_InventParameters::find(true);
+        #        AAX_inventParameters.InventLocationDimensionLink = InventMultiSiteDimensionLink::Active;
+        #        AAX_inventParameters.update();
+        #
+        #        ttscommit;
+        #    }
+        #    catch (Exception::Deadlock)
+        #    {
+        #        retry;
+        #    }
+        #    catch (Exception::UpdateConflict)
+        #    {
+        #        if (appl.ttsLevel() == 0)
+        #        {
+        #            if (xSession::currentRetryCount() >= #RetryNum)
+        #            {
+        #                throw Exception::UpdateConflictNotRecovered;
+        #            }
+        #            else
+        #            {
+        #                retry;
+        #            }
+        #        }
+        #        else
+        #        {
+        #            throw Exception::UpdateConflict;
+        #        }
+        #    }
+        #}
+      ENDSOURCE
+      SOURCE #validate
+        #/// <summary>
+        #/// validates that the inventDimLocationLink can be unlocked
+        #/// </summary>
+        #/// <returns>
+        #/// true if the inventDimLocationLink can be unlocked
+        #/// </returns>
+        #public boolean validate()
+        #{
+        #    boolean ret = true;
+        #
+        #    if (ret && !AAX_inventParameters.allowUnlockDimensionLink())
+        #    {
+        #        ret = checkFailed("@SYS109419");
+        #    }
+        #
+        #    return ret;
+        #}
+      ENDSOURCE
+      SOURCE #construct
+        #public static AAX_InventLocationDimension_UnlockLink construct()
+        #{
+        #    return new AAX_InventLocationDimension_UnlockLink();
+        #}
+      ENDSOURCE
+      SOURCE #main
+        #public client server static void main(Args args)
+        #{
+        #    Common                              common;
+        #    FormDataSource                      formDataSource;
+        #    AAX_InventLocationDimension_UnlockLink      AAX_InventLocationDimension_UnlockLink = AAX_InventLocationDimension_UnlockLink::construct();
+        #
+        #    AAX_InventLocationDimension_UnlockLink.run();
+        #
+        #    if (args)
+        #    {
+        #        common = args.record();
+        #        if (common.isFormDataSource())
+        #        {
+        #            formDataSource = common.dataSource();
+        #            formDataSource.executeQuery();
+        #        }
+        #    }
+        #}
+      ENDSOURCE
+    ENDMETHODS
+  ENDCLASS
+
+***Element: END

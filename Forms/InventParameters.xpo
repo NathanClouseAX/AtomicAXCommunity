@@ -1,0 +1,477 @@
+﻿Exportfile for AOT version 1.0 or later
+Formatversion: 1
+
+***Element: FRM
+
+; Microsoft Dynamics AX Forms unloaded
+; --------------------------------------------------------------------------------
+FRMVERSION 12
+
+FORM #InventParameters
+  PROPERTIES
+    Name                #InventParameters
+    Origin              #{3CA81DE7-D813-4BAA-B13A-929C5208DD6C}
+  ENDPROPERTIES
+  
+  METHODS
+  ENDMETHODS
+  OBJECTBANK
+    PROPERTIES
+    ENDPROPERTIES
+    
+    DATASOURCE
+      OBJECTPOOL
+        PROPERTIES
+          Name                #InventParameters
+          Table               #InventParameters
+          AllowCheck          #No
+          AllowCreate         #No
+          AllowDelete         #No
+          LinkType            #Passive
+          InsertAtEnd         #No
+          InsertIfEmpty       #No
+        ENDPROPERTIES
+        
+        FIELDLIST
+          REFERENCEFIELD InventSumDateFinancialDimensionFocus_RU
+            PROPERTIES
+            ENDPROPERTIES
+            
+            METHODS
+              SOURCE #jumpRef
+                #// <GEERU>
+                #public void jumpRef()
+                #{
+                #    DimensionHierarchy::jumpRefFocus(DimensionHierarchy::find(this.getValue()), this);
+                #}
+                #// </GEERU>
+              ENDSOURCE
+              SOURCE #resolveReference
+                #// <GEERU>
+                #public Common resolveReference(FormReferenceControl _formReferenceControl)
+                #{
+                #    return DimensionHierarchy::resolveFocusReference(_formReferenceControl);
+                #}
+                #// </GEERU>
+              ENDSOURCE
+              SOURCE #lookupReference
+                #// <GEERU>
+                #public Common lookupReference(FormReferenceControl _formReferenceControl)
+                #{
+                #    return DimensionHierarchy::lookupFocusReference(_formReferenceControl);
+                #}
+                #// </GEERU>
+              ENDSOURCE
+            ENDMETHODS
+          ENDREFERENCEFIELD
+          
+        ENDFIELDLIST
+      ENDOBJECTPOOL
+      METHODS
+      ENDMETHODS
+    ENDDATASOURCE
+    DATASOURCE
+      OBJECTPOOL
+        PROPERTIES
+          Name                #NumberSequenceReference
+          Table               #NumberSequenceReference
+          AllowCheck          #No
+          AllowCreate         #No
+          AllowDelete         #No
+          LinkType            #Passive
+          InsertAtEnd         #No
+          InsertIfEmpty       #No
+        ENDPROPERTIES
+        
+        FIELDLIST
+          REFERENCEFIELD NumberSequenceId
+            PROPERTIES
+            ENDPROPERTIES
+            
+            METHODS
+              SOURCE #resolveReference
+                #public Common resolveReference(FormReferenceControl _formReferenceControl)
+                #{
+                #     NumberSequenceCode code = _formReferenceControl.filterValue(
+                #        AbsoluteFieldBinding::construct(fieldStr(NumberSequenceTable, NumberSequence),
+                #        tableStr(NumberSequenceTable))).value();
+                #
+                #    // Do not call super as we're providing our own disambiguation logic.
+                #    // resolvedRecord = super(_formReferenceControl);
+                #
+                #    return NumberSequenceTable::findByNaturalKey(code, scope.getId(true));
+                #}
+              ENDSOURCE
+              SOURCE #lookupReference
+                #public Common lookupReference(FormReferenceControl _formReferenceControl)
+                #{
+                #
+                #    NumberSequenceTable     selectedRecord;
+                #    SysReferenceTableLookup sysTableLookup = SysReferenceTableLookup::newParameters(tableNum(NumberSequenceTable), _formReferenceControl, true);
+                #    Query lookupQuery;
+                #
+                #    // Do not call super as we're providing our own custom lookup logic.
+                #    // selectedRecord = super(_formReferenceControl);
+                #
+                #    // Display the Title and Department fields in the lookup form.
+                #    sysTableLookup.addLookupfield(fieldNum(NumberSequenceTable, NumberSequence));
+                #
+                #    // Create a custom Query that filters on NumberSequenceScope.
+                #    lookupQuery = new Query();
+                #    lookupQuery.addDataSource(tableNum(NumberSequenceTable)).addRange(fieldNum(NumberSequenceTable, NumberSequenceScope)).value(queryValue(scope.getId(true)));
+                #    sysTableLookup.parmQuery(lookupQuery);
+                #
+                #    // Return the record selected by the user.
+                #    selectedRecord = sysTableLookup.performFormLookup();
+                #
+                #    return selectedRecord;
+                #}
+              ENDSOURCE
+            ENDMETHODS
+          ENDREFERENCEFIELD
+          
+        ENDFIELDLIST
+      ENDOBJECTPOOL
+      METHODS
+        SOURCE #active
+          #public int active()
+          #{
+          #    int ret;
+          #
+          #    ret = super();
+          #
+          #    plNumberSequenceGroupInventExt.enabled(numberSequenceReference.NumberSequenceDatatype == NumberSequenceDatatype::findByDatatypeId(extendedTypeName2Id(extendedTypeStr(PlPackingSlipExternalId))).RecId);
+          #
+          #    return ret;
+          #}
+        ENDSOURCE
+        SOURCE #init
+          #public void init()
+          #{
+          #    super();
+          #    //cache display methods to limit server calls
+          #    numberSequenceReference_ds.cacheAddMethod(tableMethodStr(NumberSequenceReference,referenceLabel));
+          #    numberSequenceReference_ds.cacheAddMethod(tableMethodStr(NumberSequenceReference,referenceHelp));
+          #}
+        ENDSOURCE
+        SOURCE #removeFilter
+          #void removeFilter()
+          #{
+          #    runExecuteDirect = false;
+          #    numbersequenceReference_ds.executeQuery();
+          #}
+        ENDSOURCE
+        SOURCE #executeQuery
+          #void executeQuery()
+          #{
+          #    if (runExecuteDirect)
+          #    {
+          #        super();
+          #    }
+          #    else
+          #    {
+          #        runExecuteDirect = true;
+          #        this.queryRun(NumberSeqReference::buildQueryRunMulti(numberSequenceReference,
+          #                                                             tmpIdRef,
+          #                                                             numberSequenceTable,
+          #                                                             numberSequenceModules,
+          #                                                             scope));
+          #
+          #        numbersequenceReference_ds.research();
+          #    }
+          #}
+        ENDSOURCE
+      ENDMETHODS
+    ENDDATASOURCE
+    DATASOURCE
+      OBJECTPOOL
+        PROPERTIES
+          Name                #InventDimSetupGrid
+          Table               #InventDimSetupGrid
+          AllowCheck          #No
+          AllowCreate         #No
+          AllowDelete         #No
+          LinkType            #Passive
+          InsertAtEnd         #No
+          InsertIfEmpty       #No
+        ENDPROPERTIES
+        
+        FIELDLIST
+        ENDFIELDLIST
+      ENDOBJECTPOOL
+      METHODS
+        SOURCE #executeQuery
+          #void executeQuery()
+          #{
+          #    super();
+          #    select inventDimSetupGrid where inventDimSetupGrid.DimFieldId == tmpFieldId;
+          #}
+        ENDSOURCE
+      ENDMETHODS
+    ENDDATASOURCE
+    DATASOURCE
+      OBJECTPOOL
+        PROPERTIES
+          Name                #BOMParameters
+          Table               #BOMParameters
+          AllowCheck          #No
+          AllowCreate         #No
+          AllowDelete         #No
+          JoinSource          #InventParameters
+          LinkType            #InnerJoin
+          InsertAtEnd         #No
+          InsertIfEmpty       #No
+        ENDPROPERTIES
+        
+        FIELDLIST
+        ENDFIELDLIST
+      ENDOBJECTPOOL
+      METHODS
+        SOURCE #init
+          #public void init()
+          #{
+          #    if (!isConfigurationkeyEnabled(new DictTable(tableNum(BOMParameters)).configurationKeyId()))
+          #    {
+          #        bomParameters_ds.linkType(FormLinkType::Passive);
+          #    }
+          #    super();
+          #}
+        ENDSOURCE
+      ENDMETHODS
+    ENDDATASOURCE
+    DATASOURCE
+      OBJECTPOOL
+        PROPERTIES
+          Name                #WMSParameters
+          Table               #WMSParameters
+          AllowCheck          #No
+          AllowCreate         #No
+          AllowDelete         #No
+          JoinSource          #InventParameters
+          LinkType            #InnerJoin
+          InsertAtEnd         #No
+          InsertIfEmpty       #No
+        ENDPROPERTIES
+        
+        FIELDLIST
+        ENDFIELDLIST
+      ENDOBJECTPOOL
+      METHODS
+        SOURCE #init
+          #public void init()
+          #{
+          #    if (!isConfigurationkeyEnabled(new DictTable(tableNum(WMSParameters)).configurationKeyId()))
+          #    {
+          #        wmsParameters_ds.linkType(FormLinkType::Passive);
+          #    }
+          #
+          #    super();
+          #}
+        ENDSOURCE
+      ENDMETHODS
+    ENDDATASOURCE
+    DATASOURCE
+      OBJECTPOOL
+        PROPERTIES
+          Name                #RFIDParameters
+          Table               #RFIDParameters
+          AllowCheck          #No
+          AllowCreate         #No
+          AllowDelete         #No
+          JoinSource          #InventParameters
+          LinkType            #InnerJoin
+          InsertAtEnd         #No
+          InsertIfEmpty       #No
+        ENDPROPERTIES
+        
+        FIELDLIST
+          DATAFIELD CommunicationLoggingLevel
+            PROPERTIES
+            ENDPROPERTIES
+            
+            METHODS
+              SOURCE #modified
+                #public void modified()
+                #{
+                #    super();
+                #    element.rfidSetLoggingAccess();
+                #}
+              ENDSOURCE
+            ENDMETHODS
+          ENDDATAFIELD
+          
+        ENDFIELDLIST
+      ENDOBJECTPOOL
+      METHODS
+        SOURCE #active
+          #public int active()
+          #{
+          #    int ret;
+          #
+          #    ret = super();
+          #
+          #    element.rfidSetLoggingAccess();
+          #
+          #    return ret;
+          #}
+        ENDSOURCE
+        SOURCE #init
+          #public void init()
+          #{
+          #    if (!isConfigurationkeyEnabled(new DictTable(tableNum(RFIDParameters)).configurationKeyId()))
+          #    {
+          #        rfidParameters_ds.linkType(FormLinkType::Passive);
+          #    }
+          #
+          #    super();
+          #}
+        ENDSOURCE
+      ENDMETHODS
+    ENDDATASOURCE
+    DATASOURCE
+      OBJECTPOOL
+        PROPERTIES
+          Name                #AxdDocumentParameters
+          Table               #AxdDocumentParameters
+          AllowCheck          #No
+          AllowCreate         #No
+          AllowDelete         #No
+          JoinSource          #InventParameters
+          LinkType            #InnerJoin
+          InsertAtEnd         #No
+          InsertIfEmpty       #No
+        ENDPROPERTIES
+        
+        FIELDLIST
+        ENDFIELDLIST
+      ENDOBJECTPOOL
+      METHODS
+        SOURCE #init
+          #public void init()
+          #{
+          #    if (!isConfigurationkeyEnabled(new DictTable(tableNum(AxdDocumentParameters)).configurationKeyId()))
+          #    {
+          #        axdDocumentParameters_ds.linkType(FormLinkType::Passive);
+          #    }
+          #
+          #    super();
+          #}
+        ENDSOURCE
+      ENDMETHODS
+    ENDDATASOURCE
+    DATASOURCE
+      OBJECTPOOL
+        PROPERTIES
+          Name                #PdsParameters
+          Table               #PdsParameters
+          AllowCheck          #No
+          AllowCreate         #No
+          InsertAtEnd         #No
+          InsertIfEmpty       #No
+        ENDPROPERTIES
+        
+        FIELDLIST
+        ENDFIELDLIST
+      ENDOBJECTPOOL
+      METHODS
+      ENDMETHODS
+    ENDDATASOURCE
+    DATASOURCE
+      OBJECTPOOL
+        PROPERTIES
+          Name                #PdsMRCParameters
+          Table               #PdsMRCParameters
+          AllowCheck          #No
+          AllowCreate         #No
+          JoinSource          #InventParameters
+          LinkType            #InnerJoin
+          InsertAtEnd         #No
+          InsertIfEmpty       #No
+        ENDPROPERTIES
+        
+        FIELDLIST
+        ENDFIELDLIST
+      ENDOBJECTPOOL
+      METHODS
+        SOURCE #init
+          #public void init()
+          #{
+          #    if (!#PdsMRCEnabled)
+          #    {
+          #        pdsMRCParameters_ds.linkType(FormLinkType::Passive);
+          #    }
+          #
+          #    super();
+          #}
+        ENDSOURCE
+      ENDMETHODS
+    ENDDATASOURCE
+    DATASOURCE
+      OBJECTPOOL
+        PROPERTIES
+          Name                #AAX_InventParameters
+          Table               #AAX_InventParameters
+          AllowCheck          #No
+          AllowCreate         #No
+          AllowDelete         #No
+          JoinSource          #InventParameters
+          LinkType            #Passive
+          InsertAtEnd         #No
+          InsertIfEmpty       #No
+        ENDPROPERTIES
+        
+        FIELDLIST
+        ENDFIELDLIST
+      ENDOBJECTPOOL
+      METHODS
+      ENDMETHODS
+    ENDDATASOURCE
+  ENDOBJECTBANK
+  
+  REFERENCEDATASOURCES
+    DATASOURCE
+      OBJECTPOOL
+        PROPERTIES
+          Name                #NumberSequenceTable
+          Table               #NumberSequenceTable
+          JoinSource          #NumberSequenceReference
+          JoinRelation        #NumberSequenceTable
+        ENDPROPERTIES
+        
+        FIELDLIST
+        ENDFIELDLIST
+      ENDOBJECTPOOL
+      METHODS
+      ENDMETHODS
+    ENDDATASOURCE
+  ENDREFERENCEDATASOURCES
+  
+  JOINS
+    BOMParameters InventParameters
+    WMSParameters InventParameters
+    RFIDParameters InventParameters
+    AxdDocumentParameters InventParameters
+    PdsMRCParameters InventParameters
+    NumberSequenceTable NumberSequenceReference
+    AAX_InventParameters InventParameters
+  ENDJOINS
+  
+  PARTREFERENCES
+  ENDPARTREFERENCES
+  
+  DESIGN
+    CONTAINER
+    ENDCONTAINER
+    
+  ENDDESIGN
+  
+  PERMISSIONS #Permissions
+    PROPERTIES
+    ENDPROPERTIES
+    
+  ENDPERMISSIONS
+  
+ENDFORM
+
+
+***Element: END

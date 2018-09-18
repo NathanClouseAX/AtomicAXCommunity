@@ -1,0 +1,66 @@
+﻿Exportfile for AOT version 1.0 or later
+Formatversion: 1
+
+***Element: CLS
+
+; Microsoft Dynamics AX Class: AAX_InventDimEH unloaded
+; --------------------------------------------------------------------------------
+  CLSVERSION 1
+  
+  CLASS #AAX_InventDimEH
+    PROPERTIES
+      Name                #AAX_InventDimEH
+      Origin              #{6CE177FE-738B-462E-8980-9241BDF7E70E}
+    ENDPROPERTIES
+    
+    METHODS
+      SOURCE #classDeclaration
+        #/// <summary>
+        #/// InventDim event handler
+        #/// </summary>
+        #class AAX_InventDimEH
+        #{
+        #}
+      ENDSOURCE
+      SOURCE #modifiedInventLocationFromParent
+        #/// <summary>
+        #///    Applies default values on the current or parent record because the <c>InventLocationId</c> field is
+        #///    modified.
+        #/// </summary>
+        #/// <param name="InventDim">
+        #/// inventdim
+        #/// </param>
+        #/// <param name="_parent">
+        #///    The parent record buffer that is joined to the <c>InventDim</c> record buffer.
+        #/// </param>
+        #///
+        #public static void modifiedInventLocationFromParent(InventDim InventDim, Common _parent)
+        #{
+        #    InventDim.InventStorageDimMap::AAX_modifiedInventLocationFromParent(_parent);
+        #}
+      ENDSOURCE
+      SOURCE #setInventLocationFromParentIfModifie
+        #/// <summary>
+        #///    Checks whether the <c>InventLocationId</c> field has changed.
+        #/// </summary>
+        #/// <param name="_args">
+        #/// XppPrePostArgs
+        #/// </param>
+        #
+        #public static void setInventLocationFromParentIfModifie(XppPrePostArgs _args)
+        #{
+        #    Common parent              =   _args.getArg(identifierStr(_parent));
+        #    InventDim oldInventDIm     =   _args.getArg(identifierStr(_oldInventDim));
+        #
+        #    InventDim InventDim = _args.getThis();
+        #
+        #    if (InventDim.InventSiteId != oldInventDim.InventSiteId)
+        #    {
+        #        AAX_InventDimEH::modifiedInventLocationFromParent(InventDim, parent);
+        #    }
+        #}
+      ENDSOURCE
+    ENDMETHODS
+  ENDCLASS
+
+***Element: END

@@ -1,0 +1,523 @@
+﻿Exportfile for AOT version 1.0 or later
+Formatversion: 1
+
+***Element: SRO
+
+; Microsoft Dynamics AX ROLE : SysServerITManager unloaded
+; --------------------------------------------------------------------------------
+  VERSION 1
+  
+  ROLE #SysServerITManager
+    PROPERTIES
+      Name                #SysServerITManager
+      Label               #@SYS155016
+      Description         #@SYS155017
+      Origin              #{86CE01EB-2946-4FC1-9140-789B2D1D0A13}
+    ENDPROPERTIES
+    
+    DUTIES #Duties
+      DUTY #AIFIntegrationMaintain
+        PROPERTIES
+          Name                #AIFIntegrationMaintain
+        ENDPROPERTIES
+        
+      ENDDUTY
+      
+    DUTY #AifSyncConfigure
+      PROPERTIES
+        Name                #AifSyncConfigure
+      ENDPROPERTIES
+      
+    ENDDUTY
+    
+  DUTY #BIAnalysisProjectsMaintain
+    PROPERTIES
+      Name                #BIAnalysisProjectsMaintain
+    ENDPROPERTIES
+    
+  ENDDUTY
+  
+DUTY #BICalendarsMaintain
+  PROPERTIES
+    Name                #BICalendarsMaintain
+  ENDPROPERTIES
+  
+ENDDUTY
+
+DUTY #CAMDataConnectorConfigurationInquire
+  PROPERTIES
+    Name                #CAMDataConnectorConfigurationInquire
+  ENDPROPERTIES
+  
+ENDDUTY
+
+DUTY #CAMDataConnectorConfigurationMaintain
+  PROPERTIES
+    Name                #CAMDataConnectorConfigurationMaintain
+  ENDPROPERTIES
+  
+ENDDUTY
+
+DUTY #CAMSourceEntryTransfer
+  PROPERTIES
+    Name                #CAMSourceEntryTransfer
+  ENDPROPERTIES
+  
+ENDDUTY
+
+DUTY #CAMStatisticalMeasureConfigInquire
+  PROPERTIES
+    Name                #CAMStatisticalMeasureConfigInquire
+  ENDPROPERTIES
+  
+ENDDUTY
+
+DUTY #CAMStatisticalMeasureConfigMaintain
+  PROPERTIES
+    Name                #CAMStatisticalMeasureConfigMaintain
+  ENDPROPERTIES
+  
+ENDDUTY
+
+DUTY #CaseCategorySecurityEnable
+  PROPERTIES
+    Name                #CaseCategorySecurityEnable
+  ENDPROPERTIES
+  
+ENDDUTY
+
+DUTY #ComplianceUserOperationLogView_CN
+  PROPERTIES
+    Name                #ComplianceUserOperationLogView_CN
+  ENDPROPERTIES
+  
+ENDDUTY
+
+DUTY #ConfiguratorMaintain_BR
+  PROPERTIES
+    Name                #ConfiguratorMaintain_BR
+  ENDPROPERTIES
+  
+ENDDUTY
+
+DUTY #CortanaIntelligenceServicesMaintain
+  PROPERTIES
+    Name                #CortanaIntelligenceServicesMaintain
+  ENDPROPERTIES
+  
+ENDDUTY
+
+DUTY #CortanaIntelligenceServicesView
+  PROPERTIES
+    Name                #CortanaIntelligenceServicesView
+  ENDPROPERTIES
+  
+ENDDUTY
+
+DUTY #CueMaintain
+  PROPERTIES
+    Name                #CueMaintain
+  ENDPROPERTIES
+  
+ENDDUTY
+
+DUTY #CustSitesSolutionMaintain
+  PROPERTIES
+    Name                #CustSitesSolutionMaintain
+  ENDPROPERTIES
+  
+ENDDUTY
+
+DUTY #diraddressbookmasterinquire
+  PROPERTIES
+    Name                #diraddressbookmasterinquire
+  ENDPROPERTIES
+  
+ENDDUTY
+
+DUTY #DirAddressBookMasterMaintain
+  PROPERTIES
+    Name                #DirAddressBookMasterMaintain
+  ENDPROPERTIES
+  
+ENDDUTY
+
+DUTY #DirAddressBookPolicyInquire
+  PROPERTIES
+    Name                #DirAddressBookPolicyInquire
+  ENDPROPERTIES
+  
+ENDDUTY
+
+DUTY #DirAddressBookProcessEnable
+  PROPERTIES
+    Name                #DirAddressBookProcessEnable
+  ENDPROPERTIES
+  
+ENDDUTY
+
+DUTY #DOCommonMaintain
+  PROPERTIES
+    Name                #DOCommonMaintain
+  ENDPROPERTIES
+  
+ENDDUTY
+
+DUTY #ECPExternalAccessMaintain
+  PROPERTIES
+    Name                #ECPExternalAccessMaintain
+  ENDPROPERTIES
+  
+ENDDUTY
+
+DUTY #EFDocumentSetup_BR
+  PROPERTIES
+    Name                #EFDocumentSetup_BR
+  ENDPROPERTIES
+  
+ENDDUTY
+
+DUTY #ElectrDocExchangeEnable_RU
+  PROPERTIES
+    Name                #ElectrDocExchangeEnable_RU
+  ENDPROPERTIES
+  
+ENDDUTY
+
+DUTY #EMSFlowsMaintain
+  PROPERTIES
+    Name                #EMSFlowsMaintain
+  ENDPROPERTIES
+  
+ENDDUTY
+
+DUTY #EPHomePageView
+  PROPERTIES
+    Name                #EPHomePageView
+  ENDPROPERTIES
+  
+ENDDUTY
+
+DUTY #EPSettingsMaintain
+  PROPERTIES
+    Name                #EPSettingsMaintain
+  ENDPROPERTIES
+  
+ENDDUTY
+
+DUTY #LogisticsAddressPolicyInquire
+  PROPERTIES
+    Name                #LogisticsAddressPolicyInquire
+  ENDPROPERTIES
+  
+ENDDUTY
+
+DUTY #LogisticsAddressProcessEnable
+  PROPERTIES
+    Name                #LogisticsAddressProcessEnable
+  ENDPROPERTIES
+  
+ENDDUTY
+
+DUTY #LogisticsAddressReferenceDataInquire
+  PROPERTIES
+    Name                #LogisticsAddressReferenceDataInquire
+  ENDPROPERTIES
+  
+ENDDUTY
+
+DUTY #MaintainKLADR_RU
+  PROPERTIES
+    Name                #MaintainKLADR_RU
+  ENDPROPERTIES
+  
+ENDDUTY
+
+DUTY #OMOrganizationsInquire
+  PROPERTIES
+    Name                #OMOrganizationsInquire
+  ENDPROPERTIES
+  
+ENDDUTY
+
+DUTY #OMOrganizationsMaintain
+  PROPERTIES
+    Name                #OMOrganizationsMaintain
+  ENDPROPERTIES
+  
+ENDDUTY
+
+DUTY #PrintMgmtPrintManagementSettingsMaintai
+  PROPERTIES
+    Name                #PrintMgmtPrintManagementSettingsMaintai
+  ENDPROPERTIES
+  
+ENDDUTY
+
+DUTY #ProjProjectServerIntegrationMaintain
+  PROPERTIES
+    Name                #ProjProjectServerIntegrationMaintain
+  ENDPROPERTIES
+  
+ENDDUTY
+
+DUTY #PurchReqPurchaseOrderGenBatchEnable
+  PROPERTIES
+    Name                #PurchReqPurchaseOrderGenBatchEnable
+  ENDPROPERTIES
+  
+ENDDUTY
+
+DUTY #PurchReqPurchaseReqServiceOperations
+  PROPERTIES
+    Name                #PurchReqPurchaseReqServiceOperations
+  ENDPROPERTIES
+  
+ENDDUTY
+
+DUTY #ReqDemPlanPerformanceMaintain
+  PROPERTIES
+    Name                #ReqDemPlanPerformanceMaintain
+  ENDPROPERTIES
+  
+ENDDUTY
+
+DUTY #ReqDemPlanSetupCubeMaintain
+  PROPERTIES
+    Name                #ReqDemPlanSetupCubeMaintain
+  ENDPROPERTIES
+  
+ENDDUTY
+
+DUTY #RetailBarcodeMasksEnable
+  PROPERTIES
+    Name                #RetailBarcodeMasksEnable
+  ENDPROPERTIES
+  
+ENDDUTY
+
+DUTY #RetailChannelsView
+  PROPERTIES
+    Name                #RetailChannelsView
+  ENDPROPERTIES
+  
+ENDDUTY
+
+DUTY #RetailInventAvailabilityMaintain
+  PROPERTIES
+    Name                #RetailInventAvailabilityMaintain
+  ENDPROPERTIES
+  
+ENDDUTY
+
+DUTY #RetailSchedulerManage
+  PROPERTIES
+    Name                #RetailSchedulerManage
+  ENDPROPERTIES
+  
+ENDDUTY
+
+DUTY #RetailTransactionServiceProfilesMaintain
+  PROPERTIES
+    Name                #RetailTransactionServiceProfilesMaintain
+  ENDPROPERTIES
+  
+ENDDUTY
+
+DUTY #ShipCarrierMasterMaintain
+  PROPERTIES
+    Name                #ShipCarrierMasterMaintain
+  ENDPROPERTIES
+  
+ENDDUTY
+
+DUTY #SitesSvcMaintain
+  PROPERTIES
+    Name                #SitesSvcMaintain
+  ENDPROPERTIES
+  
+ENDDUTY
+
+DUTY #SitesSvcMaintainService
+  PROPERTIES
+    Name                #SitesSvcMaintainService
+  ENDPROPERTIES
+  
+ENDDUTY
+
+DUTY #SMASitesSolutionMaintain
+  PROPERTIES
+    Name                #SMASitesSolutionMaintain
+  ENDPROPERTIES
+  
+ENDDUTY
+
+DUTY #smmActivityProcessEnable
+  PROPERTIES
+    Name                #smmActivityProcessEnable
+  ENDPROPERTIES
+  
+ENDDUTY
+
+DUTY #smmActivityReferenceDataInquire
+  PROPERTIES
+    Name                #smmActivityReferenceDataInquire
+  ENDPROPERTIES
+  
+ENDDUTY
+
+DUTY #smmCRMProcessEnable
+  PROPERTIES
+    Name                #smmCRMProcessEnable
+  ENDPROPERTIES
+  
+ENDDUTY
+
+DUTY #SRSBISettingsMaintain
+  PROPERTIES
+    Name                #SRSBISettingsMaintain
+  ENDPROPERTIES
+  
+ENDDUTY
+
+DUTY #SRSGregorianCalendarsMaintain
+  PROPERTIES
+    Name                #SRSGregorianCalendarsMaintain
+  ENDPROPERTIES
+  
+ENDDUTY
+
+DUTY #SyncSolutionMaintainSolution
+  PROPERTIES
+    Name                #SyncSolutionMaintainSolution
+  ENDPROPERTIES
+  
+ENDDUTY
+
+DUTY #SysClientRoleCenterMaintain
+  PROPERTIES
+    Name                #SysClientRoleCenterMaintain
+  ENDPROPERTIES
+  
+ENDDUTY
+
+DUTY #SysServerSettingsMaintain
+  PROPERTIES
+    Name                #SysServerSettingsMaintain
+  ENDPROPERTIES
+  
+ENDDUTY
+
+DUTY #SystemParametersMasterMaintain
+  PROPERTIES
+    Name                #SystemParametersMasterMaintain
+  ENDPROPERTIES
+  
+ENDDUTY
+
+DUTY #SystemSequencesMaintain
+  PROPERTIES
+    Name                #SystemSequencesMaintain
+  ENDPROPERTIES
+  
+ENDDUTY
+
+DUTY #TrvTravelAndExpenseServiceOperations
+  PROPERTIES
+    Name                #TrvTravelAndExpenseServiceOperations
+  ENDPROPERTIES
+  
+ENDDUTY
+
+DUTY #UserRequestMaintain
+  PROPERTIES
+    Name                #UserRequestMaintain
+  ENDPROPERTIES
+  
+ENDDUTY
+
+DUTY #VendSitesSolutionMaintain
+  PROPERTIES
+    Name                #VendSitesSolutionMaintain
+  ENDPROPERTIES
+  
+ENDDUTY
+
+DUTY #WorkflowAlertsSettingsMaintain
+  PROPERTIES
+    Name                #WorkflowAlertsSettingsMaintain
+  ENDPROPERTIES
+  
+ENDDUTY
+
+DUTY #WorkflowViewWorkflowParticipantsPerf
+  PROPERTIES
+    Name                #WorkflowViewWorkflowParticipantsPerf
+  ENDPROPERTIES
+  
+ENDDUTY
+
+DUTY #WorkflowViewWorkflowPerf
+  PROPERTIES
+    Name                #WorkflowViewWorkflowPerf
+  ENDPROPERTIES
+  
+ENDDUTY
+
+ENDDUTIES
+
+PRIVILEGES #Privileges
+  PRIVILEGE #AAX_AifDataCleanup
+    PROPERTIES
+      Name                #AAX_AifDataCleanup
+    ENDPROPERTIES
+    
+  ENDPRIVILEGE
+  
+PRIVILEGE #SysCheckList_Setup
+  PROPERTIES
+    Name                #SysCheckList_Setup
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #SysServerITManagerPrivilege
+  PROPERTIES
+    Name                #SysServerITManagerPrivilege
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+ENDPRIVILEGES
+
+PERMISSIONSET #Permissions
+  PROPERTIES
+  ENDPROPERTIES
+  
+  TABLES #Tables
+    TABLE #SysMapParameters
+      PROPERTIES
+        Table               #SysMapParameters
+        EffectiveAccess     #Delete
+        ManagedBy           #Manual
+      ENDPROPERTIES
+      
+    ENDTABLE
+    
+ENDTABLES
+
+FORMS #Forms
+ENDFORMS
+
+SERVERMETHODS #Server Methods
+ENDSERVERMETHODS
+
+ENDPERMISSIONSET
+
+SUBROLES #Sub Roles
+ENDSUBROLES
+
+ENDROLE
+
+
+***Element: END

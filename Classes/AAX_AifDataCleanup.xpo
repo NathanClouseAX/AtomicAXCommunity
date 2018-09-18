@@ -1,0 +1,245 @@
+﻿Exportfile for AOT version 1.0 or later
+Formatversion: 1
+
+***Element: CLS
+
+; Microsoft Dynamics AX Class: AAX_AifDataCleanup unloaded
+; --------------------------------------------------------------------------------
+  CLSVERSION 1
+  
+  CLASS #AAX_AifDataCleanup
+    PROPERTIES
+      Name                #AAX_AifDataCleanup
+      Extends             #RunBaseBatch
+      Origin              #{27592C4B-C7FC-454F-954E-22EDD1E60E52}
+    ENDPROPERTIES
+    
+    METHODS
+      SOURCE #caption
+        #public ClassDescription caption()
+        #{
+        #    ClassDescription ret;
+        #
+        #    ret = "@AAX10";
+        #
+        #    return ret;
+        #}
+      ENDSOURCE
+      SOURCE #classDeclaration
+        #/// <summary>
+        #///   AIF log cleanup
+        #/// </summary>
+        #public class AAX_AifDataCleanup extends RunBaseBatch
+        #{
+        #    int numDaysBatchJobHistory;
+        #    int numDaysSysExceptionTable;
+        #    int numDaysSysExceptionTableWarning;
+        #    int numDaysAifQueueManager;
+        #    int numDaysBatchJob;
+        #
+        #    DialogField DialognumDaysBatchJobHistory;
+        #    DialogField DialognumDaysSysExceptionTable;
+        #    DialogField DialognumDaysSysExceptionTableWarning;
+        #    DialogField DialognumDaysAifQueueManager;
+        #    DIalogField dialogNumDaysBatchJob;
+        #
+        #    #define.CurrentVersion(1)
+        #    #define.version1(1)
+        #    #localmacro.CurrentList
+        #        numDaysBatchJobHistory,
+        #        numDaysSysExceptionTable,
+        #        numDaysSysExceptionTableWarning,
+        #        numDaysAifQueueManager,
+        #        numDaysBatchJob
+        #    #endmacro
+        #}
+      ENDSOURCE
+      SOURCE #description
+        #public ClassDescription description()
+        #{
+        #    ClassDescription ret;
+        #
+        #    ret = "@AAX10";
+        #
+        #    return ret;
+        #}
+      ENDSOURCE
+      SOURCE #dialog
+        #protected Object dialog()
+        #{
+        #    DialogRunBase DialogRunBase;
+        #
+        #    DialogRunBase = super();
+        #    dialogNumDaysBatchJobHistory            = dialogRunBase.addFieldValue(extendedTypeStr(Days), 60, "@AAX45","@AAX5");
+        #    dialogNumDaysSysExceptionTable          = dialogRunBase.addFieldValue(extendedTypeStr(Days), 120, "@AAX49","@AAX6");
+        #    dialogNumDaysSysExceptionTableWarning   = dialogRunBase.addFieldValue(extendedTypeStr(Days), 90, "@AAX50","@AAX7");
+        #    dialogNumDaysAifQueueManager            = dialogRunBase.addFieldValue(extendedTypeStr(Days), 120, "@AAX51","@AAX8");
+        #    DialognumDaysBatchJob                   = DialogRunbase.addFieldValue(extendedTypeStr(Days), 30, "@AAX52", "@AAX9");
+        #
+        #    return DialogRunBase;
+        #}
+      ENDSOURCE
+      SOURCE #getFromDialog
+        #public boolean getFromDialog()
+        #{
+        #    boolean ret;
+        #
+        #    ret             = super();
+        #    numDaysBatchJobHistory          = dialogNumDaysBatchJobHistory.value();
+        #    numDaysSysExceptionTable        = dialogNumDaysSysExceptionTable.value();
+        #    numDaysSysExceptionTableWarning = dialogNumDaysSysExceptionTableWarning.value();
+        #    numDaysAifQueueManager          = dialogNumDaysAifQueueManager.value();
+        #    numDaysBatchJob                 = DialognumDaysBatchJob.value();
+        #
+        #
+        #    return ret;
+        #}
+      ENDSOURCE
+      SOURCE #pack
+        #public container pack()
+        #{
+        #    return [#CurrentVersion,#CurrentList];
+        #}
+      ENDSOURCE
+      SOURCE #parmNumDaysAifQueueManager
+        #public int parmNumDaysAifQueueManager(int _numDaysAifQueueManager = numDaysAifQueueManager)
+        #{
+        #    if(!prmisdefault(_numDaysAifQueueManager))
+        #    {
+        #        numDaysAifQueueManager = _numDaysAifQueueManager;
+        #    }
+        #
+        #    return numDaysAifQueueManager;
+        #}
+      ENDSOURCE
+      SOURCE #parmNumDaysBatchJob
+        #public int parmNumDaysBatchJob(int _numDaysBatchJob = numDaysBatchJob)
+        #{
+        #    if(!prmisdefault(_numDaysBatchJob))
+        #    {
+        #        numDaysBatchJob = _numDaysBatchJob;
+        #    }
+        #
+        #    return numDaysBatchJob;
+        #}
+      ENDSOURCE
+      SOURCE #parmNumDaysBatchJobHistory
+        #public int parmNumDaysBatchJobHistory(int _numDaysBatchJobHistory = numDaysBatchJobHistory)
+        #{
+        #    if(!prmisdefault(_numDaysBatchJobHistory))
+        #    {
+        #        numDaysBatchJobHistory = _numDaysBatchJobHistory;
+        #    }
+        #
+        #    return numDaysBatchJobHistory;
+        #}
+      ENDSOURCE
+      SOURCE #parmNumDaysSysExceptionTable
+        #public int parmNumDaysSysExceptionTable(int _numDaysSysExceptionTable = numDaysSysExceptionTable)
+        #{
+        #    if(!prmisdefault(_numDaysSysExceptionTable))
+        #    {
+        #        numDaysSysExceptionTable = _numDaysSysExceptionTable;
+        #    }
+        #
+        #    return numDaysSysExceptionTable;
+        #}
+      ENDSOURCE
+      SOURCE #parmNumDaysSysExceptionTableWarning
+        #public int parmNumDaysSysExceptionTableWarning(int _numDaysSysExceptionTableWarning = numDaysSysExceptionTableWarning)
+        #{
+        #    if(!prmisdefault(_numDaysSysExceptionTableWarning))
+        #    {
+        #        numDaysSysExceptionTableWarning = _numDaysSysExceptionTableWarning;
+        #    }
+        #
+        #    return numDaysSysExceptionTableWarning;
+        #}
+      ENDSOURCE
+      SOURCE #run
+        #public void run()
+        #{
+        #    BatchJobHistory     BatchJobHistory;
+        #    SysExceptionTable   SysExceptionTable;
+        #    AifQueueManager     AifQueueManager;
+        #    BatchJob            BatchJob;
+        #    ;
+        #    //Delete BatchJobHistory where status = ended and older than numDaysBatchJobHistory days
+        #    if(numDaysBatchJobHistory != 0)
+        #    {
+        #        delete_from BatchJobHistory
+        #            where BatchJobHistory.createdDateTime < DateTimeUtil::addDays(DateTimeUtil::utcNow(),-numDaysBatchJobHistory)
+        #            && BatchJobHistory.Status == BatchStatus::Finished;
+        #    }
+        #
+        #    //Delete SysExceptionTable where status = warning and older than numDaysSysExceptionTableWarning and module = AIF
+        #    if(numDaysSysExceptionTableWarning != 0)
+        #    {
+        #        delete_from SysExceptionTable
+        #            where SysExceptionTable.createdDateTime < DateTimeUtil::addDays(DateTimeUtil::utcNow(),-numDaysSysExceptionTableWarning)
+        #            && SysExceptionTable.Exception == Exception::Warning
+        #            && SysExceptionTable.Module == 'AIF';
+        #    }
+        #
+        #    //Delete SysExceptionTable where older than numDaysSysExceptionTable days and module = AIF
+        #    if(numDaysSysExceptionTable != 0)
+        #    {
+        #        delete_from SysExceptionTable
+        #            where SysExceptionTable.createdDateTime < DateTimeUtil::addDays(DateTimeUtil::utcNow(),-numDaysSysExceptionTable)
+        #            && SysExceptionTable.Module == 'AIF';
+        #    }
+        #
+        #    //Delete AifQueueManager where older than numDaysAifQueueManager days
+        #    if(numDaysAifQueueManager != 0)
+        #    {
+        #        delete_from AifQueueManager
+        #            where AifQueueManager.SourceCreatedDateTime < DateTimeUtil::addDays(DateTimeUtil::utcNow(),-numDaysAifQueueManager);
+        #    }
+        #
+        #    //Delete BatchJob where older than numDaysBatchJob
+        #    if(numDaysBatchJob != 0)
+        #    {
+        #        delete_from BatchJob
+        #            where BatchJob.Status == BatchStatus::Finished
+        #               && BatchJob.EndDateTime < DateTimeUtil::addDays(DateTimeUtil::utcNow(), -numDaysBatchJob);
+        #
+        #        //delete orphaned batchJobHistory record from batchJob records being deleted
+        #        delete_from BatchJobHistory
+        #        notexists join BatchJob
+        #            where BatchJobHistory.BatchJobId == BatchJob.RecId;
+        #    }
+        #}
+      ENDSOURCE
+      SOURCE #unpack
+        #public boolean unpack(container packedClass)
+        #{
+        #    Version version     = runbase::getVersion(packedClass);
+        #
+        #    switch (version)
+        #    {
+        #        case #CurrentVersion:
+        #            [version,#CurrentList] = packedClass;
+        #            break;
+        #        default:
+        #            return false;
+        #    }
+        #    return true;
+        #
+        #}
+      ENDSOURCE
+      SOURCE #main
+        #public static void main(Args args)
+        #{
+        #    AAX_AifDataCleanup this = new AAX_AifDataCleanup();
+        #    ;
+        #
+        #    if(this.prompt())
+        #    {
+        #        this.run();
+        #    }
+        #}
+      ENDSOURCE
+    ENDMETHODS
+  ENDCLASS
+
+***Element: END

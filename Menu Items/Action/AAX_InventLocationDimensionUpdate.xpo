@@ -1,0 +1,30 @@
+﻿Exportfile for AOT version 1.0 or later
+Formatversion: 1
+
+***Element: FTM
+
+; Microsoft Dynamics AX MENUITEM : AAX_InventLocationDimensionUpdate unloaded
+; --------------------------------------------------------------------------------
+  VERSION 1
+  
+  MENUITEM #AAX_InventLocationDimensionUpdate
+    Type: 3
+    PROPERTIES
+      Name                #AAX_InventLocationDimensionUpdate
+      Label               #@SYS111444
+      HelpText            #@SYS338257
+      ObjectType          #Class
+      Object              #AAX_InventLocationDimensionUpdate
+      RunOn               #Server
+      ConfigurationKey    #LogisticsBasic
+      SecurityKey         #InventPeriodic
+      NeededAccessLevel   #Edit
+      ViewUserLicense     #Enterprise
+      MaintainUserLicense #Enterprise
+      Origin              #{F5BAB5A6-744F-47DE-A97F-63DD426B63C8}
+    ENDPROPERTIES
+    
+  ENDMENUITEM
+  
+
+***Element: END

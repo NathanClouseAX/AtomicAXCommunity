@@ -1,0 +1,118 @@
+﻿Exportfile for AOT version 1.0 or later
+Formatversion: 1
+
+***Element: VIE
+
+; Microsoft Dynamics AX View : DimAttributeInventLocation unloaded
+; --------------------------------------------------------------------------------
+  TABLEVERSION 1
+  
+  VIEW #DimAttributeInventLocation
+    PROPERTIES
+      Name                #DimAttributeInventLocation
+      Label               #Warehouses
+      FormRef             #InventLocations
+      TitleField1         #Name
+      TitleField2         #Value
+      ConfigurationKey    #LogisticsBasic
+      SaveDataPerCompany  #Yes
+      SingularLabel       #@SYS6437
+      DeveloperDocumentation  #@AAX60
+      Origin              #{8ED5B7F8-A30B-4B3F-95EC-6B2602F0C9D7}
+    ENDPROPERTIES
+    
+    QUERY #Metadata
+      PROPERTIES
+        Name                #Metadata
+        Version             #4
+        NextUniqueId        #1001
+      ENDPROPERTIES
+      
+      BLOCKS
+        BLOCK #InventLocation
+          PROPERTIES
+            Name                #BackingEntity
+            Table               #InventLocation
+            UniqueId            #1000
+          ENDPROPERTIES
+          
+          FIELDLIST
+            PROPERTIES
+            ENDPROPERTIES
+            
+          ENDFIELDLIST
+          LINES
+          ENDLINES
+          BLOCKS
+          ENDBLOCKS
+          GROUPBY
+          ENDGROUPBY
+          HAVING
+          ENDHAVING
+          ORDERBY
+          ENDORDERBY
+        ENDBLOCK
+      ENDBLOCKS
+    ENDQUERY
+    
+    FIELDS
+      VIEWFIELD #Key
+        PROPERTIES
+          Type                #Int64
+          Name                #Key
+          Table               #DimAttributeInventLocation
+          ExtendedDataType    #RecId
+          StringSize          #(Memo)
+          DataSource          #BackingEntity
+          DataField           #RecId
+          Origin              #{6A9D3D34-A577-4EA6-9C35-446B190E70F1}
+        ENDPROPERTIES
+        
+      ENDVIEWFIELD
+      
+      VIEWFIELD #Value
+        PROPERTIES
+          Name                #Value
+          Table               #DimAttributeInventLocation
+          ExtendedDataType    #InventLocationId
+          StringSize          #10
+          DataSource          #BackingEntity
+          DataField           #InventLocationId
+          Origin              #{AB37B012-3BC9-4058-B2B7-9EA2F2CC505C}
+        ENDPROPERTIES
+        
+      ENDVIEWFIELD
+      
+      VIEWFIELD #Name
+        PROPERTIES
+          Name                #Name
+          Table               #DimAttributeInventLocation
+          ExtendedDataType    #InventLocationName
+          StringSize          #60
+          DataSource          #BackingEntity
+          DataField           #Name
+          Origin              #{DCA03B1E-3DEF-499E-84CF-6FEE92C51E72}
+        ENDPROPERTIES
+        
+      ENDVIEWFIELD
+      
+    ENDFIELDS
+    GROUPS
+      GROUP #AutoReport
+        PROPERTIES
+          Name                #AutoReport
+        ENDPROPERTIES
+        
+        GROUPFIELDS
+          #Value
+          #Name
+        ENDGROUPFIELDS
+      ENDGROUP
+    ENDGROUPS
+    
+    METHODS
+    ENDMETHODS
+  ENDVIEW
+  
+
+***Element: END

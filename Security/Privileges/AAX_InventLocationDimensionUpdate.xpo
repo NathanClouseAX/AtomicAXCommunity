@@ -1,0 +1,48 @@
+﻿Exportfile for AOT version 1.0 or later
+Formatversion: 1
+
+***Element: SPV
+
+; Microsoft Dynamics AX PRIVILEGE : AAX_InventLocationDimensionUpdate unloaded
+; --------------------------------------------------------------------------------
+  VERSION 1
+  
+  PRIVILEGE #AAX_InventLocationDimensionUpdate
+    PROPERTIES
+      Name                #AAX_InventLocationDimensionUpdate
+      Label               #@SYS338257
+      Origin              #{2D949007-269A-4BA0-9F0A-5E547EAFE3E1}
+    ENDPROPERTIES
+    
+    ENTRYPOINTS #Entry Points
+      ENTRYPOINT #AAX_InventLocationDimensionUpdate
+        PROPERTIES
+          Name                #AAX_InventLocationDimensionUpdate
+          ObjectType          #MenuItemAction
+          ObjectName          #AAX_InventLocationDimensionUpdate
+          AccessLevel         #Create
+        ENDPROPERTIES
+        
+      ENDENTRYPOINT
+      
+  ENDENTRYPOINTS
+  
+PERMISSIONSET #Permissions
+  PROPERTIES
+  ENDPROPERTIES
+  
+  TABLES #Tables
+  ENDTABLES
+  
+SERVERMETHODS #Server Methods
+ENDSERVERMETHODS
+
+FORMS #Forms
+ENDFORMS
+
+ENDPERMISSIONSET
+
+ENDPRIVILEGE
+
+
+***Element: END

@@ -1,0 +1,25 @@
+﻿Exportfile for AOT version 1.0 or later
+Formatversion: 1
+
+***Element: FTM
+
+; Microsoft Dynamics AX MENUITEM : AAX_EnumDictionaryGenerate unloaded
+; --------------------------------------------------------------------------------
+  VERSION 1
+  
+  MENUITEM #AAX_EnumDictionaryGenerate
+    Type: 3
+    PROPERTIES
+      Name                #AAX_EnumDictionaryGenerate
+      Label               #@AAX38
+      HelpText            #@AAX44
+      ObjectType          #Class
+      Object              #AAX_EnumDictionaryGenerate
+      ConfigurationKey    #SysAdmin
+      Origin              #{5B4B5B99-33EB-439D-8996-E89189C6784A}
+    ENDPROPERTIES
+    
+  ENDMENUITEM
+  
+
+***Element: END

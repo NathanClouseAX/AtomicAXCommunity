@@ -1,0 +1,71 @@
+﻿Exportfile for AOT version 1.0 or later
+Formatversion: 1
+
+***Element: DBT
+
+; Microsoft Dynamics AX Table : Ledger unloaded
+; --------------------------------------------------------------------------------
+  TABLEVERSION 1
+  
+  TABLE #Ledger
+    EnforceFKRelation 1
+    FIELDS
+    ENDFIELDS
+    GROUPS
+    ENDGROUPS
+    
+    INDICES
+    ENDINDICES
+    FULLTEXTINDICES
+    ENDFULLTEXTINDICES
+    REFERENCES
+    ENDREFERENCES
+    
+    METHODS
+      SOURCE #allowDimensionHierarchyLevelDeletion
+        #/// <summary>
+        #/// Provides a single point for consumers to update code to optionally disallow
+        #/// deletion of a dimension hierarchy level.
+        #/// </summary>
+        #/// <param name="_dimensionHierarchyLevel">
+        #/// The dimension hierarchy level being removed.
+        #/// </param>
+        #/// <returns>
+        #/// true to allow removal to continue; otherwise, false.
+        #/// </returns>
+        #/// <remarks>
+        #/// If a consumer prevents the removal, that consumer must present a notification
+        #/// to the user as to the fact that the removal did not occur and why.
+        #/// </remarks>
+        #public static boolean allowDimensionHierarchyLevelDeletion(DimensionHierarchyLevel _dimensionHierarchyLevel)
+        #{
+        #    boolean ret = true;
+        #
+        #    // Budgeting check
+        #    ret = BudgetControlDimensionAttribute::allowDimensionHierarchyLevelDeletion(_dimensionHierarchyLevel);
+        #
+        #    // Invent site dimension link check
+        #    ret = ret && InventSiteDimensionCheck::newStandard().allowDimensionHierarchyLevelDeletion(_dimensionHierarchyLevel);
+        #
+        #    return ret;
+        #}
+      ENDSOURCE
+    ENDMETHODS
+    EVENTS
+      METHOD #allowDimensionHierarchyLevelDeletion
+        EVENTHANDLERS
+          EVENTHANDLER #postAllowDimDeleteEH
+            PROPERTIES
+              CalledWhen          #Post
+              Class               #AAX_TableLedgerEH
+              Method              #postAllowDimensionHierarchyLevelDeletion
+            ENDPROPERTIES
+            
+          ENDEVENTHANDLER
+        ENDEVENTHANDLERS
+      ENDMETHOD
+    ENDEVENTS
+  ENDTABLE
+  
+
+***Element: END

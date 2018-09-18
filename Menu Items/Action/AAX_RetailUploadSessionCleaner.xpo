@@ -1,0 +1,24 @@
+﻿Exportfile for AOT version 1.0 or later
+Formatversion: 1
+
+***Element: FTM
+
+; Microsoft Dynamics AX MENUITEM : AAX_RetailUploadSessionCleaner unloaded
+; --------------------------------------------------------------------------------
+  VERSION 1
+  
+  MENUITEM #AAX_RetailUploadSessionCleaner
+    Type: 3
+    PROPERTIES
+      Name                #AAX_RetailUploadSessionCleaner
+      Label               #@AAX53
+      HelpText            #@AAX54
+      ObjectType          #Class
+      Object              #AAX_RetailUploadSessionCleaner
+      Origin              #{1DB45846-236C-4700-A499-AC1F1C908561}
+    ENDPROPERTIES
+    
+  ENDMENUITEM
+  
+
+***Element: END

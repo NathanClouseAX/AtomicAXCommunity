@@ -1,0 +1,56 @@
+﻿Exportfile for AOT version 1.0 or later
+Formatversion: 1
+
+***Element: CLS
+
+; Microsoft Dynamics AX Class: AAX_InventLocationDimensionCheck_Active unloaded
+; --------------------------------------------------------------------------------
+  CLSVERSION 1
+  
+  CLASS #AAX_InventLocationDimensionCheck_Active
+    PROPERTIES
+      Name                #AAX_InventLocationDimensionCheck_Active
+      Extends             #AAX_InventLocationDimensionCheck
+      Origin              #{14C36542-B0F0-45E4-8FEB-876DF4629E43}
+    ENDPROPERTIES
+    
+    METHODS
+      SOURCE #checkDimensions
+        #public boolean checkDimensions(InventDim _inventDim, DimensionDefault _dimension)
+        #{
+        #    return true;
+        #}
+      ENDSOURCE
+      SOURCE #classDeclaration
+        #/// <summary>
+        #/// checks if inventDimLocationLink is active
+        #/// </summary>
+        #class AAX_InventLocationDimensionCheck_Active extends AAX_InventLocationDimensionCheck
+        #{
+        #    InventLocation          InventLocation;
+        #}
+      ENDSOURCE
+      SOURCE #new
+        #protected void new()
+        #{
+        #    super();
+        #
+        #    AAX_inventParameters    = AAX_InventParameters::find();
+        #}
+      ENDSOURCE
+      SOURCE #construct
+        #/// <summary>
+        #/// default constructor
+        #/// </summary>
+        #/// <returns>
+        #/// AAX_InventLocationDimensionCheck_Active
+        #/// </returns>
+        #static public AAX_InventLocationDimensionCheck_Active construct()
+        #{
+        #    return new AAX_InventLocationDimensionCheck_Active();
+        #}
+      ENDSOURCE
+    ENDMETHODS
+  ENDCLASS
+
+***Element: END

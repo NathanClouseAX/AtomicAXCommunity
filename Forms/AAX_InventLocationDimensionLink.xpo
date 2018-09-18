@@ -1,0 +1,423 @@
+﻿Exportfile for AOT version 1.0 or later
+Formatversion: 1
+
+***Element: FRM
+
+; Microsoft Dynamics AX Forms unloaded
+; --------------------------------------------------------------------------------
+FRMVERSION 12
+
+FORM #AAX_InventLocationDimensionLink
+  PROPERTIES
+    Name                #AAX_InventLocationDimensionLink
+    Origin              #{4626D11D-49A2-4696-856D-4289203B8AD3}
+  ENDPROPERTIES
+  
+  METHODS
+    SOURCE #classDeclaration
+      #public class FormRun extends ObjectRun
+      #{
+      #}
+    ENDSOURCE
+    SOURCE #init
+      #public void init()
+      #{
+      #    super();
+      #
+      #    AAX_InventParameters::find();
+      #
+      #    textActivationActive.text("@AAX2" + "@SYS109304");
+      #    textActivationLocked.text("@AAX3" + "@SYS109306");
+      #}
+    ENDSOURCE
+  ENDMETHODS
+  OBJECTBANK
+    PROPERTIES
+    ENDPROPERTIES
+    
+    DATASOURCE
+      OBJECTPOOL
+        PROPERTIES
+          Name                #AAX_InventParameters
+          Table               #AAX_InventParameters
+          AllowCreate         #No
+          AllowDelete         #No
+          InsertAtEnd         #No
+          InsertIfEmpty       #No
+        ENDPROPERTIES
+        
+        FIELDLIST
+        ENDFIELDLIST
+      ENDOBJECTPOOL
+      METHODS
+        SOURCE #active
+          #public int active()
+          #{
+          #    int ret;
+          #
+          #    ret = super();
+          #
+          #    AAX_InventParameters_ds.object(fieldNum(AAX_InventParameters, locationDimensionAttribute)).allowEdit(AAX_InventParameters.allowEditLocationDimension());
+          #
+          #    LocationDimensionLinkText.text(strFmt('%1', AAX_InventParameters.InventLocationDimensionLink));
+          #    switch (AAX_InventParameters.InventLocationDimensionLink)
+          #    {
+          #        case InventMultiSiteDimensionLink::Inactive:
+          #            LocationDimensionLinkText.backgroundColor(WinAPI::RGBCon2int([255,0,0])); // Red
+          #            break;
+          #        case InventMultiSiteDimensionLink::Active:
+          #            LocationDimensionLinkText.backgroundColor(WinAPI::RGBCon2int([255,255,0])); // Yellow
+          #            break;
+          #        case InventMultiSiteDimensionLink::Locked:
+          #            LocationDimensionLinkText.backgroundColor(WinAPI::RGBCon2int([0,255,0])); // Green
+          #            break;
+          #    }
+          #
+          #    inventLocationDimension_ActivateLink.visible(AAX_InventParameters.visibleActivateLocationDimensionLink());
+          #    inventLocationDimension_ActivateLink.enabled(AAX_InventParameters.allowActivateLocationDimensionLink());
+          #    inventLocationDimension_DeactivateLink.visible(AAX_InventParameters.visibleDeactivateLocationDimensionLn());
+          #    inventLocationDimension_DeactivateLink.enabled(AAX_InventParameters.allowDeactivateLocationDimensionLink());
+          #    inventLocationDimension_LockLink.visible(AAX_InventParameters.visibleLockLocationDimensionLink());
+          #    inventLocationDimension_LockLink.enabled(AAX_InventParameters.allowLockLocationDimensionLink());
+          #    inventLocationDimension_UnlockLink.visible(AAX_InventParameters.visibleUnlockLocationDimensionLink());
+          #    inventLocationDimension_UnlockLink.enabled(AAX_InventParameters.allowUnlockDimensionLink());
+          #
+          #    return ret;
+          #}
+        ENDSOURCE
+      ENDMETHODS
+    ENDDATASOURCE
+  ENDOBJECTBANK
+  
+  REFERENCEDATASOURCES
+  ENDREFERENCEDATASOURCES
+  
+  JOINS
+  ENDJOINS
+  
+  PARTREFERENCES
+  ENDPARTREFERENCES
+  
+  DESIGN
+    PROPERTIES
+      Caption             #@SYS109299
+      HideToolbar         #Yes
+    ENDPROPERTIES
+    
+    CONTAINER
+      CONTROL GROUP
+        PROPERTIES
+          Name                #GroupActivation
+          ElementPosition     #1610612733
+          HierarchyParent     #TabPage
+          Caption             #@SYS11887
+        ENDPROPERTIES
+        
+        METHODS
+        ENDMETHODS
+      ENDCONTROL 
+      
+      CONTROL GROUP
+        PROPERTIES
+          Name                #GroupDimensionLocations
+          Width               #Column width
+          ElementPosition     #1610612733
+          HierarchyParent     #GroupSetup
+          FrameType           #None
+          Columns             #2
+          ArrangeGuide        
+            ARRAY INDEX Columns 
+              #0
+              #0
+            ENDARRAY
+        ENDPROPERTIES
+        
+        METHODS
+        ENDMETHODS
+      ENDCONTROL 
+      
+      CONTROL GROUP
+        PROPERTIES
+          Name                #GroupSetup
+          ElementPosition     #1073741822
+          HierarchyParent     #TabPage
+          Caption             #@SYS2186
+        ENDPROPERTIES
+        
+        METHODS
+        ENDMETHODS
+      ENDCONTROL 
+      
+      CONTROL GROUP
+        PROPERTIES
+          Name                #GroupStatusButtons
+          Width               #Column width
+          ElementPosition     #1717986916
+          HierarchyParent     #GroupActivation
+          FrameType           #None
+          Columns             #3
+          ArrangeGuide        
+            ARRAY INDEX Columns 
+              #0
+              #0
+              #0
+            ENDARRAY
+        ENDPROPERTIES
+        
+        METHODS
+        ENDMETHODS
+      ENDCONTROL 
+      
+      CONTROL REFERENCEGROUP
+        PROPERTIES
+          Name                #InventParameters_LocationDimensionAttribute
+          ElementPosition     #1073741822
+          HierarchyParent     #GroupDimensionLocations
+          DataSource          #AAX_InventParameters
+          ReferenceField      #LocationDimensionAttribute
+        ENDPROPERTIES
+        
+        METHODS
+        ENDMETHODS
+      ENDCONTROL 
+      
+      CONTROL TAB
+        PROPERTIES
+          Name                #Tab
+          Width               #Column width
+          Height              #Column height
+          ElementPosition     #1073741823
+        ENDPROPERTIES
+        
+        METHODS
+        ENDMETHODS
+      ENDCONTROL 
+      
+      CONTROL TABPAGE
+        PROPERTIES
+          Name                #TabPage
+          ElementPosition     #1431655764
+          HierarchyParent     #Tab
+          Caption             #@SYS2952
+        ENDPROPERTIES
+        
+        METHODS
+        ENDMETHODS
+      ENDCONTROL 
+      
+      CONTROL MENUITEMBUTTON
+        PROPERTIES
+          Name                #InventLocationDimension_ActivateLink
+          AutoDeclaration     #Yes
+          ElementPosition     #920350134
+          HierarchyParent     #GroupStatusButtons
+          DataSource          #AAX_InventParameters
+          MenuItemType        #Action
+          MenuItemName        #AAX_InventLocationDimension_ActivateLink
+        ENDPROPERTIES
+        
+        METHODS
+        ENDMETHODS
+      ENDCONTROL 
+      
+      CONTROL MENUITEMBUTTON
+        PROPERTIES
+          Name                #InventLocationDimension_DeactivateLink
+          AutoDeclaration     #Yes
+          ElementPosition     #1227133512
+          HierarchyParent     #GroupStatusButtons
+          DataSource          #AAX_InventParameters
+          MenuItemType        #Action
+          MenuItemName        #AAX_InventLocationDimension_DeactivateLi
+        ENDPROPERTIES
+        
+        METHODS
+        ENDMETHODS
+      ENDCONTROL 
+      
+      CONTROL MENUITEMBUTTON
+        PROPERTIES
+          Name                #InventLocationDimension_LockLink
+          AutoDeclaration     #Yes
+          ElementPosition     #1533916890
+          HierarchyParent     #GroupStatusButtons
+          DataSource          #AAX_InventParameters
+          MenuItemType        #Action
+          MenuItemName        #AAX_InventLocationDimension_LockLink
+        ENDPROPERTIES
+        
+        METHODS
+        ENDMETHODS
+      ENDCONTROL 
+      
+      CONTROL MENUITEMBUTTON
+        PROPERTIES
+          Name                #InventLocationDimension_UnlockLink
+          AutoDeclaration     #Yes
+          ElementPosition     #1840700268
+          HierarchyParent     #GroupStatusButtons
+          DataSource          #AAX_InventParameters
+          MenuItemType        #Action
+          MenuItemName        #AAX_InventLocationDimension_UnlockLink
+        ENDPROPERTIES
+        
+        METHODS
+        ENDMETHODS
+      ENDCONTROL 
+      
+      CONTROL MENUITEMBUTTON
+        PROPERTIES
+          Name                #InventLocations
+          Left                #Auto (right)
+          ElementPosition     #1610612733
+          HierarchyParent     #GroupDimensionLocations
+          MenuItemName        #InventLocations
+        ENDPROPERTIES
+        
+        METHODS
+        ENDMETHODS
+      ENDCONTROL 
+      
+      CONTROL STATICTEXT
+        PROPERTIES
+          Name                #TextActivationActive
+          AutoDeclaration     #Yes
+          Width               #500
+          ElementPosition     #858993458
+          HierarchyParent     #GroupActivation
+        ENDPROPERTIES
+        
+        METHODS
+        ENDMETHODS
+      ENDCONTROL 
+      
+      CONTROL STATICTEXT
+        PROPERTIES
+          Name                #TextActivationLocked
+          AutoDeclaration     #Yes
+          Width               #500
+          ElementPosition     #1288490187
+          HierarchyParent     #GroupActivation
+        ENDPROPERTIES
+        
+        METHODS
+        ENDMETHODS
+      ENDCONTROL 
+      
+      CONTROL STATICTEXT
+        PROPERTIES
+          Name                #TextSetupTop
+          Width               #500
+          ElementPosition     #1073741822
+          HierarchyParent     #GroupSetup
+          Text                #@AAX4
+        ENDPROPERTIES
+        
+        METHODS
+        ENDMETHODS
+      ENDCONTROL 
+      
+      CONTROL STRINGEDIT
+        PROPERTIES
+          Name                #LocationDimensionLinkText
+          AutoDeclaration     #Yes
+          AllowEdit           #No
+          ElementPosition     #613566756
+          HierarchyParent     #GroupStatusButtons
+          DisplayLength       #40
+          DisplayHeight       #1
+          Alignment           #Center
+          ColorScheme         #RGB
+          Label               #@SYS104989
+        ENDPROPERTIES
+        
+        METHODS
+        ENDMETHODS
+      ENDCONTROL 
+      
+    ENDCONTAINER
+    
+  ENDDESIGN
+  
+  PERMISSIONS #Permissions
+    PROPERTIES
+    ENDPROPERTIES
+    
+    PERMISSIONSET #Read
+      PROPERTIES
+      ENDPROPERTIES
+      
+      FORM #Controls
+      ENDFORM
+      
+    TABLES #Tables
+    ENDTABLES
+    
+  SERVERMETHODS #Server Methods
+  ENDSERVERMETHODS
+  
+ASSOCIATEDFORMS #Associated Forms
+ENDASSOCIATEDFORMS
+
+ENDPERMISSIONSET
+
+PERMISSIONSET #Update
+  PROPERTIES
+  ENDPROPERTIES
+  
+  FORM #Controls
+  ENDFORM
+  
+TABLES #Tables
+ENDTABLES
+
+SERVERMETHODS #Server Methods
+ENDSERVERMETHODS
+
+ASSOCIATEDFORMS #Associated Forms
+ENDASSOCIATEDFORMS
+
+ENDPERMISSIONSET
+
+PERMISSIONSET #Create
+  PROPERTIES
+  ENDPROPERTIES
+  
+  FORM #Controls
+  ENDFORM
+  
+TABLES #Tables
+ENDTABLES
+
+SERVERMETHODS #Server Methods
+ENDSERVERMETHODS
+
+ASSOCIATEDFORMS #Associated Forms
+ENDASSOCIATEDFORMS
+
+ENDPERMISSIONSET
+
+PERMISSIONSET #Delete
+  PROPERTIES
+  ENDPROPERTIES
+  
+  FORM #Controls
+  ENDFORM
+  
+TABLES #Tables
+ENDTABLES
+
+SERVERMETHODS #Server Methods
+ENDSERVERMETHODS
+
+ASSOCIATEDFORMS #Associated Forms
+ENDASSOCIATEDFORMS
+
+ENDPERMISSIONSET
+
+ENDPERMISSIONS
+
+ENDFORM
+
+
+***Element: END

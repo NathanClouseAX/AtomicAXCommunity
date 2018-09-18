@@ -1,0 +1,110 @@
+﻿Exportfile for AOT version 1.0 or later
+Formatversion: 1
+
+***Element: CLS
+
+; Microsoft Dynamics AX Class: DimensionDefaultingController unloaded
+; --------------------------------------------------------------------------------
+  CLSVERSION 1
+  
+  CLASS #DimensionDefaultingController
+    PROPERTIES
+      Name                #DimensionDefaultingController
+      Extends             #DimensionDefaultingControllerBase
+      Origin              #{2D1D271C-0000-1000-A65F-37B4D2BDE70B}
+      LegacyId            #10012
+    ENDPROPERTIES
+    
+    METHODS
+      SOURCE #activated
+        #/// <summary>
+        #///    Loads the dimension attribute set and the dimension attribute value set and populates the
+        #///    checkboxes, combo boxes, and value controls from the saved state.
+        #/// </summary>
+        #/// <param name="_forceUpdate">
+        #///    A Boolean value that indicates whether to force an update of values even if you cannot see the
+        #///    controls.
+        #/// </param>
+        #/// <exception cref="M:Exception::Error">
+        #///    A valid data source and field ID was not specified.
+        #/// </exception>
+        #public void activated(boolean _forceUpdate = false)
+        #{
+        #    Common  common;
+        #    RecId   value;
+        #
+        #    // Don't process anything if the controls are not visible
+        #    if (rootContainerAsTabPage)
+        #    {
+        #        if (!hasActivated &&
+        #            !rootContainerAsTabPage.isDisplayed() &&
+        #            !_forceUpdate)
+        #        {
+        #            // Once tab pages are expanded, continue to update them
+        #            if (!rootContainerAsTabPage ||
+        #                !rootContainerAsTabPage.isExpanded())
+        #            {
+        #                return;
+        #            }
+        #        }
+        #    }
+        #    else if (!rootContainerAsGroup)
+        #    {
+        #        throw error(Error::wrongUseOfFunction(funcName()));
+        #    }
+        #
+        #    hasActivated = true;
+        #
+        #    // Load the values first, since loading the enums might change editability of the values
+        #    if (valuesDataSource)
+        #    {
+        #        Debug::assert(strlen(valuesFieldName) > 0);
+        #
+        #        common = valuesDataSource.cursor();
+        #        value = common.getFieldValue(valuesFieldName);
+        #        if (!isActivatedInternal)
+        #        {
+        #            // Only reset if not being called from within the class itself
+        #            origValuesDSForceWrite = NoYesUnchanged::Unchanged;
+        #        }
+        #        if (valuesModified || lastValueSetLoaded != value || !lastValueSetCached)
+        #        {
+        #            if (this.loadAttributeValueSet(value,common))
+        #            {
+        #                lastValueSetLoaded = value;
+        #                lastValueSetCached = true;
+        #            }
+        #        }
+        #    }
+        #
+        #    // Load enums last as the enumerations set in them could control whether the value is editable
+        #    if (enumsDataSource)
+        #    {
+        #        Debug::assert(strlen(enumsFieldName) > 0);
+        #
+        #        common = enumsDataSource.cursor();
+        #        value = common.getFieldValue(enumsFieldName);
+        #        if (!isActivatedInternal)
+        #        {
+        #            // Only reset if not being called from within the class itself
+        #            origEnumsDSForceWrite = NoYesUnchanged::Unchanged;
+        #        }
+        #        if (enumsModified || lastEnumSetLoaded != value || !lastEnumSetCached)
+        #        {
+        #            if (this.loadAttributeSet(value))
+        #            {
+        #                lastEnumSetLoaded = value;
+        #                lastEnumSetCached = true;
+        #            }
+        #        }
+        #    }
+        #    else if (!valuesDataSource)
+        #    {
+        #        throw error(Error::wrongUseOfFunction(funcname()));
+        #    }
+        #}
+      ENDSOURCE
+    ENDMETHODS
+  ENDCLASS
+
+***Element: END

@@ -1,0 +1,44 @@
+﻿Exportfile for AOT version 1.0 or later
+Formatversion: 1
+
+***Element: DBT
+
+; Microsoft Dynamics AX Table : InventDim unloaded
+; --------------------------------------------------------------------------------
+  TABLEVERSION 1
+  
+  TABLE #InventDim
+    EnforceFKRelation 0
+    FIELDS
+    ENDFIELDS
+    GROUPS
+    ENDGROUPS
+    
+    INDICES
+    ENDINDICES
+    FULLTEXTINDICES
+    ENDFULLTEXTINDICES
+    REFERENCES
+    ENDREFERENCES
+    
+    METHODS
+    ENDMETHODS
+    EVENTS
+      METHOD #setInventSiteFromParentIfModified
+        EVENTHANDLERS
+          EVENTHANDLER #AAX_InventDimEHPost
+            PROPERTIES
+              CalledWhen          #Post
+              Class               #AAX_InventDimEH
+              Method              #setInventLocationFromParentIfModifie
+              AOTlink             #\Classes\AAX_InventDimEH\setInventLocationFromParentIfModifie
+            ENDPROPERTIES
+            
+          ENDEVENTHANDLER
+        ENDEVENTHANDLERS
+      ENDMETHOD
+    ENDEVENTS
+  ENDTABLE
+  
+
+***Element: END

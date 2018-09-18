@@ -1,0 +1,27 @@
+﻿Exportfile for AOT version 1.0 or later
+Formatversion: 1
+
+***Element: FTM
+
+; Microsoft Dynamics AX MENUITEM : AAX_InventLocationDimension_DeactivateLi unloaded
+; --------------------------------------------------------------------------------
+  VERSION 1
+  
+  MENUITEM #AAX_InventLocationDimension_DeactivateLi
+    Type: 3
+    PROPERTIES
+      Name                #AAX_InventLocationDimension_DeactivateLi
+      Label               #@SYS109391
+      HelpText            #@SYS109392
+      ObjectType          #Class
+      Object              #AAX_InventLocationDimension_DeactivateLi
+      ConfigurationKey    #LogisticsBasic
+      ViewUserLicense     #Enterprise
+      MaintainUserLicense #Enterprise
+      Origin              #{BF474D8D-0448-4298-814C-39F4CB92F714}
+    ENDPROPERTIES
+    
+  ENDMENUITEM
+  
+
+***Element: END

@@ -1,0 +1,48 @@
+﻿Exportfile for AOT version 1.0 or later
+Formatversion: 1
+
+***Element: SPV
+
+; Microsoft Dynamics AX PRIVILEGE : AAX_InventLocationDimension_DeactivateLi unloaded
+; --------------------------------------------------------------------------------
+  VERSION 1
+  
+  PRIVILEGE #AAX_InventLocationDimension_DeactivateLi
+    PROPERTIES
+      Name                #AAX_InventLocationDimension_DeactivateLi
+      Label               #@SYS109392
+      Origin              #{2D7DBC32-F01A-4EEF-A438-A2236732074A}
+    ENDPROPERTIES
+    
+    ENTRYPOINTS #Entry Points
+      ENTRYPOINT #AAX_InventLocationDimension_DeactivateLi
+        PROPERTIES
+          Name                #AAX_InventLocationDimension_DeactivateLi
+          ObjectType          #MenuItemAction
+          ObjectName          #AAX_InventLocationDimension_DeactivateLi
+          AccessLevel         #Create
+        ENDPROPERTIES
+        
+      ENDENTRYPOINT
+      
+  ENDENTRYPOINTS
+  
+PERMISSIONSET #Permissions
+  PROPERTIES
+  ENDPROPERTIES
+  
+  TABLES #Tables
+  ENDTABLES
+  
+SERVERMETHODS #Server Methods
+ENDSERVERMETHODS
+
+FORMS #Forms
+ENDFORMS
+
+ENDPERMISSIONSET
+
+ENDPRIVILEGE
+
+
+***Element: END

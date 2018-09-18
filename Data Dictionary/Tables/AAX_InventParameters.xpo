@@ -1,0 +1,436 @@
+﻿Exportfile for AOT version 1.0 or later
+Formatversion: 1
+
+***Element: DBT
+
+; Microsoft Dynamics AX Table : AAX_InventParameters unloaded
+; --------------------------------------------------------------------------------
+  TABLEVERSION 1
+  
+  TABLE #AAX_InventParameters
+    EnforceFKRelation 0
+    PROPERTIES
+      Name                #AAX_InventParameters
+      Label               #@SYS24222
+      FormRef             #InventParameters
+      TableContents       #Default data
+      ConfigurationKey    #LogisticsBasic
+      SecurityKey         #InventTables
+      MaxAccessMode       #Edit
+      CacheLookup         #Found
+      CreateRecIdIndex    #Yes
+      TableGroup          #Parameter
+      PrimaryIndex        #Key
+      ClusterIndex        #Key
+      ModifiedDateTime    #Yes
+      DEL_modifiedTime    #Yes
+      ModifiedBy          #Yes
+      DeveloperDocumentation  #@SYS123835
+      Origin              #{5AB69199-2CE4-4CA5-9B68-187389F6DF1F}
+    ENDPROPERTIES
+    
+    FIELDS
+      FIELD #InventLocationDimensionLink
+        ENUM
+        PROPERTIES
+          Name                #InventLocationDimensionLink
+          Visible             #No
+          Table               #AAX_InventParameters
+          Origin              #{0CA50AB9-ECA7-45E4-9A5B-A40E2BE6C86E}
+          EnumType            #InventMultiSiteDimensionLink
+        ENDPROPERTIES
+        
+      FIELD #InventParameters
+        INT64
+        PROPERTIES
+          Name                #InventParameters
+          Table               #AAX_InventParameters
+          Origin              #{EB03C71A-493C-48D5-BC52-52D9F2D6AA72}
+          ExtendedDataType    #RefRecId
+        ENDPROPERTIES
+        
+      FIELD #Key
+        INT
+        PROPERTIES
+          Name                #Key
+          AllowEditOnCreate   #No
+          AllowEdit           #No
+          Visible             #No
+          Table               #AAX_InventParameters
+          Origin              #{1BEB23ED-59C8-43E8-95A9-7DE4F095463A}
+          ExtendedDataType    #ParametersKey
+        ENDPROPERTIES
+        
+      FIELD #LocationDimensionAttribute
+        INT64
+        PROPERTIES
+          Name                #LocationDimensionAttribute
+          Table               #AAX_InventParameters
+          Origin              #{710FEEE6-9980-4D9A-B4D6-E10BAF7BF572}
+          ExtendedDataType    #RefRecId
+        ENDPROPERTIES
+        
+    ENDFIELDS
+    GROUPS
+      GROUP #AutoSummary
+        PROPERTIES
+          Name                #AutoSummary
+        ENDPROPERTIES
+        
+        GROUPFIELDS
+          #InventParameters
+          #InventLocationDimensionLink
+          #Key
+          #LocationDimensionAttribute
+        ENDGROUPFIELDS
+      ENDGROUP
+      GROUP #AutoReport
+        PROPERTIES
+          Name                #AutoReport
+        ENDPROPERTIES
+        
+        GROUPFIELDS
+          #InventParameters
+          #InventLocationDimensionLink
+          #Key
+          #LocationDimensionAttribute
+        ENDGROUPFIELDS
+      ENDGROUP
+      GROUP #AutoLookup
+        PROPERTIES
+          Name                #AutoLookup
+        ENDPROPERTIES
+        
+        GROUPFIELDS
+          #InventParameters
+          #InventLocationDimensionLink
+          #Key
+          #LocationDimensionAttribute
+        ENDGROUPFIELDS
+      ENDGROUP
+      GROUP #AutoBrowse
+        PROPERTIES
+          Name                #AutoBrowse
+        ENDPROPERTIES
+        
+        GROUPFIELDS
+          #InventParameters
+          #InventLocationDimensionLink
+          #Key
+          #LocationDimensionAttribute
+        ENDGROUPFIELDS
+      ENDGROUP
+    ENDGROUPS
+    
+    INDICES
+      #Key
+      PROPERTIES
+        Name                #Key
+        AllowDuplicates     #No
+        AlternateKey        #Yes
+        Origin              #{1F366287-AD79-43D2-AA2E-FFF940043A89}
+      ENDPROPERTIES
+      
+      INDEXFIELDS
+        #Key
+      ENDINDEXFIELDS
+      
+      #RefRecIdIdx
+      PROPERTIES
+        Name                #RefRecIdIdx
+        AllowDuplicates     #No
+        Origin              #{D12CD298-7E17-4FFB-8552-2212ABC64D64}
+      ENDPROPERTIES
+      
+      INDEXFIELDS
+        #InventParameters
+      ENDINDEXFIELDS
+      
+    ENDINDICES
+    FULLTEXTINDICES
+    ENDFULLTEXTINDICES
+    REFERENCES
+      REFERENCE #InventParameters
+        PROPERTIES
+          Name                #InventParameters
+          Table               #InventParameters
+          RelatedTableCardinality   #ZeroOne
+          Cardinality         #ExactlyOne
+          RelationshipType    #Association
+          UseDefaultRoleNames #Yes
+        ENDPROPERTIES
+        
+        FIELDREFERENCES
+          REFERENCETYPE PKFK
+          PROPERTIES
+            Field               #InventParameters
+            RelatedField        #Key
+          ENDPROPERTIES
+          
+        ENDFIELDREFERENCES
+      ENDREFERENCE
+      REFERENCE #LocationDimensionAttribute
+        PROPERTIES
+          Name                #LocationDimensionAttribute
+          Table               #DimensionAttribute
+          RelatedTableCardinality   #ZeroOne
+          Cardinality         #ZeroMore
+          RelationshipType    #Association
+          RelatedTableRole    #LocationDimensionAttributeId
+          Role                #LocationDimensionAttributeId_InventParameters
+        ENDPROPERTIES
+        
+        FIELDREFERENCES
+          REFERENCETYPE PKFK
+          PROPERTIES
+            Field               #LocationDimensionAttribute
+            RelatedField        #RecId
+          ENDPROPERTIES
+          
+        ENDFIELDREFERENCES
+      ENDREFERENCE
+    ENDREFERENCES
+    
+    DELETEACTIONS
+    ENDDELETEACTIONS
+    
+    METHODS
+      SOURCE #allowActivateLocationDimensionLink
+        #/// <summary>
+        #/// Specifies whether you can change the <c>MultiSiteDimensionLink</c> field from inactive to active.
+        #/// </summary>
+        #/// <returns>
+        #/// true if you can set the <c>MultiSiteDimensionLink</c> from inactive to active; otherwise false.
+        #/// </returns>
+        #/// <remarks>
+        #/// This method is used to enable or disable the Activate Link menu button on the
+        #/// <c>InventSiteDimensionLink</c> form.
+        #/// </remarks>
+        #public boolean allowActivateLocationDimensionLink()
+        #{
+        #    return (this.InventLocationDimensionLink == InventMultiSiteDimensionLink::Inactive)
+        #        && (this.LocationDimensionAttribute != 0);
+        #}
+      ENDSOURCE
+      SOURCE #allowDeactivateLocationDimensionLink
+        #/// <summary>
+        #/// Specifies whether you can change the <c>MultiSiteDimensionLink</c> field from active to inactive.
+        #/// </summary>
+        #/// <returns>
+        #/// true if you can change the <c>MultiSiteDimensionLink</c> field from active to inactive; otherwise
+        #/// false.
+        #/// </returns>
+        #/// <remarks>
+        #/// This method is used to enable or disable the Deactivate Link menu button on the
+        #/// <c>InventSiteDimensonLink</c> form.
+        #/// </remarks>
+        #public boolean allowDeactivateLocationDimensionLink()
+        #{
+        #    return this.InventLocationDimensionLink == InventMultiSiteDimensionLink::Active;
+        #}
+      ENDSOURCE
+      SOURCE #allowEditLocationDimension
+        #/// <summary>
+        #/// Specifies whether you can modify the <c>MultiSiteDimension</c> field.
+        #/// </summary>
+        #/// <returns>
+        #/// true if the <c>MultiSiteDimension</c> field may be edited; otherwise false.
+        #/// </returns>
+        #public boolean allowEditLocationDimension()
+        #{
+        #    return this.InventLocationDimensionLink == InventMultiSiteDimensionLink::Inactive;
+        #}
+      ENDSOURCE
+      SOURCE #allowLockLocationDimensionLink
+        #/// <summary>
+        #/// Specifies whether you can change the <c>MultiSiteDimensionLink</c> field from active to locked.
+        #/// </summary>
+        #/// <returns>
+        #/// true if you can change the <c>MultiSiteDimensionLink</c> field from active to locked; otherwise
+        #/// false.
+        #/// </returns>
+        #/// <remarks>
+        #/// This method is used to enable or disable the Lock Link menu button on the
+        #/// <c>InventSiteDimensionLink</c> form.
+        #/// </remarks>
+        #public boolean allowLockLocationDimensionLink()
+        #{
+        #    return this.InventLocationDimensionLink == InventMultiSiteDimensionLink::Active;
+        #}
+      ENDSOURCE
+      SOURCE #allowUnlockDimensionLink
+        #/// <summary>
+        #/// Specifies whether you can change the <c>MultiSiteDimensionLink</c> field from locked to active.
+        #/// </summary>
+        #/// <returns>
+        #/// true if you can change the <c>MultiSiteDimensionLink</c> from active to locked; otherwise false.
+        #/// </returns>
+        #/// <remarks>
+        #/// This method is used to enable or disable the Unlock Link menu button on the
+        #/// <c>InventSiteDimensionLink</c> form.
+        #/// </remarks>
+        #public boolean allowUnlockDimensionLink()
+        #{
+        #    return this.InventLocationDimensionLink == InventMultiSiteDimensionLink::Locked;
+        #}
+      ENDSOURCE
+      SOURCE #initValue
+        #public void initValue()
+        #{
+        #    super();
+        #    this.InventParameters = InventParameters::find().Key;
+        #
+        #}
+      ENDSOURCE
+      SOURCE #isLocationDimensionLinkInactive
+        #/// <summary>
+        #///    Specifies whether the dimension link is inactive.
+        #/// </summary>
+        #/// <returns>
+        #///    true if the dimension link is inactive; otherwise, false.
+        #/// </returns>
+        #/// <remarks>
+        #///    The dimension link is inactive if the <c>MultiSiteDimensionLink</c> field is not active or locked.
+        #/// </remarks>
+        #public boolean isLocationDimensionLinkInactive()
+        #{
+        #    return this.InventLocationDimensionLink == InventMultiSiteDimensionLink::Inactive;
+        #}
+      ENDSOURCE
+      SOURCE #LocationDimensionAttribute
+        #/// <summary>
+        #///    Gets the dimension attribute of the site link.
+        #/// </summary>
+        #/// <returns>
+        #///    The dimension attribute to which the site is linked.
+        #/// </returns>
+        #public DimensionAttribute LocationDimensionAttribute()
+        #{
+        #    return DimensionAttribute::find(this.LocationDimensionAttribute);
+        #}
+      ENDSOURCE
+      SOURCE #validateField
+        #public boolean validateField(FieldId _fieldIdToCheck)
+        #{
+        #    boolean ret;
+        #
+        #    ret = super(_fieldIdToCheck);
+        #
+        #    if (ret)
+        #    {
+        #        switch (_fieldIdToCheck)
+        #        {
+        #
+        #            case fieldNum(AAX_InventParameters, LocationDimensionAttribute):
+        #                if(InventParameters::find().SiteDimensionAttribute == this.LocationDimensionAttribute)
+        #                {
+        #                    ret = checkFailed(strFmt("@AAX1"));
+        #                }
+        #                break;
+        #        }
+        #    }
+        #
+        #    return ret;
+        #}
+      ENDSOURCE
+      SOURCE #visibleActivateLocationDimensionLink
+        #/// <summary>
+        #///    Specifies whether the Activate Link button should be visible.
+        #/// </summary>
+        #/// <returns>
+        #///    true if the Activate Link button should be visible; otherwise false.
+        #/// </returns>
+        #/// <remarks>
+        #///    This method is used to hide or show the Activate Link menu button on the
+        #///    <c>InventSiteDimensionLink</c> form.
+        #/// </remarks>
+        #public boolean visibleActivateLocationDimensionLink()
+        #{
+        #    return this.InventLocationDimensionLink == InventMultiSiteDimensionLink::Inactive;
+        #}
+      ENDSOURCE
+      SOURCE #visibleDeactivateLocationDimensionLn
+        #/// <summary>
+        #///    Specifies whether the Deactivate Link button should be visible.
+        #/// </summary>
+        #/// <returns>
+        #///    true if the Deactivate Link button should be visible; otherwise false.
+        #/// </returns>
+        #/// <remarks>
+        #///    This method is used to hide or show the Deactivate Link menu button on the
+        #///    <c>InventSiteDimensionLink</c> form.
+        #/// </remarks>
+        #public boolean visibleDeactivateLocationDimensionLn()
+        #{
+        #    return this.InventLocationDimensionLink != InventMultiSiteDimensionLink::Inactive;
+        #}
+      ENDSOURCE
+      SOURCE #visibleLockLocationDimensionLink
+        #/// <summary>
+        #///    Specifies whether the Lock Link button should be visible.
+        #/// </summary>
+        #/// <returns>
+        #///    true if the Lock Link button should be visible; otherwise, false.
+        #/// </returns>
+        #/// <remarks>
+        #///    This method is used to hide or show the Lock Link menu button on the <c>InventSiteDimensionLink</c>
+        #///    form.
+        #/// </remarks>
+        #public boolean visibleLockLocationDimensionLink()
+        #{
+        #    return this.InventLocationDimensionLink != InventMultiSiteDimensionLink::Locked;
+        #}
+      ENDSOURCE
+      SOURCE #visibleUnlockLocationDimensionLink
+        #/// <summary>
+        #///    Specifies whether the Unlock Link button should be visible.
+        #/// </summary>
+        #/// <returns>
+        #///    true if the Unlock Link button should be visible; otherwise, false.
+        #/// </returns>
+        #/// <remarks>
+        #///    This method is used to hide or show the Unlock Link menu button on the
+        #///    <c>InventSiteDimensionLink</c> form.
+        #/// </remarks>
+        #public boolean visibleUnlockLocationDimensionLink()
+        #{
+        #    return this.InventLocationDimensionLink == InventMultiSiteDimensionLink::Locked;
+        #}
+      ENDSOURCE
+      SOURCE #find
+        #/// <summary>
+        #/// Finds a record in the <c>AAX_InventParameters</c> table.
+        #/// </summary>
+        #/// <param name="_forupdate">
+        #/// true if the record must be selected for update; otherwise, false.
+        #/// </param>
+        #/// <returns>
+        #/// An <c>AAX_InventParameters</c> record.
+        #/// </returns>
+        #public static AAX_InventParameters find(boolean _forupdate = false)
+        #{
+        #    AAX_InventParameters parameter;
+        #
+        #    if (_forupdate)
+        #    {
+        #        parameter.selectForUpdate(_forupdate);
+        #    }
+        #
+        #    select firstonly parameter
+        #        index Key
+        #        where parameter.InventParameters == 0;
+        #
+        #    if (!parameter && !parameter.isTmp())
+        #    {
+        #        Company::createParameter(parameter);
+        #        PrintMgmt::createDefaultData(PrintMgmtHierarchyType::Invent);
+        #    }
+        #
+        #    return parameter;
+        #}
+      ENDSOURCE
+    ENDMETHODS
+  ENDTABLE
+  
+
+***Element: END

@@ -1,0 +1,691 @@
+﻿Exportfile for AOT version 1.0 or later
+Formatversion: 1
+
+***Element: FRM
+
+; Microsoft Dynamics AX Forms unloaded
+; --------------------------------------------------------------------------------
+FRMVERSION 12
+
+FORM #InventLocation
+  PROPERTIES
+    Name                #InventLocation
+    Origin              #{680563E8-4D4B-470E-9768-61840A995815}
+  ENDPROPERTIES
+  
+  METHODS
+    SOURCE #classDeclaration
+      #final class FormRun extends ObjectRun
+      #{
+      #    #resAppl
+      #
+      #    WMSLocation                 exampleLocation;
+      #    WMSLocationId               exampleLocationId;
+      #    boolean                     isExampleLocationIdOk;
+      #    container                   siteIdxContainer;
+      #    FormTreeExpand              formTreeExpand;
+      #
+      #    RetailReplenishmentTreeDatasource   hierarchyTree;
+      #
+      #    LogisticsEntityPostalAddressFormHandler     postalAddressForm;
+      #    SysFormSplitter_X                           m_vSplitter;
+      #
+      #    DimensionDefaultingController               dimensionDefaultingController;
+      #}
+    ENDSOURCE
+    SOURCE #init
+      #public void init()
+      #{
+      #    super();
+      #    postalAddressForm = LogisticsEntityPostalAddressFormHandler::newParameters(inventLocation_ds, logisticsEntityPostalAddressView_ds);
+      #    m_vSplitter = new SysFormSplitter_X(vSplitter, gridContainer, element);
+      #
+      #    dimensionDefaultingController = DimensionDefaultingController::constructInTabWithValues(true, true, true, 0, this, tabFinancialDimensions, "@SYS138487");
+      #    dimensionDefaultingController.parmAttributeValueSetDataSource(inventLocation_ds, fieldStr(InventLocation, AAX_DefaultDimension));
+      #
+      #    if (isConfigurationkeyEnabled(configurationKeyNum(Retail)))
+      #    {
+      #        hierarchyTree = this.getRetailReplenishmentTreeDataSource();
+      #    }
+      #    if (BrazilParameters::isEnabled())
+      #    {
+      #        detailAddress.enabled(false);
+      #    }
+      #
+      #    TabFinancialDimensions.visible(AAX_InventParameters::find().LocationDimensionAttribute);
+      #
+      #
+      #    if (RetailSMB::IsRetailSMBEnabled())
+      #    {
+      #        RetailSMB::SetVisible(element);
+      #    }
+      #}
+    ENDSOURCE
+  ENDMETHODS
+  OBJECTBANK
+    PROPERTIES
+    ENDPROPERTIES
+    
+    DATASOURCE
+      OBJECTPOOL
+        PROPERTIES
+          Name                #InventLocation
+          Table               #InventLocation
+          Index               #InventLocationIdx
+          InsertIfEmpty       #No
+        ENDPROPERTIES
+        
+        FIELDLIST
+          DATAFIELD InventLocationIdReqMain
+            PROPERTIES
+            ENDPROPERTIES
+            
+            METHODS
+              SOURCE #lookup
+                #public void lookup(FormControl _formControl, str _filterStr)
+                #{
+                #    InventLocation::lookupBySiteId(_formControl, inventLocation.InventSiteId, InventLocationType::Standard, false);
+                #}
+              ENDSOURCE
+            ENDMETHODS
+          ENDDATAFIELD
+          
+          DATAFIELD ReqRefill
+            PROPERTIES
+            ENDPROPERTIES
+            
+            METHODS
+              SOURCE #modified
+                #public void modified()
+                #{
+                #    super();
+                #    element.enableFields();
+                #}
+              ENDSOURCE
+            ENDMETHODS
+          ENDDATAFIELD
+          
+          DATAFIELD InventLocationType
+            PROPERTIES
+            ENDPROPERTIES
+            
+            METHODS
+              SOURCE #modified
+                #public void modified()
+                #{
+                #    element.enableFields();
+                #    super();
+                #}
+              ENDSOURCE
+            ENDMETHODS
+          ENDDATAFIELD
+          
+          DATAFIELD InventLocationIdQuarantine
+            PROPERTIES
+            ENDPROPERTIES
+            
+            METHODS
+              SOURCE #lookup
+                #public void lookup(FormControl _formControl, str _filterStr)
+                #{
+                #    InventLocation::lookupBySiteId(_formControl, inventLocation.InventSiteId, InventLocationType::Quarantine, true, true);
+                #}
+              ENDSOURCE
+            ENDMETHODS
+          ENDDATAFIELD
+          
+          DATAFIELD WMSAisleNameActive
+            PROPERTIES
+            ENDPROPERTIES
+            
+            METHODS
+              SOURCE #modified
+                #public void modified()
+                #{
+                #    isExampleLocationIdOk = false;
+                #    super();
+                #    element.enableFields();
+                #}
+              ENDSOURCE
+            ENDMETHODS
+          ENDDATAFIELD
+          
+          DATAFIELD WMSRackNameActive
+            PROPERTIES
+            ENDPROPERTIES
+            
+            METHODS
+              SOURCE #modified
+                #public void modified()
+                #{
+                #    isExampleLocationIdOk = false;
+                #    super();
+                #    element.enableFields();
+                #}
+              ENDSOURCE
+            ENDMETHODS
+          ENDDATAFIELD
+          
+          DATAFIELD WMSRackFormat
+            PROPERTIES
+            ENDPROPERTIES
+            
+            METHODS
+              SOURCE #modified
+                #public void modified()
+                #{
+                #    isExampleLocationIdOk = false;
+                #    super();
+                #    element.enableFields();
+                #}
+              ENDSOURCE
+            ENDMETHODS
+          ENDDATAFIELD
+          
+          DATAFIELD WMSLevelNameActive
+            PROPERTIES
+            ENDPROPERTIES
+            
+            METHODS
+              SOURCE #modified
+                #public void modified()
+                #{
+                #    isExampleLocationIdOk = false;
+                #    super();
+                #    element.enableFields();
+                #}
+              ENDSOURCE
+            ENDMETHODS
+          ENDDATAFIELD
+          
+          DATAFIELD WMSLevelFormat
+            PROPERTIES
+            ENDPROPERTIES
+            
+            METHODS
+              SOURCE #modified
+                #public void modified()
+                #{
+                #    isExampleLocationIdOk = false;
+                #    super();
+                #    element.enableFields();
+                #}
+              ENDSOURCE
+            ENDMETHODS
+          ENDDATAFIELD
+          
+          DATAFIELD WMSPositionNameActive
+            PROPERTIES
+            ENDPROPERTIES
+            
+            METHODS
+              SOURCE #modified
+                #public void modified()
+                #{
+                #    isExampleLocationIdOk = false;
+                #    super();
+                #    element.enableFields();
+                #}
+              ENDSOURCE
+            ENDMETHODS
+          ENDDATAFIELD
+          
+          DATAFIELD WMSPositionFormat
+            PROPERTIES
+            ENDPROPERTIES
+            
+            METHODS
+              SOURCE #modified
+                #public void modified()
+                #{
+                #    isExampleLocationIdOk = false;
+                #    super();
+                #    element.enableFields();
+                #}
+              ENDSOURCE
+            ENDMETHODS
+          ENDDATAFIELD
+          
+          DATAFIELD InventLocationIdTransit
+            PROPERTIES
+            ENDPROPERTIES
+            
+            METHODS
+              SOURCE #lookup
+                #public void lookup(FormControl _formControl, str _filterStr)
+                #{
+                #    InventLocation::lookupBySiteId(_formControl, inventLocation.InventSiteId, InventLocationType::Transit, false);
+                #}
+              ENDSOURCE
+            ENDMETHODS
+          ENDDATAFIELD
+          
+          DATAFIELD VendAccount
+            PROPERTIES
+            ENDPROPERTIES
+            
+            METHODS
+              SOURCE #modified
+                #public void modified()
+                #{
+                #    super();
+                #
+                #    inventLocation_ds.refresh();
+                #}
+              ENDSOURCE
+            ENDMETHODS
+          ENDDATAFIELD
+          
+          DATAFIELD InventSiteId
+            PROPERTIES
+            ENDPROPERTIES
+            
+            METHODS
+              SOURCE #modified
+                #public void modified()
+                #{
+                #    super();
+                #
+                #    if (BrazilParameters::isEnabled() && inventLocation.InventCountingGroup_BR != InventCountingGroup_BR::OwnStockInOtherPower)
+                #    {
+                #        ttsbegin;
+                #
+                #        super();
+                #
+                #        inventLocation.copyLocationFromSiteLocation();
+                #
+                #        ttscommit;
+                #
+                #        logisticsEntityPostalAddressView_ds.research();
+                #    }
+                #    else
+                #    {
+                #        super();
+                #    }
+                #}
+              ENDSOURCE
+            ENDMETHODS
+          ENDDATAFIELD
+          
+          DATAFIELD InventCountingGroup_BR
+            PROPERTIES
+            ENDPROPERTIES
+            
+            METHODS
+              SOURCE #modified
+                #public void modified()
+                #{
+                #    super();
+                #
+                #    element.enableCustVendFields_BR();
+                #
+                #    logisticsEntityPostalAddressView_ds.research();
+                #}
+              ENDSOURCE
+            ENDMETHODS
+          ENDDATAFIELD
+          
+          DATAFIELD CustAccount_BR
+            PROPERTIES
+            ENDPROPERTIES
+            
+            METHODS
+              SOURCE #modified
+                #public void modified()
+                #{
+                #    super();
+                #
+                #    inventLocation_ds.refresh();
+                #}
+              ENDSOURCE
+            ENDMETHODS
+          ENDDATAFIELD
+          
+          DATAFIELD InventProfileId_RU
+            PROPERTIES
+            ENDPROPERTIES
+            
+            METHODS
+              SOURCE #lookup
+                #public void lookup(FormControl _formControl, str _filterStr)
+                #{
+                #    InventProfile_RU::lookupInventProfileId(_formControl, inventLocation.InventProfileType_RU);
+                #}
+              ENDSOURCE
+            ENDMETHODS
+          ENDDATAFIELD
+          
+          DATAFIELD InventLocationIdGoodsInRoute_RU
+            PROPERTIES
+            ENDPROPERTIES
+            
+            METHODS
+              SOURCE #lookup
+                #public void lookup(FormControl _formControl, str _filterStr)
+                #{
+                #    InventLocation::lookupBySiteId(_formControl, inventLocation.InventSiteId, InventLocationType::GoodsInRoute_RU, true, true);
+                #}
+              ENDSOURCE
+            ENDMETHODS
+          ENDDATAFIELD
+          
+          DATAFIELD NumberSequenceGroup_RU
+            PROPERTIES
+            ENDPROPERTIES
+            
+            METHODS
+              SOURCE #jumpRef
+                #public void jumpRef()
+                #{
+                #    Args args = new Args();
+                #
+                #    args.record(inventLocation);
+                #    args.parmEnum(ModuleAxapta::Inventory);
+                #    new MenuFunction(menuitemDisplayStr(NumberSequenceGroupInventory_RU), MenuItemType::Display).run(args);
+                #}
+                #
+                #
+              ENDSOURCE
+            ENDMETHODS
+          ENDDATAFIELD
+          
+          DATAFIELD FSHStore
+            PROPERTIES
+            ENDPROPERTIES
+            
+            METHODS
+              SOURCE #modified
+                #public void modified()
+                #{
+                #    super();
+                #    element.enableReplenishmentGroup();
+                #}
+                #
+              ENDSOURCE
+            ENDMETHODS
+          ENDDATAFIELD
+          
+          DATAFIELD AllowMarkingReservationRemoval
+            PROPERTIES
+            ENDPROPERTIES
+            
+            METHODS
+              SOURCE #modified
+                #public void modified()
+                #{
+                #    super();
+                #
+                #    inventLocation_ds.object(fieldNum(InventLocation, RemoveInventBlockingOnStatusChange))
+                #        .allowEdit(inventLocation.allowRemoveBlockingOnStatusChanged());
+                #}
+              ENDSOURCE
+            ENDMETHODS
+          ENDDATAFIELD
+          
+          DATAFIELD WHSEnabled
+            PROPERTIES
+            ENDPROPERTIES
+            
+            METHODS
+              SOURCE #modified
+                #public void modified()
+                #{
+                #    super();
+                #    element.enableWHSManagementParameters();
+                #}
+              ENDSOURCE
+            ENDMETHODS
+          ENDDATAFIELD
+          
+        ENDFIELDLIST
+      ENDOBJECTPOOL
+      METHODS
+        SOURCE #init
+          #public void init()
+          #{
+          #    super();
+          #
+          #    if (element.args().dataset() == tableNum(InventParameters))
+          #    {
+          #        this.query().dataSourceTable(tableNum(InventLocation)).clearDynalinks();
+          #    }
+          #}
+        ENDSOURCE
+        SOURCE #delete
+          #public void delete()
+          #{
+          #    super();
+          #
+          #    dimensionDefaultingController.deleted();
+          #}
+        ENDSOURCE
+        SOURCE #selectionChanged
+          #public void selectionChanged()
+          #{
+          #    super();
+          #
+          #    if (isConfigurationkeyEnabled(configurationKeyNum(Retail)))
+          #    {
+          #        element.initRetailReplenishmentTreeDatasource(inventLocation.InventLocationId);
+          #    }
+          #}
+          #
+        ENDSOURCE
+        SOURCE #write
+          #public void write()
+          #{
+          #    boolean updateLogisticsPostalAddressBR;
+          #
+          #    if (BrazilParameters::isEnabled() && inventLocation.InventSiteId != inventLocation.orig().InventSiteId    )
+          #    {
+          #        updateLogisticsPostalAddressBR = true;
+          #    }
+          #
+          #    dimensionDefaultingController.writing();
+          #
+          #    super();
+          #
+          #    if (tree.isActivePage())
+          #    {
+          #        tree.pageActivated();
+          #    }
+          #
+          #    if (updateLogisticsPostalAddressBR)
+          #    {
+          #        inventLocation.copyLocationFromSiteLocation();
+          #
+          #        logisticsEntityPostalAddressView_ds.research();
+          #    }
+          #}
+        ENDSOURCE
+        SOURCE #active
+          #public int active()
+          #{
+          #    int ret;
+          #
+          #    ret = super();
+          #
+          #    isExampleLocationIdOk = false;
+          #    exampleLocation = inventLocation.exampleLocation();
+          #
+          #    element.enableFields();
+          #
+          #    if (isConfigurationkeyEnabled(configurationKeyNum(Retail)))
+          #    {
+          #        element.enableReplenishmentGroup();
+          #    }
+          #
+          #    element.checkWarehouseProcessConfigValid();
+          #
+          #    dimensionDefaultingController.activated();
+          #
+          #    return ret;
+          #}
+        ENDSOURCE
+        SOURCE #exampleName
+          #public display WMSLocationId exampleName(InventLocation   _inventLocation)
+          #{
+          #    if (!isExampleLocationIdOk)
+          #    {
+          #        isExampleLocationIdOk = true;
+          #        exampleLocationId = _inventLocation.wmsLocationId(exampleLocation);
+          #    }
+          #    return exampleLocationId;
+          #}
+        ENDSOURCE
+      ENDMETHODS
+    ENDDATASOURCE
+    DATASOURCE
+      OBJECTPOOL
+        PROPERTIES
+          Name                #LogisticsEntityPostalAddressView
+          Table               #LogisticsEntityPostalAddressView
+          AutoSearch          #No
+          JoinSource          #InventLocation
+        ENDPROPERTIES
+        
+        FIELDLIST
+        ENDFIELDLIST
+      ENDOBJECTPOOL
+      METHODS
+        SOURCE #init
+          #public void init()
+          #{
+          #    super();
+          #    this.cacheAddMethod(tableMethodStr(LogisticsEntityPostalAddressView,locationRoles));
+          #}
+        ENDSOURCE
+        SOURCE #executeQuery
+          #public void executeQuery()
+          #{
+          #    LogisticsEntityPostalAddressView::updateQuery(this.query().dataSourceName(this.name()), inventLocation.RecId, LogisticsLocationEntityType::Warehouse);
+          #    super();
+          #    postalAddressForm.callerUpdateButtons(newAddress, editAddress, deleteAddress, mapButton, deactivateAddress, logisticsLocationDefault, logisticsEntityPostalAddressView.IsPrimary);
+          #}
+        ENDSOURCE
+        SOURCE #active
+          #public int active()
+          #{
+          #    int ret;
+          #
+          #    ret = super();
+          #
+          #    postalAddressForm.callerActive();
+          #    postalAddressForm.callerUpdateButtons(newAddress, editAddress, deleteAddress, mapButton, deactivateAddress, logisticsLocationDefault, logisticsEntityPostalAddressView.IsPrimary);
+          #
+          #    return ret;
+          #}
+        ENDSOURCE
+      ENDMETHODS
+    ENDDATASOURCE
+    DATASOURCE
+      OBJECTPOOL
+        PROPERTIES
+          Name                #OMHierarchyRelationship
+          Table               #OMHierarchyRelationship
+          AllowEdit           #No
+          AllowCreate         #No
+          AllowDelete         #No
+          InsertAtEnd         #No
+          InsertIfEmpty       #No
+        ENDPROPERTIES
+        
+        FIELDLIST
+        ENDFIELDLIST
+      ENDOBJECTPOOL
+      METHODS
+      ENDMETHODS
+    ENDDATASOURCE
+    DATASOURCE
+      OBJECTPOOL
+        PROPERTIES
+          Name                #MCRPickingWBWarehouseInfo
+          Table               #MCRPickingWBWarehouseInfo
+          AllowCheck          #No
+          JoinSource          #InventLocation
+          LinkType            #OuterJoin
+        ENDPROPERTIES
+        
+        FIELDLIST
+        ENDFIELDLIST
+      ENDOBJECTPOOL
+      METHODS
+        SOURCE #validateWrite
+          #public boolean validateWrite()
+          #{
+          #    mcrPickingWBWarehouseInfo.Warehouse = inventLocation.InventLocationId;
+          #
+          #    return super();
+          #}
+        ENDSOURCE
+      ENDMETHODS
+    ENDDATASOURCE
+  ENDOBJECTBANK
+  
+  REFERENCEDATASOURCES
+  ENDREFERENCEDATASOURCES
+  
+  JOINS
+    LogisticsEntityPostalAddressView InventLocation
+    MCRPickingWBWarehouseInfo InventLocation
+  ENDJOINS
+  
+  PARTREFERENCES
+  ENDPARTREFERENCES
+  
+  DESIGN
+    CONTAINER
+      CONTROL TAB
+        PROPERTIES
+          Name                #Tab
+          Width               #Column width
+          Height              #Column height
+          ElementPosition     #1610612734
+          HierarchyParent     #DetailsContainer
+          Tabs                #4
+          Style               #FastTabs
+        ENDPROPERTIES
+        
+        METHODS
+        ENDMETHODS
+      ENDCONTROL 
+      
+      CONTROL TABPAGE
+        PROPERTIES
+          Name                #TabFinancialDimensions
+          AutoDeclaration     #Yes
+          Visible             #No
+          NeededPermission    #Manual
+          Width               #Column width
+          ElementPosition     #1395864366
+          HierarchyParent     #Tab
+          Caption             #@SYS101181
+          Columns             #Auto
+          HideIfEmpty         #No
+        ENDPROPERTIES
+        
+        METHODS
+          SOURCE #pageActivated
+            #public void pageActivated()
+            #{
+            #    dimensionDefaultingController.pageActivated();
+            #    super();
+            #}
+          ENDSOURCE
+        ENDMETHODS
+      ENDCONTROL 
+      
+    ENDCONTAINER
+    
+  ENDDESIGN
+  
+  PERMISSIONS #Permissions
+    PROPERTIES
+    ENDPROPERTIES
+    
+  ENDPERMISSIONS
+  
+ENDFORM
+
+
+***Element: END

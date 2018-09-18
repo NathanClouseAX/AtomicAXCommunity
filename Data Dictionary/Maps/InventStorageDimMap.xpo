@@ -1,0 +1,181 @@
+﻿Exportfile for AOT version 1.0 or later
+Formatversion: 1
+
+***Element: MAP
+
+; Microsoft Dynamics AX Map : InventStorageDimMap unloaded
+; --------------------------------------------------------------------------------
+  TABLEVERSION 1
+  
+  MAP #InventStorageDimMap
+    FIELDS
+    ENDFIELDS
+    GROUPS
+    ENDGROUPS
+    
+    MAPPINGS
+    ENDMAPPINGS
+    
+    METHODS
+      SOURCE #AAX_modifiedInventLocationFromParent
+        #/// <summary>
+        #///    Populates values on the current or the parent record when the <c>InventLocationId</c> field is modified.
+        #/// </summary>
+        #/// <param name="_parent">
+        #///    The parent record buffer if the current records is innerjoined.
+        #/// </param>
+        #public void AAX_modifiedInventLocationFromParent(Common _parent)
+        #{
+        #    this.InventStorageDimMap::modifiedInventLocationFromParent(_parent);
+        #}
+      ENDSOURCE
+      SOURCE #modifiedField
+        #public void modifiedField(FieldId _fieldId)
+        #{
+        #    super(_fieldId);
+        #
+        #
+        #    switch (_fieldId)
+        #    {
+        #        case fieldNum(InventStorageDimMap,InventSiteId):
+        #            if (this.InventLocationId
+        #             && this.InventSiteId != InventLocation::find(this.InventLocationId).InventSiteId)
+        #            {
+        #                this.InventLocationId = '';
+        #            }
+        #
+        #            if (this.isFormDataSource())
+        #            {
+        #                this.InventStorageDimMap::modifiedInventSiteFromParent(this.InventStorageDimMap::formDataSourceJoinParent());
+        #            }
+        #            break;
+        #
+        #        case fieldNum(InventStorageDimMap,InventLocationId):
+        #            if (this.isFormDataSource())
+        #            {
+        #                this.InventStorageDimMap::modifiedInventLocationFromParent(this.InventStorageDimMap::formDataSourceJoinParent());
+        #            }
+        #            break;
+        #
+        #    }
+        #}
+      ENDSOURCE
+      SOURCE #modifiedInventLocationFromParent
+        #public void modifiedInventLocationFromParent(Common  _parent)
+        #{
+        #
+        #    AAX_InventLocationDimensionLink inventLocationDimensionLink;
+        #
+        #    if (_parent.TableId)
+        #    {
+        #        switch (_parent.TableId)
+        #        {
+        #            case tableNum(InventItemLocation):
+        #                return;
+        #            default:
+        #                break;
+        #        }
+        #    }
+        #
+        #    if (this.TableId == tableNum(InventDim) && _parent.TableId && _parent.TableId != tableNum(Common))
+        #    {
+        #        inventLocationDimensionLink = AAX_InventLocationDimensionLink::newDimensionTables(_parent, this);
+        #    }
+        #    else
+        #    {
+        #        inventLocationDimensionLink = AAX_InventLocationDimensionLink::newDimensionTables(this, this);
+        #    }
+        #
+        #    inventLocationDimensionLink.linkDimension();
+        #
+        #}
+      ENDSOURCE
+      SOURCE #modifiedInventSiteFromParent
+        #/// <summary>
+        #///    Populates values on the current or the parent record when the <c>InventSiteId</c> field is modified.
+        #/// </summary>
+        #/// <param name="_parent">
+        #///    The parent record buffer if the current records is innerjoined.
+        #/// </param>
+        #public void modifiedInventSiteFromParent(Common _parent)
+        #{
+        #    InventSiteDimensionLink inventSiteDimensionLink;
+        #    ItemId                  itemId;
+        #    InventDim               inventDim;
+        #    FieldId                 itemIdFieldId;
+        #
+        #    AgreementLine           agreementLine;
+        #
+        #    if (this.TableId == tableNum(InventDim) && _parent.TableId && _parent.TableId != tableNum(Common))
+        #    {
+        #        inventSiteDimensionLink = InventSiteDimensionLink::newDimensionTables(_parent, this);
+        #
+        #        if (!this.InventLocationId)
+        #        {
+        #            itemIdFieldId = fieldName2id(_parent.TableId,fieldStr(InventTable,ItemId));
+        #            if (itemIdFieldId)
+        #            {
+        #                itemId = _parent.(itemIdFieldId);
+        #            }
+        #
+        #            if (itemId)
+        #            {
+        #                inventDim.InventSiteId = this.InventSiteId;
+        #                switch (_parent.TableId)
+        #                {
+        #                    case tableNum(SalesLine):
+        #                    case tableNum(SalesQuotationLine):
+        #                        this.InventLocationId  = InventTable::find(itemId).salesInventLocationId('',InventDim::findOrCreate(inventDim).InventDimId,this.InventSiteId);
+        #                        break;
+        #
+        #                    case tableNum(PurchLine):
+        #                    case tableNum(PurchReqLine):
+        #                    case tableNum(PurchRFQCaseLine):
+        #                    case tableNum(VendInvoiceInfoLine):
+        #                        this.InventLocationId  = InventTable::find(itemId).purchInventLocationId('',InventDim::findOrCreate(inventDim).InventDimId,this.InventSiteId);
+        #                        break;
+        #
+        #                    case tableNum(AgreementLine):
+        #                        agreementLine = _parent as AgreementLine;
+        #
+        #                        if (agreementLine.agreementModuleType() == ModuleSalesPurch::Sales)
+        #                        {
+        #                            this.InventLocationId  = agreementLine.inventTable().salesInventLocationId('', InventDim::findOrCreate(inventDim).InventDimId, this.InventSiteId);
+        #                        }
+        #                        else
+        #                        {
+        #                            this.InventLocationId  = agreementLine.inventTable().purchInventLocationId('', InventDim::findOrCreate(inventDim).InventDimId, this.InventSiteId);
+        #                        }
+        #                        break;
+        #
+        #                    case tableNum(InventItemPriceSim):
+        #                    case tableNum(InventItemPrice):
+        #                    case tableNum(RouteVersion):
+        #                    case tableNum(BOMVersion):
+        #                        break;
+        #
+        #                    default:
+        #                        this.InventLocationId  = InventTable::find(itemId).inventLocationId('',InventDim::findOrCreate(inventDim).InventDimId,this.InventSiteId);
+        #                        break;
+        #                }
+        #            }
+        #        }
+        #    }
+        #    else
+        #    {
+        #        inventSiteDimensionLink = InventSiteDimensionLink::newDimensionTables(this, this);
+        #    }
+        #
+        #    inventSiteDimensionLink.linkDimension();
+        #
+        #    if(this.orig().InventLocationId != this.InventLocationId)
+        #    {
+        #        this.InventStorageDimMap::modifiedInventLocationFromParent(_parent);
+        #    }
+        #}
+      ENDSOURCE
+    ENDMETHODS
+  ENDMAP
+  
+
+***Element: END

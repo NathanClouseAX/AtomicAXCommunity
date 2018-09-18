@@ -1,0 +1,246 @@
+﻿Exportfile for AOT version 1.0 or later
+Formatversion: 1
+
+***Element: DBT
+
+; Microsoft Dynamics AX Table : AAX_EnumDictionary unloaded
+; --------------------------------------------------------------------------------
+  TABLEVERSION 1
+  
+  TABLE #AAX_EnumDictionary
+    EnforceFKRelation 1
+    PROPERTIES
+      Name                #AAX_EnumDictionary
+      Label               #@AAX39
+      TitleField1         #enum
+      TitleField2         #enumValue
+      TableContents       #Default data
+      CreateRecIdIndex    #Yes
+      SaveDataPerCompany  #No
+      PrimaryIndex        #SurrogateKey
+      ClusterIndex        #SurrogateKey
+      DeveloperDocumentation  #@AAX48
+      Origin              #{A785B4E7-8D3F-472E-AB68-B747F51D6E5F}
+    ENDPROPERTIES
+    
+    FIELDS
+      FIELD #enum
+        STRING
+        PROPERTIES
+          Name                #enum
+          Label               #@AAX46
+          Table               #AAX_EnumDictionary
+          Origin              #{443D6878-3F37-423C-905A-20A3E31DEFB4}
+          ExtendedDataType    #Str60
+          StringSize          #60
+        ENDPROPERTIES
+        
+      FIELD #enumValue
+        INT
+        PROPERTIES
+          Name                #enumValue
+          Label               #@SYS40594
+          Table               #AAX_EnumDictionary
+          Origin              #{02C9630B-593C-467A-91BA-8BD21ECBCCFE}
+          ExtendedDataType    #EnumId
+        ENDPROPERTIES
+        
+      FIELD #label
+        STRING
+        PROPERTIES
+          Name                #label
+          Label               #@AAX47
+          Table               #AAX_EnumDictionary
+          Origin              #{8DD460D7-2C70-4A84-BC59-0E2F54AAA716}
+          ExtendedDataType    #String255
+          StringSize          #255
+        ENDPROPERTIES
+        
+      FIELD #LanguageId
+        STRING
+        PROPERTIES
+          Name                #LanguageId
+          Table               #AAX_EnumDictionary
+          Origin              #{2D8D33FA-D9AA-4939-91E6-3660437BFC9D}
+          ExtendedDataType    #LanguageIdAll
+          StringSize          #7
+        ENDPROPERTIES
+        
+      FIELD #name
+        STRING
+        PROPERTIES
+          Name                #name
+          Table               #AAX_EnumDictionary
+          Origin              #{0CB3722B-C8B7-4A57-BFBF-E76AAF91C920}
+          ExtendedDataType    #Str60
+          StringSize          #60
+        ENDPROPERTIES
+        
+    ENDFIELDS
+    GROUPS
+      GROUP #AutoSummary
+        PROPERTIES
+          Name                #AutoSummary
+        ENDPROPERTIES
+        
+        GROUPFIELDS
+          #enum
+          #enumValue
+          #label
+          #LanguageId
+          #name
+        ENDGROUPFIELDS
+      ENDGROUP
+      GROUP #AutoReport
+        PROPERTIES
+          Name                #AutoReport
+        ENDPROPERTIES
+        
+        GROUPFIELDS
+          #enum
+          #enumValue
+          #label
+          #LanguageId
+          #name
+        ENDGROUPFIELDS
+      ENDGROUP
+      GROUP #AutoLookup
+        PROPERTIES
+          Name                #AutoLookup
+        ENDPROPERTIES
+        
+        GROUPFIELDS
+          #enum
+          #enumValue
+          #label
+          #LanguageId
+          #name
+        ENDGROUPFIELDS
+      ENDGROUP
+      GROUP #AutoBrowse
+        PROPERTIES
+          Name                #AutoBrowse
+        ENDPROPERTIES
+        
+        GROUPFIELDS
+          #enum
+          #enumValue
+          #label
+          #LanguageId
+          #name
+        ENDGROUPFIELDS
+      ENDGROUP
+    ENDGROUPS
+    
+    INDICES
+      #enumValue
+      PROPERTIES
+        Name                #enumValue
+        Origin              #{C3E5312B-4200-43B4-8EB7-C86CE9F1054B}
+      ENDPROPERTIES
+      
+      INDEXFIELDS
+        #enumValue
+      ENDINDEXFIELDS
+      
+      #idxLabel
+      PROPERTIES
+        Name                #idxLabel
+        Origin              #{0C74C2A5-17ED-4184-8D9C-B975FD6DD9EF}
+      ENDPROPERTIES
+      
+      INDEXFIELDS
+        #label
+      ENDINDEXFIELDS
+      
+      #idxName
+      PROPERTIES
+        Name                #idxName
+        Origin              #{A7E24F8A-3EF2-4C42-ADA4-1B97C1314396}
+      ENDPROPERTIES
+      
+      INDEXFIELDS
+        #name
+      ENDINDEXFIELDS
+      
+      #idxEnum
+      PROPERTIES
+        Name                #idxEnum
+        Origin              #{12DD5904-93F8-458D-ADEC-93A40DDB3C33}
+      ENDPROPERTIES
+      
+      INDEXFIELDS
+        #enum
+      ENDINDEXFIELDS
+      
+      #enumEnumValueName
+      PROPERTIES
+        Name                #enumEnumValueName
+        AllowDuplicates     #No
+        Origin              #{2DCB4AAA-289A-4617-83E9-5D70D1CBE7CC}
+      ENDPROPERTIES
+      
+      INDEXFIELDS
+        #LanguageId
+        #name
+        #enumValue
+        #enum
+      ENDINDEXFIELDS
+      
+    ENDINDICES
+    FULLTEXTINDICES
+    ENDFULLTEXTINDICES
+    REFERENCES
+      REFERENCE #LanguageTable
+        PROPERTIES
+          Name                #LanguageTable
+          Table               #LanguageTable
+          RelatedTableCardinality   #ZeroOne
+          Cardinality         #ZeroMore
+          RelationshipType    #Association
+          UseDefaultRoleNames #Yes
+        ENDPROPERTIES
+        
+        FIELDREFERENCES
+          REFERENCETYPE PKFK
+          PROPERTIES
+            Field               #LanguageId
+            RelatedField        #LanguageId
+          ENDPROPERTIES
+          
+        ENDFIELDREFERENCES
+      ENDREFERENCE
+    ENDREFERENCES
+    
+    DELETEACTIONS
+    ENDDELETEACTIONS
+    
+    METHODS
+      SOURCE #initFromdictEnum
+        #/// <summary>
+        #///     initializes a record
+        #/// </summary>
+        #/// <param name="dictEnum">
+        #///     enum dictionary object
+        #/// </param>
+        #/// <param name="counter">
+        #///     position of the enum
+        #/// </param>
+        #/// <param name="LanguageId">
+        #///     label language used for storage
+        #/// </param>
+        #public void initFromdictEnum(dictEnum dictEnum, int counter, languageIdAll LanguageId)
+        #{
+        #    this.enum       = DictEnum.name();
+        #    this.name       = DictEnum.index2Name(counter);
+        #    this.label      = DictEnum.index2Label(counter);
+        #    this.label      = SysLabel::labelId2String2(dictEnum.index2LabelId(counter), LanguageId);
+        #    this.enumValue  = DictEnum.index2Value(counter);
+        #    this.LanguageId = LanguageId;
+        #}
+      ENDSOURCE
+    ENDMETHODS
+  ENDTABLE
+  
+
+***Element: END

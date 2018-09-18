@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ModelManifest SchemaVersion="1.9" ModelFileVersion="18" ElementCount="0" ModelBuildVersion="">
+  <Name>Atomic AX</Name>
+  <DisplayName>Atomic AX (www.atomicax.com)</DisplayName>
+  <Description>Community Extensions From www.atomicax.com</Description>
+  <Publisher>www.atomicax.com</Publisher>
+  <Signed>false</Signed>
+  <Category>Standard</Category>
+  <InstallMode>Standard</InstallMode>
+  <Version>1.0.0.0</Version>
+  <Layer>Usr</Layer>
+  <DependencyState />
+</ModelManifest>

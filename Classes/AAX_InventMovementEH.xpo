@@ -1,0 +1,129 @@
+﻿Exportfile for AOT version 1.0 or later
+Formatversion: 1
+
+***Element: CLS
+
+; Microsoft Dynamics AX Class: AAX_InventMovementEH unloaded
+; --------------------------------------------------------------------------------
+  CLSVERSION 1
+  
+  CLASS #AAX_InventMovementEH
+    PROPERTIES
+      Name                #AAX_InventMovementEH
+      Origin              #{285018E7-C8BA-4C96-89EF-C8DB580D565C}
+    ENDPROPERTIES
+    
+    METHODS
+      SOURCE #classDeclaration
+        #/// <summary>
+        #/// Event Handler for InventMovement class
+        #/// </summary>
+        #class AAX_InventMovementEH
+        #{
+        #}
+      ENDSOURCE
+      SOURCE #checkInventLocationDimension
+        #/// <summary>
+        #///    Validates the used inventory dimensions against the used financial dimensions.
+        #/// </summary>
+        #/// <param name="_InventMovement">
+        #///    An <c>InventMovement</c> object
+        #/// </param>
+        #/// <returns>
+        #///    true if validation is correct; otherwise, false.
+        #/// </returns>
+        #///
+        #
+        #public static boolean checkInventLocationDimension(InventMovement _InventMovement)
+        #{
+        #    AAX_InventLocationDimensionCheck AAX_InventLocationDimensionCheck;
+        #    if (_InventMovement.AAX_adjustmentMovement())
+        #    {
+        #        return true;
+        #    }
+        #
+        #    AAX_InventLocationDimensionCheck = AAX_InventLocationDimensionCheck::newStandard();
+        #
+        #    return AAX_InventLocationDimensionCheck.checkDimensions(_InventMovement.inventdim(), _inventMovement.defaultDimension());
+        #}
+        #
+        #
+      ENDSOURCE
+      SOURCE #preUpdateLedgerAdjust
+        #/// <summary>
+        #/// verify that physical and inventory dimensions match
+        #/// </summary>
+        #/// <param name="_args">
+        #/// XppPrePostArgs
+        #/// </param>
+        #/// <exception cref="Exception::Error">
+        #/// Inventory and Financial Dimensions do not match
+        #/// </exception>
+        #public static void preUpdateLedgerAdjust(XppPrePostArgs _args)
+        #{
+        #    InventMovement InventMovement;
+        #
+        #    InventMovement = _args.getThis();
+        #
+        #    if (!AAX_InventMovementEH::checkInventLocationDimension(InventMovement))
+        #    {
+        #        throw error("@AAX1");
+        #    }
+        #}
+      ENDSOURCE
+      SOURCE #preUpdateLedgerFinancial
+        #/// <summary>
+        #/// verify that physical and inventory dimensions match
+        #/// </summary>
+        #/// <param name="_args">
+        #/// XppPrePostArgs
+        #/// </param>
+        #/// <exception cref="Exception::Error">
+        #/// Inventory and Financial Dimensions do not match
+        #/// </exception>
+        #public static void preUpdateLedgerFinancial(XppPrePostArgs _args)
+        #{
+        #    InventMovement InventMovement;
+        #
+        #    InventMovement = _args.getThis();
+        #
+        #    if (InventMovement.mustBeBookedFinancially())
+        #    {
+        #        if (!AAX_InventMovementEH::checkInventLocationDimension(InventMovement))
+        #        {
+        #            throw error("@AAX1");
+        #        }
+        #    }
+        #
+        #}
+      ENDSOURCE
+      SOURCE #preUpdateLedgerPhysical
+        #/// <summary>
+        #/// verify that physical and inventory dimensions match
+        #/// </summary>
+        #/// <param name="_args">
+        #/// XppPrePostArgs
+        #/// </param>
+        #/// <exception cref="Exception::Error">
+        #/// Inventory and Financial Dimensions do not match
+        #/// </exception>
+        #public static void preUpdateLedgerPhysical(XppPrePostArgs _args)
+        #{
+        #    InventMovement InventMovement;
+        #
+        #    InventMovement = _args.getThis();
+        #
+        #
+        #    if (InventMovement.mustBeBookedPhysically())
+        #    {
+        #        if (!AAX_InventMovementEH::checkInventLocationDimension(InventMovement))
+        #        {
+        #            throw error("@AAX1");
+        #        }
+        #    }
+        #}
+      ENDSOURCE
+    ENDMETHODS
+  ENDCLASS
+
+***Element: END

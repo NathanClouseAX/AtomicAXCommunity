@@ -1,0 +1,48 @@
+﻿Exportfile for AOT version 1.0 or later
+Formatversion: 1
+
+***Element: SPV
+
+; Microsoft Dynamics AX PRIVILEGE : AAX_InventLocationDimension_UnlockLink unloaded
+; --------------------------------------------------------------------------------
+  VERSION 1
+  
+  PRIVILEGE #AAX_InventLocationDimension_UnlockLink
+    PROPERTIES
+      Name                #AAX_InventLocationDimension_UnlockLink
+      Label               #@SYS109389
+      Origin              #{AA5EE7F6-1345-4ED9-9BB7-8979A6D43365}
+    ENDPROPERTIES
+    
+    ENTRYPOINTS #Entry Points
+      ENTRYPOINT #AAX_InventLocationDimension_UnlockLink
+        PROPERTIES
+          Name                #AAX_InventLocationDimension_UnlockLink
+          ObjectType          #MenuItemAction
+          ObjectName          #AAX_InventLocationDimension_UnlockLink
+          AccessLevel         #Create
+        ENDPROPERTIES
+        
+      ENDENTRYPOINT
+      
+  ENDENTRYPOINTS
+  
+PERMISSIONSET #Permissions
+  PROPERTIES
+  ENDPROPERTIES
+  
+  TABLES #Tables
+  ENDTABLES
+  
+SERVERMETHODS #Server Methods
+ENDSERVERMETHODS
+
+FORMS #Forms
+ENDFORMS
+
+ENDPERMISSIONSET
+
+ENDPRIVILEGE
+
+
+***Element: END

@@ -1,0 +1,26 @@
+﻿Exportfile for AOT version 1.0 or later
+Formatversion: 1
+
+***Element: FTM
+
+; Microsoft Dynamics AX MENUITEM : AAX_DatabaseLogCleanup unloaded
+; --------------------------------------------------------------------------------
+  VERSION 1
+  
+  MENUITEM #AAX_DatabaseLogCleanup
+    Type: 3
+    PROPERTIES
+      Name                #AAX_DatabaseLogCleanup
+      Label               #@SYS58410
+      HelpText            #@AAX37
+      ObjectType          #Class
+      Object              #AAX_DatabaseLogCleanup
+      RunOn               #Server
+      ConfigurationKey    #SysAdmin
+      Origin              #{D458882B-2CDA-4BBF-A630-94D7E2710D3C}
+    ENDPROPERTIES
+    
+  ENDMENUITEM
+  
+
+***Element: END

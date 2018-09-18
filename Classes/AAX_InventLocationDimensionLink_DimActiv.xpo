@@ -1,0 +1,118 @@
+﻿Exportfile for AOT version 1.0 or later
+Formatversion: 1
+
+***Element: CLS
+
+; Microsoft Dynamics AX Class: AAX_InventLocationDimensionLink_DimActiv unloaded
+; --------------------------------------------------------------------------------
+  CLSVERSION 1
+  
+  CLASS #AAX_InventLocationDimensionLink_DimActiv
+    PROPERTIES
+      Name                #AAX_InventLocationDimensionLink_DimActiv
+      Extends             #AAX_InventLocationDimensionLink
+      Origin              #{5026D50B-6858-4CE9-80E4-E97D0D872151}
+    ENDPROPERTIES
+    
+    METHODS
+      SOURCE #axParmDefaultDimensionSet
+        #public void axParmDefaultDimensionSet(AxInventSiteDimensionable _axInventSiteDimensionable, DimensionDefault _dimension)
+        #{
+        #    DimensionDefault    resultDimension;
+        #    DimensionDefault    originalDimension;
+        #
+        #    originalDimension = dimensionDefaultMap.DefaultDimension;
+        #
+        #    resultDimension = DimensionDefaultingService::serviceReplaceAttributeValue(_dimension, originalDimension, AAX_inventParameters.LocationDimensionAttribute);
+        #
+        #    _axInventSiteDimensionable.setDefaultDimensionValue(resultDimension);
+        #}
+      ENDSOURCE
+      SOURCE #axSetDefaultDimension
+        #public void axSetDefaultDimension(AxInventSiteDimensionable _axInventSiteDimensionable)
+        #{
+        #    DimensionDefault    resultDimension;
+        #    DimensionDefault    siteDimension;
+        #    DimensionDefault    originalDimension;
+        #
+        #    boolean isSiteDimensionEmpty(DimensionDefault _dimension)
+        #    {
+        #        return (DimensionAttributeValueSetStorage::find(_dimension).getValueByDimensionAttribute(AAX_inventParameters.LocationDimensionAttribute) == 0);
+        #    }
+        #
+        #    _axInventSiteDimensionable.setStorageDimField(inventLocationIdFieldId);
+        #
+        #    if (_axInventSiteDimensionable.isStorageDimFieldSet(inventLocationIdFieldId))
+        #    {
+        #        originalDimension = dimensionDefaultMap.DefaultDimension;
+        #
+        #        if (isSiteDimensionEmpty(originalDimension) || inventParameters.MultiSiteDimensionLink == InventMultiSiteDimensionLink::Locked)
+        #        {
+        #            siteDimension = InventSite::find(storageDimTable.(inventLocationIdFieldId)).DefaultDimension;
+        #
+        #            resultDimension = DimensionDefaultingService::serviceReplaceAttributeValue(originalDimension, siteDimension, AAX_inventParameters.LocationDimensionAttribute);
+        #
+        #            _axInventSiteDimensionable.setDefaultDimensionValue(resultDimension);
+        #        }
+        #    }
+        #}
+      ENDSOURCE
+      SOURCE #classDeclaration
+        #/// <summary>
+        #/// InventLocationDimensionLink in active status
+        #/// </summary>
+        #class AAX_InventLocationDimensionLink_DimActiv extends AAX_inventLocationDimensionLink
+        #{
+        #    AAX_InventParameters    AAX_inventParameters;
+        #    InventParameters        InventParameters;
+        #    DimensionDefaultMap     dimensionDefaultMap;
+        #}
+      ENDSOURCE
+      SOURCE #linkDimension
+        #public void linkDimension()
+        #{
+        #    DimensionDefault    dimension;
+        #
+        #
+        #    dimension = dimensionDefaultMap.DefaultDimension;
+        #    dimensionDefaultMap.DefaultDimension = InventLocation::AAX_changeDimension(dimension, storageDimTable.(inventLocationIdFieldId));
+        #}
+      ENDSOURCE
+      SOURCE #new
+        #protected void new(Common _common)
+        #{
+        #    super();
+        #
+        #    dimensionDefaultMap  = _common;
+        #
+        #    inventParameters        = InventParameters::find();
+        #    AAX_InventParameters    = AAX_InventParameters::find();
+        #}
+      ENDSOURCE
+      SOURCE #construct
+        #protected static AAX_InventLocationDimensionLink_DimActiv construct(Common _common)
+        #{
+        #    return new AAX_InventLocationDimensionLink_DimActiv(_common);
+        #}
+        #
+      ENDSOURCE
+      SOURCE #newStandard
+        #/// <summary>
+        #/// InventLocationDimensionLink in active status
+        #/// </summary>
+        #/// <param name="_common">
+        #/// Common
+        #/// </param>
+        #/// <returns>
+        #/// AAX_InventLocationDimensionLink_DimActiv
+        #/// </returns>
+        #public static AAX_InventLocationDimensionLink_DimActiv newStandard(Common _common)
+        #{
+        #    return AAX_InventLocationDimensionLink_DimActiv::construct(_common);
+        #}
+        #
+      ENDSOURCE
+    ENDMETHODS
+  ENDCLASS
+
+***Element: END

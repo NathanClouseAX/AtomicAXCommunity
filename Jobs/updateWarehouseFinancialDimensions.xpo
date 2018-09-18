@@ -1,0 +1,53 @@
+﻿Exportfile for AOT version 1.0 or later
+Formatversion: 1
+
+***Element: JOB
+
+; Microsoft Dynamics AX Job: updateWarehouseFinancialDimensions unloaded
+; --------------------------------------------------------------------------------
+  JOBVERSION 1
+  
+  SOURCE #updateWarehouseFinancialDimensions
+    #static void updateWarehouseFinancialDimensions(Args _args)
+    #{
+    #    InventLocation InventLocation;
+    #
+    #    DimensionDefault DefDim;
+    #    DimensionAttribute                  dimensionAttribute;
+    #    DimensionAttributeValue             newValue;
+    #    DimensionAttributeValueSetStorage   dimensionStorage;
+    #
+    #
+    #
+    #    if(AAX_InventParameters::find().isLocationDimensionLinkInactive())
+    #    {
+    #        while select forUpdate * from InventLocation
+    #        {
+    #            ttsBegin;
+    #            //todo change to your dimension name
+    #            dimensionAttribute = DimensionAttribute::findbyName("Warehouse");
+    #            DefDim = InventLocation.AAX_DefaultDimension;
+    #
+    #            newValue = DimensionAttributeValue::findByDimensionAttributeAndValue(dimensionAttribute, InventLocation.InventLocationId,false,true);
+    #
+    #            dimensionStorage = DimensionAttributeValueSetStorage::find(DefDim);
+    #            dimensionStorage.addItem(newValue);
+    #
+    #            DefDim = dimensionStorage.save();
+    #
+    #
+    #            InventLocation.AAX_DefaultDimension = DefDim;
+    #            InventLocation.Update();
+    #            ttsCommit;
+    #        }
+    #
+    #    }
+    #
+    #}
+  ENDSOURCE
+  PROPERTIES
+    Origin              #{2E815CD2-C413-4361-A8F3-BD98B7090DF4}
+  ENDPROPERTIES
+  
+
+***Element: END

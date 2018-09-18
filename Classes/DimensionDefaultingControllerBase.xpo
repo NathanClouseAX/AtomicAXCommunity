@@ -1,0 +1,184 @@
+﻿Exportfile for AOT version 1.0 or later
+Formatversion: 1
+
+***Element: CLS
+
+; Microsoft Dynamics AX Class: DimensionDefaultingControllerBase unloaded
+; --------------------------------------------------------------------------------
+  CLSVERSION 1
+  
+  CLASS #DimensionDefaultingControllerBase
+    PROPERTIES
+      Name                #DimensionDefaultingControllerBase
+      Extends             #DimensionControllerObject
+      Origin              #{2D210000-0000-1000-4DCD-46B4D2B33708}
+    ENDPROPERTIES
+    
+    METHODS
+      SOURCE #loadAttributeValueSet
+        #/// <summary>
+        #///    Loads the dimension attribute value set and populates the value controls from the saved state.
+        #/// </summary>
+        #/// <param name="_dimAttributeValueSetId">
+        #///    The record ID of the <c>DimensionAttributeValueSet</c> table to load.
+        #/// </param>
+        #/// <returns>
+        #///    true if the set was loaded and controls updated; otherwise, false.
+        #/// </returns>
+        #protected boolean loadAttributeValueSet(recId _dimAttributeValueSetId,
+        #                                        Common _common = null)
+        #{
+        #    int                             i;
+        #    DimensionAttributeValue         dimAttrValue;
+        #    DimensionAttribute              dimAttr;
+        #    Map                             setItemMap;
+        #    container                       con;
+        #    DimensionValue                  value;
+        #    DimensionLinkSetFieldValueEventArgs dimLinkSetFieldValueEventArgs;
+        #    DimensionLinkCancelEventArgs        dimLinkAllowFieldEditEventArgs;
+        #    DimensionAttributeSetStorage        storage;
+        #    boolean                             localAllowEdit = allowEdit;     // Default to the current editability state for all dimensions (may be overridden for each one by an editable set or link provider below)
+        #    //AAX Start
+        #    DefaultDimensionView            DefaultDimensionView;
+        #    Common                          common;
+        #    DimensionAttribute              DimensionAttribute;
+        #    //AAX End
+        #
+        #    valueStrArray[0] = '';
+        #    valuesModified = false;
+        #    valuesRecId = _dimAttributeValueSetId;
+        #
+        #    // If no dimension attributes exist in the system, short circuit and do nothing
+        #    if (!dimAttributesExist || !isPageActivated)
+        #    {
+        #        return false;
+        #    }
+        #
+        #    // Enable the container so all fields are enabled since there is at least one
+        #    this.allowEditRootContainer();
+        #
+        #    formRun.lockWindowUpdate(true);
+        #    this.lockRootContainer();
+        #
+        #    valueKeyArray[0] = 0;
+        #    valueKeyHashArray[0] = emptyGuid();
+        #
+        #    if (_dimAttributeValueSetId)
+        #    {
+        #        con = this.getAttributeValueSet(_dimAttributeValueSetId, company);
+        #        setItemMap = Map::create(con);
+        #    }
+        #
+        #    if (editableDimensionAttributeSetId)
+        #    {
+        #        storage = DimensionAttributeSetStorage::find(editableDimensionAttributeSetId);
+        #    }
+        #
+        #    // For each dimension shown, either default it from a link provider, load it from storage, or clear it.
+        #    for (i = 1; i <= dimAttrCount; i++)
+        #    {
+        #
+        #        value = "";
+        #        dimAttr = dimAttrArray.value(i);
+        #
+        #        // Figure out what the value would be before calling the provider
+        #        if (setItemMap && setItemMap.exists(dimAttr.RecId))
+        #        {
+        #            con = setItemMap.lookup(dimAttr.RecId);
+        #            dimAttrValue = conPeek(con, #ValueSetContainerOffset_DAV);
+        #
+        #            if (dimAttrArray.exists(i) && valueControlArray.exists(i))
+        #            {
+        #                value = conPeek(con, #ValueSetContainerOffset_Value);
+        #            }
+        #        }
+        #
+        #        if (storage)
+        #        {
+        #            // If an editable set was specified then use the editability for each dimension instead of the global setting
+        #            localAllowEdit = storage.getEnumValueByDimensionAttribute(dimAttr.RecId);
+        #        }
+        #
+        #        if (localAllowEdit)
+        #        {
+        #            // Determine if a link provider has prevented editing of this field if it otherwise would have been editable
+        #            dimLinkAllowFieldEditEventArgs = new DimensionLinkCancelEventArgs(dimAttr.RecId);
+        #            this.DimensionLinkAllowFieldEdit(dimLinkAllowFieldEditEventArgs);
+        #            valueControlArray.value(i).allowEdit(!dimLinkAllowFieldEditEventArgs.parmCancel());
+        #        }
+        #        else
+        #        {
+        #            // Even if a link provider says to allow edit, if the controller was told not to, do not use the providers vote
+        #            valueControlArray.value(i).allowEdit(false);
+        #        }
+        #
+        #        // Handle link providers first
+        #        dimLinkSetFieldValueEventArgs = new DimensionLinkSetFieldValueEventArgs(dimAttr.RecId);
+        #        dimLinkSetFieldValueEventArgs.parmDimensionValue(value);
+        #        this.DimensionLinkSetFieldValue(dimLinkSetFieldValueEventArgs);
+        #        if (dimLinkSetFieldValueEventArgs.parmCancel())
+        #        {
+        #            value = dimLinkSetFieldValueEventArgs.parmDimensionValue();
+        #            this.handleValueModified(i, value);   // Note: This method may throw a error regarding DimValue not exists if data is corrupt. Probably okay to do this but is different than the below insert for persisted combinations.
+        #        }
+        #        else if (setItemMap && setItemMap.exists(dimAttr.RecId))
+        #        {
+        #            con = setItemMap.lookup(dimAttr.RecId);
+        #            dimAttrValue = conPeek(con, #ValueSetContainerOffset_DAV);
+        #
+        #            if (dimAttrArray.exists(i) && valueControlArray.exists(i))
+        #            {
+        #                // Force a tolerance level of Accept as we don't want warnings or errors on hydrating existing values
+        #                this.setValue(ErrorTolerance::Accept, i, dimAttrValue, value, conPeek(con, #ValueSetContainerOffset_NAME));
+        #            }
+        #            else
+        #            {
+        #                // Either the data or the backing store index is invalid since the index
+        #                // of the dimension attribute doesn't exist, so assert and continue
+        #                Debug::assert(false);
+        #            }
+        #        }
+        #        else if(valuesTableAndFieldName == strFmt('%1.%2',tableStr(InventLocation),fieldStr(InventLocation,AAX_DefaultDimension))
+        #                && dimAttr.RecId == InventParameters::find().SiteDimensionAttribute)
+        #        {
+        #           //AAX display the site dimension info on InventLocation form
+        #            select * from DefaultDimensionView
+        #            where DefaultDimensionView.DefaultDimension == InventSite::find(_common.(fieldnum(InventLocation,InventSiteId))).DefaultDimension
+        #            join DimensionAttribute
+        #            where DefaultDimensionView.DimensionAttributeId == DimensionAttribute.RecId;
+        #
+        #            if(DimensionAttribute)
+        #            {
+        #                //Cast common as the view that the dimension uses
+        #                common = new DictTable(tableName2id(DimensionAttribute.ViewName)).makeRecord();
+        #                //Match the Key field from the view to the Dimension
+        #                select * from common where common.(DimensionAttribute.KeyAttribute) == DefaultDimensionView.EntityInstance;
+        #                //Use display value from default dimension
+        #                valueControlArray.value(i).text(DefaultDimensionView.displayValue);
+        #                //Use the name for more detailed, retrieved for the view, fieldId can vary based on DimensionAttribute
+        #                valueNameControlArray.value(i).text(common.(DimensionAttribute.NameAttribute));
+        #            }
+        #
+        #           //AAX end
+        #        }
+        #        else
+        #        {
+        #            valueControlArray.value(i).text('');
+        #            this.setName(i);
+        #        }
+        #    }
+        #
+        #    this.lockRootContainer(false);
+        #    formRun.lockWindowUpdate(false);
+        #
+        #    return true;
+        #}
+      ENDSOURCE
+    ENDMETHODS
+    EVENTS
+      EVENT #dimensionLinkChangeEnumValue
+      ENDEVENT
+    ENDEVENTS
+  ENDCLASS
+
+***Element: END

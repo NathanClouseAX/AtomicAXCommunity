@@ -1,0 +1,142 @@
+﻿Exportfile for AOT version 1.0 or later
+Formatversion: 1
+
+***Element: CLS
+
+; Microsoft Dynamics AX Class: AAX_InventLocationDimensionLink unloaded
+; --------------------------------------------------------------------------------
+  CLSVERSION 1
+  
+  CLASS #AAX_InventLocationDimensionLink
+    PROPERTIES
+      Name                #AAX_InventLocationDimensionLink
+      Origin              #{05A27C75-9448-407A-95D4-6FC9F04C4B45}
+    ENDPROPERTIES
+    
+    METHODS
+      SOURCE #axParmDefaultDimensionSet
+        #/// <summary>
+        #/// get/set defaultDimensionSet
+        #/// </summary>
+        #/// <param name="_axInventSiteDimensionable">
+        #/// AxInventSiteDimensionable
+        #/// </param>
+        #/// <param name="_dimension">
+        #/// DimensionDefault
+        #/// </param>
+        #abstract public void axParmDefaultDimensionSet(AxInventSiteDimensionable _axInventSiteDimensionable, DimensionDefault _dimension)
+        #{
+        #}
+      ENDSOURCE
+      SOURCE #axSetDefaultDimension
+        #/// <summary>
+        #/// set defaultDimension
+        #/// </summary>
+        #/// <param name="_axInventSiteDimensionable">
+        #/// AxInventSiteDimensionable
+        #/// </param>
+        #abstract public void axSetDefaultDimension(AxInventSiteDimensionable _axInventSiteDimensionable)
+        #{
+        #}
+      ENDSOURCE
+      SOURCE #classDeclaration
+        #/// <summary>
+        #/// main controller for InventLocationDimensionLink
+        #/// </summary>
+        #abstract class AAX_InventLocationDimensionLink
+        #{
+        #    Common      storageDimTable;
+        #    FieldId     inventLocationIdFieldId;
+        #}
+      ENDSOURCE
+      SOURCE #linkDimension
+        #/// <summary>
+        #/// link physical dimension to financial dimension
+        #/// </summary>
+        #abstract public void linkDimension()
+        #{
+        #}
+      ENDSOURCE
+      SOURCE #new
+        #protected void new()
+        #{
+        #}
+      ENDSOURCE
+      SOURCE #parmInventLocationIdFieldId
+        #protected FieldId parmInventLocationIdFieldId(FieldId _inventLocationIdFieldId = inventLocationIdFieldId)
+        #{
+        #    inventLocationIdFieldId = _inventLocationIdFieldId;
+        #    return inventLocationIdFieldId;
+        #}
+      ENDSOURCE
+      SOURCE #parmStorageDimTable
+        #protected Common parmStorageDimTable(Common _storageDimTable = storageDimTable)
+        #{
+        #    storageDimTable = _storageDimTable;
+        #    return storageDimTable;
+        #}
+      ENDSOURCE
+      SOURCE #newDimensionTables
+        #/// <summary>
+        #/// newDimensionTables
+        #/// </summary>
+        #/// <param name="_financialDimensionTable">
+        #/// Common
+        #/// </param>
+        #/// <param name="_storageDimTable">
+        #/// Common
+        #/// </param>
+        #/// <returns>
+        #/// AAX_inventLocationDimensionLink
+        #/// </returns>
+        #static public AAX_inventLocationDimensionLink newDimensionTables(Common _financialDimensionTable, Common _storageDimTable)
+        #{
+        #    AAX_inventLocationDimensionLink inventLocationDimensionLink = null;
+        #    FieldId                 dimensionFieldId    = 0;
+        #    FieldId                 inventLocationIdFIeldId = 0;
+        #    FormDataSource          formDataSource;
+        #    boolean                 useLocationLink;
+        #
+        #    useLocationLink = InventLocation::AAX_useLocationLink(_financialDimensionTable);
+        #
+        #    inventLocationIdFieldId = fieldName2id(_storageDimTable.TableId, extendedTypeStr(InventLocationId));
+        #
+        #    switch (_financialDimensionTable.TableId)
+        #    {
+        #        case tableNum(InventJournalTrans):
+        #            if (useLocationLink)
+        #            {
+        #                if (_storageDimTable.isFormDataSource())
+        #                {
+        #                    formDataSource = _storageDimTable.dataSource();
+        #                    if (formDataSource.name() == identifierStr(InventDimReceipt))
+        #                    {
+        #                        useLocationLink = false;
+        #                    }
+        #                }
+        #            }
+        #            break;
+        #
+        #        default:
+        #            break;
+        #    }
+        #
+        #    if(useLocationLink && SysDictTable::isTableMapped(tableNum(DimensionDefaultMap), _financialDimensionTable.TableId))
+        #    {
+        #        inventLocationDimensionLink = AAX_InventLocationDimensionLink_DimActiv::newStandard(_financialDimensionTable);
+        #    }
+        #    else
+        #    {
+        #        inventLocationDimensionLink = AAX_inventLocationDimensionLink_Null::newStandard();
+        #    }
+        #
+        #    inventLocationDimensionLink.parmStorageDimTable(_storageDimTable);
+        #    inventLocationDimensionLink.parmInventLocationIdFieldId(inventLocationIdFieldId);
+        #
+        #    return inventLocationDimensionLink;
+        #}
+      ENDSOURCE
+    ENDMETHODS
+  ENDCLASS
+
+***Element: END

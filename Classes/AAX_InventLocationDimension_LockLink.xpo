@@ -1,0 +1,136 @@
+﻿Exportfile for AOT version 1.0 or later
+Formatversion: 1
+
+***Element: CLS
+
+; Microsoft Dynamics AX Class: AAX_InventLocationDimension_LockLink unloaded
+; --------------------------------------------------------------------------------
+  CLSVERSION 1
+  
+  CLASS #AAX_InventLocationDimension_LockLink
+    PROPERTIES
+      Name                #AAX_InventLocationDimension_LockLink
+      Origin              #{EE3E0C67-7EA2-4EB6-B764-884769A7456A}
+    ENDPROPERTIES
+    
+    METHODS
+      SOURCE #classDeclaration
+        #/// <summary>
+        #/// locks inventDimLocationLink
+        #/// </summary>
+        #public class AAX_InventLocationDimension_LockLink
+        #{
+        #    AAX_InventParameters AAX_inventParameters;
+        #}
+      ENDSOURCE
+      SOURCE #new
+        #protected void new()
+        #{
+        #    AAX_inventParameters    = AAX_InventParameters::find();
+        #}
+      ENDSOURCE
+      SOURCE #run
+        #/// <summary>
+        #///    Performs the task of the class.
+        #/// </summary>
+        #public void run()
+        #{
+        #    #OCCRetryCount
+        #
+        #    if (!this.validate())
+        #    {
+        #        return;
+        #    }
+        #
+        #    try
+        #    {
+        #        ttsbegin;
+        #
+        #        AAX_inventParameters = AAX_InventParameters::find(true);
+        #        AAX_inventParameters.InventLocationDimensionLink = InventMultiSiteDimensionLink::Locked;
+        #        AAX_inventParameters.update();
+        #
+        #        ttscommit;
+        #    }
+        #    catch (Exception::Deadlock)
+        #    {
+        #        retry;
+        #    }
+        #    catch (Exception::UpdateConflict)
+        #    {
+        #        if (appl.ttsLevel() == 0)
+        #        {
+        #            if (xSession::currentRetryCount() >= #RetryNum)
+        #            {
+        #                throw Exception::UpdateConflictNotRecovered;
+        #            }
+        #            else
+        #            {
+        #                retry;
+        #            }
+        #        }
+        #        else
+        #        {
+        #            throw Exception::UpdateConflict;
+        #        }
+        #    }
+        #}
+      ENDSOURCE
+      SOURCE #validate
+        #/// <summary>
+        #/// validates that the inventDimLocationLink can be locked
+        #/// </summary>
+        #/// <returns>
+        #/// true if the inventDimLocationLink can be locked
+        #/// </returns>
+        #public boolean validate()
+        #{
+        #    boolean ret = true;
+        #
+        #    if (ret && !AAX_inventParameters.allowLockLocationDimensionLink())
+        #    {
+        #        ret = checkFailed("@SYS109418");
+        #    }
+        #
+        #    return ret;
+        #}
+      ENDSOURCE
+      SOURCE #construct
+        #public static AAX_InventLocationDimension_LockLink construct()
+        #{
+        #    return new AAX_InventLocationDimension_LockLink();
+        #}
+      ENDSOURCE
+      SOURCE #main
+        #public client server static void main(Args args)
+        #{
+        #    Common                                  common;
+        #    FormDataSource                          formDataSource;
+        #    AAX_InventLocationDimension_LockLink    AAX_InventLocationDimension_LockLink = AAX_InventLocationDimension_LockLink::construct();
+        #    MenuFunction                            inventLocationDimensionUpdateMenu;
+        #
+        #    AAX_InventLocationDimension_LockLink.run();
+        #
+        #    if (args)
+        #    {
+        #        common = args.record();
+        #        if (common.isFormDataSource())
+        #        {
+        #            formDataSource = common.dataSource();
+        #            formDataSource.executeQuery();
+        #        }
+        #        if (common.isFormDataSource() && InventParameters::find().MultiSiteDimensionLink == InventMultiSiteDimensionLink::Locked)
+        #        {
+        #            inventLocationDimensionUpdateMenu = new MenuFunction(menuitemActionStr(AAX_InventLocationDimensionUpdate), MenuItemType::Action);
+        #            if (inventLocationDimensionUpdateMenu.checkAccessRights())
+        #            {
+        #                inventLocationDimensionUpdateMenu.run();
+        #            }
+        #        }
+        #    }
+        #}
+      ENDSOURCE
+    ENDMETHODS
+  ENDCLASS
+
+***Element: END

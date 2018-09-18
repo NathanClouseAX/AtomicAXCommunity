@@ -1,0 +1,129 @@
+﻿Exportfile for AOT version 1.0 or later
+Formatversion: 1
+
+***Element: CLS
+
+; Microsoft Dynamics AX Class: AAX_InventLocationDimension_DeactivateLi unloaded
+; --------------------------------------------------------------------------------
+  CLSVERSION 1
+  
+  CLASS #AAX_InventLocationDimension_DeactivateLi
+    PROPERTIES
+      Name                #AAX_InventLocationDimension_DeactivateLi
+      Origin              #{F166B5AF-C85B-470A-8831-5BE98BA8EA65}
+    ENDPROPERTIES
+    
+    METHODS
+      SOURCE #classDeclaration
+        #/// <summary>
+        #/// deactivate inventDimLocationLink
+        #/// </summary>
+        #public class AAX_InventLocationDimension_DeactivateLi
+        #{
+        #    AAX_InventParameters    AAX_inventParameters;
+        #}
+      ENDSOURCE
+      SOURCE #new
+        #protected void new()
+        #{
+        #    AAX_inventParameters    = AAX_InventParameters::find();
+        #}
+      ENDSOURCE
+      SOURCE #run
+        #/// <summary>
+        #///    Contains the code that does the actual job of the class.
+        #/// </summary>
+        #public void run()
+        #{
+        #    #OCCRetryCount
+        #
+        #    if (!this.validate())
+        #    {
+        #        return;
+        #    }
+        #
+        #    try
+        #    {
+        #        ttsbegin;
+        #
+        #        AAX_inventParameters = AAX_InventParameters::find(true);
+        #        AAX_inventParameters.InventLocationDimensionLink = InventMultiSiteDimensionLink::Inactive;
+        #        AAX_inventParameters.update();
+        #
+        #        ttscommit;
+        #    }
+        #    catch (Exception::Deadlock)
+        #    {
+        #        retry;
+        #    }
+        #    catch (Exception::UpdateConflict)
+        #    {
+        #        if (appl.ttsLevel() == 0)
+        #        {
+        #            if (xSession::currentRetryCount() >= #RetryNum)
+        #            {
+        #                throw Exception::UpdateConflictNotRecovered;
+        #            }
+        #            else
+        #            {
+        #                retry;
+        #            }
+        #        }
+        #        else
+        #        {
+        #            throw Exception::UpdateConflict;
+        #        }
+        #    }
+        #}
+      ENDSOURCE
+      SOURCE #validate
+        #/// <summary>
+        #/// validates that the inventDimLocationLink can be disabled
+        #/// </summary>
+        #/// <returns>
+        #/// true if the inventDimLocationLink can be disabled
+        #/// </returns>
+        #public boolean validate()
+        #{
+        #    boolean ret = true;
+        #
+        #
+        #    if (ret && !AAX_inventParameters.allowDeactivateLocationDimensionLink())
+        #    {
+        #        ret = checkFailed("@SYS109421");
+        #    }
+        #
+        #    return ret;
+        #}
+      ENDSOURCE
+      SOURCE #construct
+        #public static AAX_InventLocationDimension_DeactivateLi construct()
+        #{
+        #    return new AAX_InventLocationDimension_DeactivateLi();
+        #}
+      ENDSOURCE
+      SOURCE #main
+        #public client server static void main(Args args)
+        #{
+        #    Common                              common;
+        #    FormDataSource                      formDataSource;
+        #    AAX_InventLocationDimension_DeactivateLi  AAX_InventLocationDimension_DeactivateLi = AAX_InventLocationDimension_DeactivateLi::construct();
+        #
+        #    AAX_InventLocationDimension_DeactivateLi.run();
+        #
+        #    if (args)
+        #    {
+        #        common = args.record();
+        #        if (common.isFormDataSource())
+        #        {
+        #            formDataSource = common.dataSource();
+        #            formDataSource.executeQuery();
+        #        }
+        #    }
+        #}
+        #
+      ENDSOURCE
+    ENDMETHODS
+  ENDCLASS
+
+***Element: END

@@ -1,0 +1,265 @@
+﻿Exportfile for AOT version 1.0 or later
+Formatversion: 1
+
+***Element: DBT
+
+; Microsoft Dynamics AX Table : InventLocation unloaded
+; --------------------------------------------------------------------------------
+  TABLEVERSION 1
+  
+  TABLE #InventLocation
+    EnforceFKRelation 0
+    FIELDS
+      FIELD #AAX_DefaultDimension
+        INT64
+        PROPERTIES
+          Name                #AAX_DefaultDimension
+          Table               #InventLocation
+          Origin              #{FF09AE75-91D8-4DC5-AFC2-183EFEE36DD9}
+          ExtendedDataType    #DimensionDefault
+        ENDPROPERTIES
+        
+    ENDFIELDS
+    GROUPS
+    ENDGROUPS
+    
+    INDICES
+    ENDINDICES
+    FULLTEXTINDICES
+    ENDFULLTEXTINDICES
+    REFERENCES
+      REFERENCE #AAX_DefaultDimension
+        PROPERTIES
+          Name                #AAX_DefaultDimension
+          Table               #DimensionAttributeValueSet
+          RelatedTableCardinality   #ZeroOne
+          Cardinality         #ZeroMore
+          RelationshipType    #Association
+          RelatedTableRole    #DefaultDimension
+          Role                #DefaultDimension_InventLocation
+        ENDPROPERTIES
+        
+        FIELDREFERENCES
+          REFERENCETYPE PKFK
+          PROPERTIES
+            Field               #AAX_DefaultDimension
+            RelatedField        #RecId
+          ENDPROPERTIES
+          
+        ENDFIELDREFERENCES
+      ENDREFERENCE
+    ENDREFERENCES
+    
+    METHODS
+      SOURCE #AAX_dimensionAttributeValue
+        #/// <summary>
+        #///    Gets the dimension value for the site linked attribute.
+        #/// </summary>
+        #/// <returns>
+        #///    The <c>RecId</c> value of the <c>DimensionAttributeValue</c> record that corresponds to the
+        #///    attribute to which the site is linked.
+        #/// </returns>
+        #public RecId AAX_dimensionAttributeValue()
+        #{
+        #    DimensionAttributeValueSetStorage   valueSetStorage;
+        #
+        #    valueSetStorage = DimensionAttributeValueSetStorage::find(this.AAX_DefaultDimension);
+        #
+        #    return valueSetStorage.getValueByDimensionAttribute(AAX_InventParameters::find().LocationDimensionAttribute);
+        #}
+      ENDSOURCE
+      SOURCE #AAX_locationDimensionEquals
+        #/// <summary>
+        #/// Indicates whether the dimension that is linked to site is the same as the dimension that is
+        #/// specified on the site.
+        #/// </summary>
+        #/// <param name="_dimension">
+        #/// The dimension to check.
+        #/// </param>
+        #/// <returns>
+        #/// true if the linked dimension attribute has the same value; otherwise, false.
+        #/// </returns>
+        #public boolean AAX_locationDimensionEquals(DimensionDefault _dimension)
+        #{
+        #    DimensionAttributeValueSetStorage   valueSetStorage;
+        #    RecId                               dimAttributeValue;
+        #
+        #    valueSetStorage = DimensionAttributeValueSetStorage::find(_dimension);
+        #
+        #    dimAttributeValue = valueSetStorage.getValueByDimensionAttribute(AAX_InventParameters::find().LocationDimensionAttribute);
+        #
+        #    return (dimAttributeValue == this.AAX_dimensionAttributeValue());
+        #}
+      ENDSOURCE
+      SOURCE #modifiedField
+        #public void modifiedField(FieldId _fieldId)
+        #{
+        #    super(_fieldId);
+        #
+        #    switch (_fieldId)
+        #    {
+        #        case fieldNum(InventLocation, UniqueCheckDigits):
+        #            if(this.UniqueCheckDigits)
+        #            {
+        #                warning("@WAX2631");
+        #            }
+        #
+        #            break;
+        #
+        #        case fieldNum(InventLocation, AllowMarkingReservationRemoval):
+        #            if (!this.allowRemoveBlockingOnStatusChanged())
+        #            {
+        #                this.RemoveInventBlockingOnStatusChange = false;
+        #            }
+        #
+        #            break;
+        #    }
+        #}
+      ENDSOURCE
+      SOURCE #AAX_changeDimension
+        #/// <summary>
+        #/// If site link is enabled, replaces the site linked dimension to match the site.
+        #/// </summary>
+        #/// <param name="_dimension">
+        #/// The dimension default value to change.
+        #/// </param>
+        #/// <param name="_inventSiteId">
+        #/// The site from which to default the dimension.
+        #/// </param>
+        #/// <returns>
+        #/// The resulting dimension.
+        #/// </returns>
+        #/// <remarks>
+        #/// If the site link is inactive, this method returns the dimension that was passed without any changes
+        #/// to it.
+        #/// </remarks>
+        #public static DimensionDefault AAX_changeDimension(DimensionDefault _dimension, InventLocationId _InventLocationId)
+        #{
+        #    DimensionDefault    LocationDimension;
+        #    AAX_InventParameters    AAX_inventParameters = AAX_InventParameters::find();
+        #
+        #    if (AAX_inventParameters.isLocationDimensionLinkInactive())
+        #    {
+        #        return _dimension;
+        #    }
+        #
+        #    LocationDimension = InventLocation::find(_InventLocationId).AAX_DefaultDimension;
+        #
+        #    return DimensionDefaultingService::serviceReplaceAttributeValue(_dimension, LocationDimension, AAX_inventParameters.LocationDimensionAttribute);
+        #}
+      ENDSOURCE
+      SOURCE #AAX_useLocationLink
+        #/// <summary>
+        #/// Determines whether to use the site link for the provided buffer.
+        #/// </summary>
+        #/// <param name="_common">
+        #/// A buffer to check.
+        #/// </param>
+        #/// <returns>
+        #/// true if the site link is enabled and can be used for the provided record; otherwise, false.
+        #/// </returns>
+        #/// <remarks>
+        #/// This method returns true if the site link is either locked or active.
+        #/// </remarks>
+        #public static boolean AAX_useLocationLink(Common _common)
+        #{
+        #    SMAServiceOrderLine     smaServiceOrderLine;
+        #    SMAAgreementLine        smaAgreementLine;
+        #    TmpProjAdjustmentCreate tmpProjAdjustmentCreate;
+        #    // <GIN>
+        #    InventTransferLine      inventTransferLine;
+        #    // </GIN>
+        #    boolean                 uselocationLink;
+        #
+        #    // If the link is not inactive, site dimension link is used
+        #    if (!AAX_InventParameters::find().isLocationDimensionLinkInactive())
+        #    {
+        #        useLocationLink = true;
+        #
+        #        switch (_common.TableId)
+        #        {
+        #            case tableNum(BOMParmReportFinish):
+        #            case tableNum(CustTable):
+        #            case tableNum(ForecastPurch):
+        #            case tableNum(ForecastSales):
+        #            case tableNum(InventJournalTrans):
+        #            case tableNum(InventNonConformanceTable):
+        #            case tableNum(InventQualityOrderTable):
+        #            case tableNum(InventQuarantineOrder):
+        #            case tableNum(InventTable):
+        #            case tableNum(Kanban):
+        #            case tableNum(KanbanJob):
+        #            case tableNum(KanbanJobPickingList):
+        #            case tableNum(ProdBOM):
+        #            case tableNum(ProdJournalBOM):
+        #            case tableNum(ProdTable):
+        #            case tableNum(PurchLine):
+        #            case tableNum(PurchReqLine):
+        #            case tableNum(PurchRFQCaseLine):
+        #            case tableNum(PurchRFQCaseTable):
+        #            case tableNum(PurchRFQLine):
+        #            case tableNum(PurchRFQTable):
+        #            case tableNum(PurchTable):
+        #            case tableNum(SalesLine):
+        #            case tableNum(SalesQuotationLine):
+        #            case tableNum(SalesQuotationTable):
+        #            case tableNum(SalesTable):
+        #            case tableNum(TmpBOM):
+        #            case tableNum(VendTable):
+        #                break;
+        #            // some transactions use LocationLink depending on type
+        #            case tableNum(SMAServiceOrderLine):
+        #                smaServiceOrderLine = _common;
+        #                if (smaServiceOrderLine.TransactionType != SMATransactionType::Item)
+        #                {
+        #                    useLocationLink = false;
+        #                }
+        #                break;
+        #
+        #            case tableNum(SMAAgreementLine):
+        #                smaAgreementLine = _common;
+        #                if (smaAgreementLine.TransactionType != SMATransactionType::Item)
+        #                {
+        #                    useLocationLink = false;
+        #                }
+        #                break;
+        #
+        #            case tableNum(TmpProjAdjustmentCreate):
+        #                tmpProjAdjustmentCreate = _common;
+        #                if (tmpProjAdjustmentCreate.AdjustmentType != ProjAdjustmentType::Item)
+        #                {
+        #                    useLocationLink = false;
+        #                }
+        #                break;
+        #
+        #            // <GIN>
+        #            case tableNum(InventTransferLine):
+        #                if (!InventParameters::isActiveStockTransfer_IN())
+        #                {
+        #                    useLocationLink = false;
+        #                }
+        #                else
+        #                {
+        #                    inventTransferLine = _common;
+        #                    if (inventTransferLine.inventTransferTable().TransferType_IN != TransferType_IN::StockTransfer)
+        #                    {
+        #                        useLocationLink = false;
+        #                    }
+        #                }
+        #                break;
+        #            // </GIN>
+        #
+        #            default:
+        #                useLocationLink = false;
+        #                break;
+        #        }
+        #    }
+        #
+        #    return useLocationLink;
+        #}
+      ENDSOURCE
+    ENDMETHODS
+  ENDTABLE
+  
+
+***Element: END

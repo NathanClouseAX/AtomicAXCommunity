@@ -1,0 +1,47 @@
+﻿Exportfile for AOT version 1.0 or later
+Formatversion: 1
+
+***Element: SPV
+
+; Microsoft Dynamics AX PRIVILEGE : AAX_DatabaseLogCleanup unloaded
+; --------------------------------------------------------------------------------
+  VERSION 1
+  
+  PRIVILEGE #AAX_DatabaseLogCleanup
+    PROPERTIES
+      Name                #AAX_DatabaseLogCleanup
+      Label               #@SYS58410
+      Origin              #{0F0003C2-58E3-4679-B672-AAA74D7AF009}
+    ENDPROPERTIES
+    
+    ENTRYPOINTS #Entry Points
+      ENTRYPOINT #AAX_DatabaseLogCleanup
+        PROPERTIES
+          Name                #AAX_DatabaseLogCleanup
+          ObjectType          #MenuItemAction
+          ObjectName          #AAX_DatabaseLogCleanup
+        ENDPROPERTIES
+        
+      ENDENTRYPOINT
+      
+  ENDENTRYPOINTS
+  
+PERMISSIONSET #Permissions
+  PROPERTIES
+  ENDPROPERTIES
+  
+  TABLES #Tables
+  ENDTABLES
+  
+SERVERMETHODS #Server Methods
+ENDSERVERMETHODS
+
+FORMS #Forms
+ENDFORMS
+
+ENDPERMISSIONSET
+
+ENDPRIVILEGE
+
+
+***Element: END

@@ -1,0 +1,74 @@
+﻿Exportfile for AOT version 1.0 or later
+Formatversion: 1
+
+***Element: QUE
+
+; Microsoft Dynamics AX Query: AAX_RetailCDXDownloadSessionCleanup unloaded
+; --------------------------------------------------------------------------------
+VERSION 31
+
+QUERY #AAX_RetailCDXDownloadSessionCleanup
+  PROPERTIES
+    Name                #AAX_RetailCDXDownloadSessionCleanup
+    Version             #94
+    NextUniqueId        #1003
+    Origin              #{6042D65E-2934-4D15-A6B7-19B33EA0F563}
+  ENDPROPERTIES
+  
+  METHODS
+    SOURCE #classDeclaration
+      #public class QueryRun extends ObjectRun
+      #{
+      #}
+    ENDSOURCE
+  ENDMETHODS
+  BLOCKS
+    BLOCK #RetailCDXDownloadSessionDataStore
+      PROPERTIES
+        Name                #RetailCDXDownloadSessionDataStore
+        Table               #RetailCDXDownloadSessionDataStore
+        UniqueId            #1002
+        FetchMode           #1:1
+      ENDPROPERTIES
+      
+      FIELDLIST
+        PROPERTIES
+        ENDPROPERTIES
+        
+      ENDFIELDLIST
+      SORTING
+      ENDSORTING
+      LINES
+        LINE #Status
+        PROPERTIES
+          Name                #Status
+          Table               #RetailCDXDownloadSessionDataStore
+          Field               #Status
+        ENDPROPERTIES
+        
+        LINE #DateApplied
+        PROPERTIES
+          Name                #DateApplied
+          Table               #RetailCDXDownloadSessionDataStore
+          Field               #DateApplied
+        ENDPROPERTIES
+        
+      ENDLINES
+      BLOCKS
+      ENDBLOCKS
+      GROUPBY
+      ENDGROUPBY
+      HAVING
+      ENDHAVING
+      ORDERBY
+      ENDORDERBY
+    ENDBLOCK
+  ENDBLOCKS
+  DEPENDENTS
+  ENDDEPENDENTS
+  COMPOSITEQUERIES
+  ENDCOMPOSITEQUERIES
+ENDQUERY
+
+
+***Element: END

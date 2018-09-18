@@ -1,0 +1,161 @@
+﻿Exportfile for AOT version 1.0 or later
+Formatversion: 1
+
+***Element: CLS
+
+; Microsoft Dynamics AX Class: AAX_InventLocationDimension_ActivateLink unloaded
+; --------------------------------------------------------------------------------
+  CLSVERSION 1
+  
+  CLASS #AAX_InventLocationDimension_ActivateLink
+    PROPERTIES
+      Name                #AAX_InventLocationDimension_ActivateLink
+      RunOn               #Server
+      Origin              #{C653A227-0DF1-412E-88C1-6CC7AACF179F}
+    ENDPROPERTIES
+    
+    METHODS
+      SOURCE #classDeclaration
+        #/// <summary>
+        #/// activates inventDimLocationLink
+        #/// </summary>
+        #public class AAX_InventLocationDimension_ActivateLink
+        #{
+        #    AAX_InventParameters    AAX_inventParameters;
+        #}
+      ENDSOURCE
+      SOURCE #new
+        #protected void new()
+        #{
+        #    AAX_inventParameters    = AAX_InventParameters::find();
+        #}
+      ENDSOURCE
+      SOURCE #run
+        #/// <summary>
+        #///    Contains the code that does the actual job of the class.
+        #/// </summary>
+        #public void run()
+        #{
+        #    #OCCRetryCount
+        #
+        #    if (!this.validate())
+        #        return;
+        #
+        #    try
+        #    {
+        #        ttsbegin;
+        #
+        #        AAX_inventParameters = AAX_InventParameters::find(true);
+        #        AAX_inventParameters.InventLocationDimensionLink = InventMultiSiteDimensionLink::Active;
+        #        AAX_inventParameters.update();
+        #
+        #        ttscommit;
+        #    }
+        #    catch (Exception::Deadlock)
+        #    {
+        #        retry;
+        #    }
+        #    catch (Exception::UpdateConflict)
+        #    {
+        #        if (appl.ttsLevel() == 0)
+        #        {
+        #            if (xSession::currentRetryCount() >= #RetryNum)
+        #                throw Exception::UpdateConflictNotRecovered;
+        #            else
+        #                retry;
+        #        }
+        #        else
+        #        {
+        #            throw Exception::UpdateConflict;
+        #        }
+        #    }
+        #}
+      ENDSOURCE
+      SOURCE #validate
+        #/// <summary>
+        #/// validates activation
+        #/// </summary>
+        #/// <returns>
+        #/// true if activation allowed and inventLocations have financial dimensions
+        #/// </returns>
+        #public boolean validate()
+        #{
+        #    boolean ret = true;
+        #
+        #    if (ret && !AAX_inventParameters.allowActivateLocationDimensionLink())
+        #    {
+        #        ret = checkFailed("@SYS109417");
+        #    }
+        #
+        #    if (ret && !this.validateInventLocation())
+        #    {
+        #        ret = checkFailed("@SYS109396");
+        #    }
+        #
+        #    return ret;
+        #}
+      ENDSOURCE
+      SOURCE #validateInventLocation
+        #/// <summary>
+        #/// validated inventLocation
+        #/// </summary>
+        #/// <returns>
+        #/// true if the inventLocation record has a financial dimension assigned.
+        #/// </returns>
+        #protected boolean validateInventLocation()
+        #{
+        #    InventLocation      InventLocation;
+        #    boolean             ok = true;
+        #
+        #    while select InventLocation
+        #    {
+        #        if (InventLocation.AAX_dimensionAttributeValue() == 0)
+        #        {
+        #            ok = checkFailed(strFmt("@AAX59", InventLocation.InventLocationId, AAX_inventParameters.LocationDimensionAttribute().localizedName()));
+        #        }
+        #    }
+        #    return ok;
+        #}
+      ENDSOURCE
+      SOURCE #construct
+        #public static AAX_InventLocationDimension_ActivateLink construct()
+        #{
+        #    return new AAX_InventLocationDimension_ActivateLink();
+        #}
+        #
+      ENDSOURCE
+      SOURCE #main
+        #public client server static void main(Args args)
+        #{
+        #    Common                              common;
+        #    FormDataSource                      formDataSource;
+        #    AAX_InventLocationDimension_ActivateLink    AAX_InventLocationDimension_ActivateLink = AAX_InventLocationDimension_ActivateLink::construct();
+        #    MenuFunction                        inventLocationDimensionUpdateMenu;
+        #
+        #    AAX_InventLocationDimension_ActivateLink.run();
+        #
+        #    if (args)
+        #    {
+        #        common = args.record();
+        #        if (common.isFormDataSource())
+        #        {
+        #            formDataSource = common.dataSource();
+        #            formDataSource.executeQuery();
+        #        }
+        #        if (common.isFormDataSource() && InventParameters::find().MultiSiteDimensionLink == InventMultiSiteDimensionLink::Active)
+        #        {
+        #            inventLocationDimensionUpdateMenu = new MenuFunction(menuitemActionStr(AAX_InventLocationDimensionUpdate), MenuItemType::Action);
+        #            if (inventLocationDimensionUpdateMenu.checkAccessRights())
+        #            {
+        #                inventLocationDimensionUpdateMenu.run();
+        #            }
+        #        }
+        #    }
+        #}
+        #
+        #
+      ENDSOURCE
+    ENDMETHODS
+  ENDCLASS
+
+***Element: END

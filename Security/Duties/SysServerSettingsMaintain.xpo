@@ -1,0 +1,969 @@
+﻿Exportfile for AOT version 1.0 or later
+Formatversion: 1
+
+***Element: SDT
+
+; Microsoft Dynamics AX DUTY : SysServerSettingsMaintain unloaded
+; --------------------------------------------------------------------------------
+  VERSION 1
+  
+  DUTY #SysServerSettingsMaintain
+    PROPERTIES
+      Name                #SysServerSettingsMaintain
+      Label               #@SYS154726
+      Description         #@SYS154727
+      Origin              #{26E77D2F-C840-4B47-B4A1-BEDDBB5961BC}
+    ENDPROPERTIES
+    
+    PRIVILEGES #Privileges
+      PRIVILEGE #AAX_DatabaseLogCleanup
+        PROPERTIES
+          Name                #AAX_DatabaseLogCleanup
+        ENDPROPERTIES
+        
+      ENDPRIVILEGE
+      
+    PRIVILEGE #AAX_EnumDictionaryGenerate
+      PROPERTIES
+        Name                #AAX_EnumDictionaryGenerate
+      ENDPROPERTIES
+      
+    ENDPRIVILEGE
+    
+  PRIVILEGE #AAX_InventLocationDimension_ActivateLink
+    PROPERTIES
+      Name                #AAX_InventLocationDimension_ActivateLink
+    ENDPROPERTIES
+    
+  ENDPRIVILEGE
+  
+PRIVILEGE #AAX_InventLocationDimension_DeactivateLi
+  PROPERTIES
+    Name                #AAX_InventLocationDimension_DeactivateLi
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #AAX_InventLocationDimension_LockLink
+  PROPERTIES
+    Name                #AAX_InventLocationDimension_LockLink
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #AAX_InventLocationDimension_UnlockLink
+  PROPERTIES
+    Name                #AAX_InventLocationDimension_UnlockLink
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #AAX_InventLocationDimensionLink
+  PROPERTIES
+    Name                #AAX_InventLocationDimensionLink
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #AAX_InventLocationDimensionUpdate
+  PROPERTIES
+    Name                #AAX_InventLocationDimensionUpdate
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #AAX_RetailDownloadSessionCleaner
+  PROPERTIES
+    Name                #AAX_RetailDownloadSessionCleaner
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #AAX_RetailUploadSessionCleaner
+  PROPERTIES
+    Name                #AAX_RetailUploadSessionCleaner
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #AdministrationMenuItems
+  PROPERTIES
+    Name                #AdministrationMenuItems
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #BatchAlertsMaintain
+  PROPERTIES
+    Name                #BatchAlertsMaintain
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #BatchChangeStatus
+  PROPERTIES
+    Name                #BatchChangeStatus
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #BatchDialog
+  PROPERTIES
+    Name                #BatchDialog
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #BatchGroupMaintain
+  PROPERTIES
+    Name                #BatchGroupMaintain
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #BatchGroupView
+  PROPERTIES
+    Name                #BatchGroupView
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #BatchHistoryMaintain
+  PROPERTIES
+    Name                #BatchHistoryMaintain
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #BatchJobHistoryMaintain
+  PROPERTIES
+    Name                #BatchJobHistoryMaintain
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #BatchJobHistoryView
+  PROPERTIES
+    Name                #BatchJobHistoryView
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #BatchJobMaintain
+  PROPERTIES
+    Name                #BatchJobMaintain
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #BatchJobUserMaintain
+  PROPERTIES
+    Name                #BatchJobUserMaintain
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #BatchJobUserView
+  PROPERTIES
+    Name                #BatchJobUserView
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #BatchJobView
+  PROPERTIES
+    Name                #BatchJobView
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #BatchMaintain
+  PROPERTIES
+    Name                #BatchMaintain
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #BatchRun
+  PROPERTIES
+    Name                #BatchRun
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #BOMCalcCleanUpProcess
+  PROPERTIES
+    Name                #BOMCalcCleanUpProcess
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #CueMaintain
+  PROPERTIES
+    Name                #CueMaintain
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #DocumentHandlingMaintain
+  PROPERTIES
+    Name                #DocumentHandlingMaintain
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #ECPBasketMaintain
+  PROPERTIES
+    Name                #ECPBasketMaintain
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #EPComplianceViewDatabaseLogsView
+  PROPERTIES
+    Name                #EPComplianceViewDatabaseLogsView
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #GenerateCIL
+  PROPERTIES
+    Name                #GenerateCIL
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #InterCompanyCheckOrderProcess
+  PROPERTIES
+    Name                #InterCompanyCheckOrderProcess
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #InterCompanyTransferInventDimProcess
+  PROPERTIES
+    Name                #InterCompanyTransferInventDimProcess
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #InventCleanupTrackingInventSumProcess
+  PROPERTIES
+    Name                #InventCleanupTrackingInventSumProcess
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #InventCleanupWHSInventSumProcess
+  PROPERTIES
+    Name                #InventCleanupWHSInventSumProcess
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #InventCostCleanUpProcess
+  PROPERTIES
+    Name                #InventCostCleanUpProcess
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #InventDistinctProductMaintain
+  PROPERTIES
+    Name                #InventDistinctProductMaintain
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #InventJournalCleanUpProcess
+  PROPERTIES
+    Name                #InventJournalCleanUpProcess
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #InventSiteDimensionLinkValidaGenerate
+  PROPERTIES
+    Name                #InventSiteDimensionLinkValidaGenerate
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #InventSiteInconsistencyCleanUpProcess
+  PROPERTIES
+    Name                #InventSiteInconsistencyCleanUpProcess
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #InventSumSummarizeMaintain
+  PROPERTIES
+    Name                #InventSumSummarizeMaintain
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #InventUnusedDimCleanUpProcess
+  PROPERTIES
+    Name                #InventUnusedDimCleanUpProcess
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #OutlookSyncParametersMaintain
+  PROPERTIES
+    Name                #OutlookSyncParametersMaintain
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #ProdJournalCleanUpProcess
+  PROPERTIES
+    Name                #ProdJournalCleanUpProcess
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #ProdTableCleanUpProcess
+  PROPERTIES
+    Name                #ProdTableCleanUpProcess
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #PurchCORJobDeliveryDueMaintain
+  PROPERTIES
+    Name                #PurchCORJobDeliveryDueMaintain
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #PurchParmCleanUpProcess
+  PROPERTIES
+    Name                #PurchParmCleanUpProcess
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #RunBaseBatchPrintableDialogMaintain
+  PROPERTIES
+    Name                #RunBaseBatchPrintableDialogMaintain
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #RunbaseDialog_Clear
+  PROPERTIES
+    Name                #RunbaseDialog_Clear
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #RunBaseQueryDialogMaintain
+  PROPERTIES
+    Name                #RunBaseQueryDialogMaintain
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #RunBaseReportDialogMaintain
+  PROPERTIES
+    Name                #RunBaseReportDialogMaintain
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #RunbaseSetDefault
+  PROPERTIES
+    Name                #RunbaseSetDefault
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #SalesOrderEntryStatisticsCleanUMaintain
+  PROPERTIES
+    Name                #SalesOrderEntryStatisticsCleanUMaintain
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #SalesParmCleanUpProcess
+  PROPERTIES
+    Name                #SalesParmCleanUpProcess
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #SalesPostingHistoryInvoice4PaymView_RU
+  PROPERTIES
+    Name                #SalesPostingHistoryInvoice4PaymView_RU
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #SalesPostingHistoryInvoiceView
+  PROPERTIES
+    Name                #SalesPostingHistoryInvoiceView
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #SIGParametersMaintain
+  PROPERTIES
+    Name                #SIGParametersMaintain
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #SIGParametersView
+  PROPERTIES
+    Name                #SIGParametersView
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #SIGProcSetupMaintain
+  PROPERTIES
+    Name                #SIGProcSetupMaintain
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #SIGProcSetupView
+  PROPERTIES
+    Name                #SIGProcSetupView
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #SIGReasonCodeMaintain
+  PROPERTIES
+    Name                #SIGReasonCodeMaintain
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #SIGReasonCodeView
+  PROPERTIES
+    Name                #SIGReasonCodeView
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #SIGSignatureDelegationMaintain
+  PROPERTIES
+    Name                #SIGSignatureDelegationMaintain
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #SIGSignatureDelegationView
+  PROPERTIES
+    Name                #SIGSignatureDelegationView
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #SIGSignatureFailureMaintain
+  PROPERTIES
+    Name                #SIGSignatureFailureMaintain
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #sigsignaturefailureview
+  PROPERTIES
+    Name                #sigsignaturefailureview
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #sigsignaturereviewView
+  PROPERTIES
+    Name                #sigsignaturereviewView
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #smmAxaptaOutlookMappingMaintain
+  PROPERTIES
+    Name                #smmAxaptaOutlookMappingMaintain
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #smmImportBusSectorProcess
+  PROPERTIES
+    Name                #smmImportBusSectorProcess
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #smmImportContactPersonProcess
+  PROPERTIES
+    Name                #smmImportContactPersonProcess
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #smmImportFileFormatMaintain
+  PROPERTIES
+    Name                #smmImportFileFormatMaintain
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #smmImportLeadProcess
+  PROPERTIES
+    Name                #smmImportLeadProcess
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #smmImportRelationJournalMaintain
+  PROPERTIES
+    Name                #smmImportRelationJournalMaintain
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #smmImportRelationJournalView
+  PROPERTIES
+    Name                #smmImportRelationJournalView
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #smmOutlookAdministrationMaintain
+  PROPERTIES
+    Name                #smmOutlookAdministrationMaintain
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #smmPhoneParametersMaintain
+  PROPERTIES
+    Name                #smmPhoneParametersMaintain
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #SysClientPerfMaintain
+  PROPERTIES
+    Name                #SysClientPerfMaintain
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #SysClusterConfigMaintain
+  PROPERTIES
+    Name                #SysClusterConfigMaintain
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #SysConfigurationMaintain
+  PROPERTIES
+    Name                #SysConfigurationMaintain
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #SysConsistencyCheckBase
+  PROPERTIES
+    Name                #SysConsistencyCheckBase
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #SysDataAreaMaintain
+  PROPERTIES
+    Name                #SysDataAreaMaintain
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #SysDataAreaPrintCollectionsGenerate
+  PROPERTIES
+    Name                #SysDataAreaPrintCollectionsGenerate
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #SysDataAreaSelect
+  PROPERTIES
+    Name                #SysDataAreaSelect
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #SysDataAreaVirtualMaintain
+  PROPERTIES
+    Name                #SysDataAreaVirtualMaintain
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #SysDatabaseLogCleanUp
+  PROPERTIES
+    Name                #SysDatabaseLogCleanUp
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #SysDatabaseLogMOGenerate
+  PROPERTIES
+    Name                #SysDatabaseLogMOGenerate
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #SysDatabaseLogSetupMaintain
+  PROPERTIES
+    Name                #SysDatabaseLogSetupMaintain
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #SysDatabaseLogView
+  PROPERTIES
+    Name                #SysDatabaseLogView
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #SysDataExport
+  PROPERTIES
+    Name                #SysDataExport
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #SysDataImport
+  PROPERTIES
+    Name                #SysDataImport
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #SysDataSearchManagerMaintain
+  PROPERTIES
+    Name                #SysDataSearchManagerMaintain
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #SysEDTSetup
+  PROPERTIES
+    Name                #SysEDTSetup
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #SysEmailBroadcastProcess
+  PROPERTIES
+    Name                #SysEmailBroadcastProcess
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #SysEmailDistributorProcess
+  PROPERTIES
+    Name                #SysEmailDistributorProcess
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #SysEmailMessageSystemTableMaintain
+  PROPERTIES
+    Name                #SysEmailMessageSystemTableMaintain
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #SysEmailMessageSystemTableView
+  PROPERTIES
+    Name                #SysEmailMessageSystemTableView
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #SysEmailMessageTableMaintain
+  PROPERTIES
+    Name                #SysEmailMessageTableMaintain
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #SysEmailMessageXSLTEditorMaintain
+  PROPERTIES
+    Name                #SysEmailMessageXSLTEditorMaintain
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #SysEmailMessageXSLTEditorView
+  PROPERTIES
+    Name                #SysEmailMessageXSLTEditorView
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #SysEmailParametersMaintain
+  PROPERTIES
+    Name                #SysEmailParametersMaintain
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #SysEmailParametersView
+  PROPERTIES
+    Name                #SysEmailParametersView
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #SysEmailPopClientConstraintsMaintain
+  PROPERTIES
+    Name                #SysEmailPopClientConstraintsMaintain
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #SysEmailPopClientConstraintsView
+  PROPERTIES
+    Name                #SysEmailPopClientConstraintsView
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #SysEmailRetryScheduleMaintain
+  PROPERTIES
+    Name                #SysEmailRetryScheduleMaintain
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #SysEmailRetryScheduleView
+  PROPERTIES
+    Name                #SysEmailRetryScheduleView
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #SysEmailSystemTableMaintain
+  PROPERTIES
+    Name                #SysEmailSystemTableMaintain
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #SysEmailSystemTableView
+  PROPERTIES
+    Name                #SysEmailSystemTableView
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #SysEmailTableMaintain
+  PROPERTIES
+    Name                #SysEmailTableMaintain
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #SysEmailTableView
+  PROPERTIES
+    Name                #SysEmailTableView
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #SysExpImpGroupMaintain
+  PROPERTIES
+    Name                #SysExpImpGroupMaintain
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #SysExpImpTablesMaintain
+  PROPERTIES
+    Name                #SysExpImpTablesMaintain
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #SysHelpSystemParametersMaintain
+  PROPERTIES
+    Name                #SysHelpSystemParametersMaintain
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #SysLastValueMaintain
+  PROPERTIES
+    Name                #SysLastValueMaintain
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #SysLicenseCodeMaintain
+  PROPERTIES
+    Name                #SysLicenseCodeMaintain
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #SysOccConfigurationMaintain
+  PROPERTIES
+    Name                #SysOccConfigurationMaintain
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #SysOutgoingEmailTableMaintain
+  PROPERTIES
+    Name                #SysOutgoingEmailTableMaintain
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #SysPartitionAdministration
+  PROPERTIES
+    Name                #SysPartitionAdministration
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #SysQueryFormMaintain
+  PROPERTIES
+    Name                #SysQueryFormMaintain
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #SysRecordTemplateTableMaintain
+  PROPERTIES
+    Name                #SysRecordTemplateTableMaintain
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #SysRecordTemplateTableView
+  PROPERTIES
+    Name                #SysRecordTemplateTableView
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #SysRecurrenceRunMaintain
+  PROPERTIES
+    Name                #SysRecurrenceRunMaintain
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #SysRenameKey
+  PROPERTIES
+    Name                #SysRenameKey
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #SysServerConfigMaintain
+  PROPERTIES
+    Name                #SysServerConfigMaintain
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #SysServersDrain
+  PROPERTIES
+    Name                #SysServersDrain
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #SysSqlAdminMaintain
+  PROPERTIES
+    Name                #SysSqlAdminMaintain
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #SysSqlStatusView
+  PROPERTIES
+    Name                #SysSqlStatusView
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #SysSQMSettingsMaintain
+  PROPERTIES
+    Name                #SysSQMSettingsMaintain
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #sysTableBrowser
+  PROPERTIES
+    Name                #sysTableBrowser
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #SysTableRowCountView
+  PROPERTIES
+    Name                #SysTableRowCountView
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #SysTraceSQLMaintain
+  PROPERTIES
+    Name                #SysTraceSQLMaintain
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #SysUserLicenseReportsGenerate
+  PROPERTIES
+    Name                #SysUserLicenseReportsGenerate
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #SysUsersOnlineView
+  PROPERTIES
+    Name                #SysUsersOnlineView
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #TradeNonStockedConversionMaintain
+  PROPERTIES
+    Name                #TradeNonStockedConversionMaintain
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #WHSMobileDeviceActivityLogCleanup
+  PROPERTIES
+    Name                #WHSMobileDeviceActivityLogCleanup
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+PRIVILEGE #WMSLocationLoadServiceSumUpLoadProcess
+  PROPERTIES
+    Name                #WMSLocationLoadServiceSumUpLoadProcess
+  ENDPROPERTIES
+  
+ENDPRIVILEGE
+
+ENDPRIVILEGES
+
+ENDDUTY
+
+
+***Element: END

@@ -1,0 +1,56 @@
+﻿Exportfile for AOT version 1.0 or later
+Formatversion: 1
+
+***Element: CLS
+
+; Microsoft Dynamics AX Class: AAX_TableLedgerEH unloaded
+; --------------------------------------------------------------------------------
+  CLSVERSION 1
+  
+  CLASS #AAX_TableLedgerEH
+    PROPERTIES
+      Name                #AAX_TableLedgerEH
+      Origin              #{D44324FC-D21B-4929-80F4-5810CA91B19B}
+    ENDPROPERTIES
+    
+    METHODS
+      SOURCE #classDeclaration
+        #/// <summary>
+        #/// tableLedger event handler
+        #/// </summary>
+        #class AAX_TableLedgerEH
+        #{
+        #}
+      ENDSOURCE
+      SOURCE #postAllowDimensionHierarchyLevelDeletion
+        #/// <summary>
+        #/// checks if a dimension hierarchy level can be deleted
+        #/// </summary>
+        #/// <param name="_args">
+        #/// XppPrePostArgs
+        #/// </param>
+        #/// <exception cref="Exception::Error">
+        #/// error to avoid ttscommit
+        #/// </exception>
+        #public static void postAllowDimensionHierarchyLevelDeletion(XppPrePostArgs _args)
+        #{
+        #    Ledger Ledger;
+        #    boolean ret;
+        #    DimensionHierarchyLevel dimensionHierarchyLevel;
+        #
+        #    Ledger = _args.getThis();
+        #    dimensionHierarchyLevel = _args.getArg("_dimensionHierarchyLevel");
+        #
+        #    ret = ret && AAX_InventLocationDimensionCheck::newStandard().allowDimensionHierarchyLevelDeletion(dimensionHierarchyLevel);
+        #
+        #    if(ret)
+        #    {
+        #        throw error(strFmt("@SYS19378", funcName()));
+        #    }
+        #
+        #}
+      ENDSOURCE
+    ENDMETHODS
+  ENDCLASS
+
+***Element: END

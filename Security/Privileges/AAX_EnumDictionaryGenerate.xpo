@@ -1,0 +1,47 @@
+﻿Exportfile for AOT version 1.0 or later
+Formatversion: 1
+
+***Element: SPV
+
+; Microsoft Dynamics AX PRIVILEGE : AAX_EnumDictionaryGenerate unloaded
+; --------------------------------------------------------------------------------
+  VERSION 1
+  
+  PRIVILEGE #AAX_EnumDictionaryGenerate
+    PROPERTIES
+      Name                #AAX_EnumDictionaryGenerate
+      Label               #@AAX38
+      Origin              #{A21D07C9-14FC-4AD2-A0D0-CFC0426F12EF}
+    ENDPROPERTIES
+    
+    ENTRYPOINTS #Entry Points
+      ENTRYPOINT #AAX_EnumDictionaryGenerate
+        PROPERTIES
+          Name                #AAX_EnumDictionaryGenerate
+          ObjectType          #MenuItemAction
+          ObjectName          #AAX_EnumDictionaryGenerate
+        ENDPROPERTIES
+        
+      ENDENTRYPOINT
+      
+  ENDENTRYPOINTS
+  
+PERMISSIONSET #Permissions
+  PROPERTIES
+  ENDPROPERTIES
+  
+  TABLES #Tables
+  ENDTABLES
+  
+SERVERMETHODS #Server Methods
+ENDSERVERMETHODS
+
+FORMS #Forms
+ENDFORMS
+
+ENDPERMISSIONSET
+
+ENDPRIVILEGE
+
+
+***Element: END
